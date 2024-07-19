@@ -15,6 +15,19 @@ body {
     accent-color: #027c56;
 }
 
+.gradient-text {
+    background: linear-gradient(270deg, #2176ff 0%, #21befd 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.gradient-bakground {
+    background: linear-gradient(
+        270deg,
+        #2174fe 0%,
+        #21c3fd 100%,
+        rgba(255, 255, 255, 0) 100%
+    );
+}
 input:focus,
 textarea:focus,
 select:focus {

@@ -36,12 +36,13 @@ Route::middleware('custom')->group(function () {
 
         return view("emails.parent");
     });
-    Route::get('register', function () {
-
-        return view("register");
-    });
     Route::get('resources', function () {
 
         return view("resources");
     });
+});
+
+Route::get('register', function () {
+
+    return view("register");
 });
