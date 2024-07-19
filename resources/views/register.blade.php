@@ -21,7 +21,7 @@
 
 
 
-    <section class="bg-white p-5 rounded-md shadow-lg min-h-[80vh] w-[80vw]">
+    <section class="bg-white p-5 rounded-xl shadow-lg min-h-[80vh] w-[80vw]">
 
 
         <div class="grid lg:grid-cols-2 grid-cols-1 w-full">
