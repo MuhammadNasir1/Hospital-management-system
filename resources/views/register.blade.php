@@ -27,8 +27,10 @@
         <div class="grid lg:grid-cols-2 grid-cols-1 w-full">
             <div class="h-[100%] flex justify-center items-center">
                 <div class=" w-full">
-                    <h1 class="gradient-text text-2xl font-bold">Welcome Back</h1>
-                    <p class="text-[#000000] opacity-[50%]">Request For a Service</p>
+                    <div class="lg:text-start text-center">
+                        <h1 class="gradient-text text-2xl font-bold">Welcome Back</h1>
+                        <p class="text-[#000000] opacity-[50%]">Request For a Service</p>
+                    </div>
 
                     <form action="#" class="mt-7">
                         <div>
