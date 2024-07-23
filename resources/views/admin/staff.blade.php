@@ -56,7 +56,7 @@
             @if (isset($user))
                 <form action="../updateUserCar/{{ $user->id }}" method="post" enctype="multipart/form-data">
                 @else
-                    <form id="customerData" method="post" enctype="multipart/form-data">
+                    <form id="staffData" method="post" enctype="multipart/form-data">
             @endif
             @csrf
             <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
@@ -142,20 +142,26 @@
                         </select>
                     </div>
 
+                    <div class="col-span-3">
+                        <label class="text-[14px] font-normal" for="note">@lang('lang.Note')</label>
+                        <textarea class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   min-h-[80px] text-[14px]" name="note"
+                            id="note" placeholder="@lang('lang.Note_Here')"></textarea>
+                    </div>
+
                     <h1 class="font-semibold col-span-3">@lang('lang.Education_&_Training')</h1>
 
                     <div>
                         <label class="text-[14px] font-normal" for="school">@lang('lang.Medical_School')</label>
-                        <input type="number" min="0" required
+                        <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="school" id="school" placeholder=" @lang('lang.Medical_School_Here')"
                             value="{{ $user->email ?? '' }}">
                     </div>
                     <div>
-                        <label class="text-[14px] font-normal" for="grduation">@lang('lang.Graduation_Year')</label>
-                        <input type="text" required
+                        <label class="text-[14px] font-normal" for="graduation">@lang('lang.Graduation_Year')</label>
+                        <input type="number" min="0" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="grduation" id="grduation" placeholder=" @lang('lang.Graduation_Year_Here')"
+                            name="graduation" id="graduation" placeholder=" @lang('lang.Graduation_Year_Here')"
                             value="{{ $user->email ?? '' }}">
                     </div>
                     <div>
@@ -233,8 +239,7 @@
                 var id = $(this).attr('delId');
                 $('#delLink').attr('href', '../delCustomer/' + id);
             });
-            // insert data
-            $("#customerData").submit(function(event) {
+            $("#staffData").submit(function(event) {
                 var url = "../registerdata";
                 event.preventDefault();
                 var formData = new FormData(this);
@@ -251,13 +256,13 @@
                         $('#addBtn').attr('disabled', true);
                     },
                     success: function(response) {
-                        window.location.href = '../companies';
+                        window.location.href = '../staff';
 
 
                     },
                     error: function(jqXHR) {
                         let response = JSON.parse(jqXHR.responseText);
-                        console.log("error");
+                        console.log("error" + response);
                         Swal.fire(
                             'Warning!',
                             response.message,

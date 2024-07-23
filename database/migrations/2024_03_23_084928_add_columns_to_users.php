@@ -15,6 +15,12 @@ return new class extends Migration
             $table->text('phone')->nullable();
             $table->text('address')->nullable();
             $table->string('company')->nullable();
+            $table->string('gender')->nullable();
+            $table->string('age')->nullable();
+            $table->string('dob')->nullable();
+            $table->string('school')->nullable();
+            $table->string('graduation')->nullable();
+            $table->string('residency')->nullable();
             $table->text('user_image')->nullable();
             $table->string('verification')->default("pending");
             $table->string('tax_number')->nullable();
