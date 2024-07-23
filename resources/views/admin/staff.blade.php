@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 
 @section('title')
-    Users
+    @lang('lang.Admin')
 @endsection
 
 @section('content')
@@ -10,12 +10,12 @@
         <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
             <div>
                 <div class="flex justify-end sm:justify-between  items-center px-[20px] mb-3">
-                    <h3 class="text-[20px] text-black hidden sm:block">@lang('lang.Companies_List')</h3>
+                    <h3 class="text-[20px] text-black hidden sm:block">@lang('lang.Staff_List')</h3>
                     <div>
 
                         <button data-modal-target="addcustomermodal" data-modal-toggle="addcustomermodal"
                             class="bg-primary cursor-pointer text-white h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
-                            @lang('lang.Add_Company')</button>
+                            @lang('lang.Add_Staff')</button>
                     </div>
                 </div>
                 <div class="overflow-x-auto">
@@ -33,40 +33,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($users as $data)
-                                <tr>
-                                    <td>{{ $data->id }}</td>
-                                    <td>
-                                        {{ $data->company }}
-                                    </td>
 
-                                    <td>{{ $data->name }}</td>
-                                    <td>{{ $data->phone }}</td>
-                                    <td>{{ $data->email }}</td>
-                                    <td>{{ $data->address }}</td>
-                                    <td>{{ $data->role }}</td>
-                                    <td>
-                                        <div class="flex gap-5 items-center justify-center">
-
-                                            <a href="{{ route('updateUser', $data->id) }}">
-                                                <button data-modal-target="Updateproductmodal"
-                                                    data-modal-toggle="Updateproductmodal"
-                                                    class=" updateBtn cursor-pointer  w-[42px]"
-                                                    updateId="{{ $data->id }}"><img width="38px"
-                                                        src="{{ asset('images/icons/edit.svg') }}" alt="update"></button>
-                                            </a>
-                                            <a href="{{ route('deleteUser', $data->id) }}">
-                                                <button data-modal-target="deleteData" data-modal-toggle="deleteData"
-                                                    class="delButton" delId="{{ $data->id }}">
-                                                    <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
-                                                        alt="delete" class="cursor-pointer">
-                                                </button>
-                                            </a>
-
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
 
                         </tbody>
                     </table>
@@ -95,7 +62,7 @@
             <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
                 <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
                     <h3 class="text-xl font-semibold text-white ">
-                        @lang('lang.Add_Company')
+                        @lang('lang.Add_Staff')
                     </h3>
                     <button type="button"
                         class=" absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
@@ -108,30 +75,18 @@
                     </button>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-6 mx-6 my-6">
+                <div class="grid md:grid-cols-3 gap-6 mx-6 my-6">
                     <div>
                         <label class="text-[14px] font-normal" for="name">@lang('lang.Full_Name')</label>
                         <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="name" id="name" value="{{ $user->name ?? '' }}"
-                            placeholder=" @lang('lang.Full_Name_Here')">
+                            name="name" id="name" value="{{ $user->name ?? '' }}" placeholder=" @lang('lang.Full_Name_Here')">
                     </div>
-                    <div>
-                        <label class="text-[14px] font-normal" for="company">@lang('lang.Company_Name')</label>
-                        <input type="text" required
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="company" id="company" value="{{ $user->name ?? '' }}"
-                            placeholder=" @lang('lang.Company_Name_Here')">
-                    </div>
-
-                </div>
-                <div class="grid  md:grid-cols-3 gap-6 mx-6 my-6">
                     <div>
                         <label class="text-[14px] font-normal" for="phone">@lang('lang.Phone_No')</label>
                         <input type="number" min="0" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="phone" id="phone" value="{{ $user->name ?? '' }}"
-                            placeholder=" @lang('lang.Phone_No_Here')">
+                            name="phone" id="phone" value="{{ $user->name ?? '' }}" placeholder=" @lang('lang.Phone_No_Here')">
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="user_email">@lang('lang.Email_Address')</label>
@@ -141,10 +96,73 @@
                             value="{{ $user->email ?? '' }}">
                     </div>
                     <div>
+                        <label class="text-[14px] font-normal" for="dob">@lang('lang.Date_Of_Birth')</label>
+                        <input type="date" required
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="dob" id="dob" value="{{ $user->name ?? '' }}">
+                    </div>
+                    <div>
+                        <label class="text-[14px] font-normal" for="gender">@lang('lang.Gender')</label>
+                        <select name="gender" id="gender">
+                            <option value="male">@lang('lang.Male')</option>
+                            <option value="female">@lang('lang.Female')</option>
+                            <option value="others">@lang('lang.Others')</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="text-[14px] font-normal" for="age">@lang('lang.Age')</label>
+                        <input type="number" min="0" required
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="age" id="age" value="{{ $user->name ?? '' }}" placeholder=" @lang('lang.Age_Here')">
+                    </div>
+
+                    <div>
+                        <label class="text-[14px] font-normal" for="city">@lang('lang.City')</label>
+                        <input type="text" required
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="city" id="city" placeholder=" @lang('lang.City_Here')"
+                            value="{{ $user->email ?? '' }}">
+                    </div>
+
+                    <div>
                         <label class="text-[14px] font-normal" for="address">@lang('lang.Address')</label>
                         <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="address" id="address" placeholder=" @lang('lang.Address_Here')"
+                            value="{{ $user->email ?? '' }}">
+                    </div>
+
+                    <div>
+                        <label class="text-[14px] font-normal" for="role">@lang('lang.Role')</label>
+                        <select name="role" id="role">
+                            <option value="doctor"> @lang('lang.Doctor')</option>
+                            <option value="nurse"> @lang('lang.Nurse')</option>
+                            <option value="receptionist"> @lang('lang.Receptionist')</option>
+                        </select>
+                    </div>
+
+                    <h1 class="font-semibold col-span-3">@lang('lang.Education_&_Training')</h1>
+
+                    <div>
+                        <label class="text-[14px] font-normal" for="school">@lang('lang.Medical_School')</label>
+                        <input type="number" min="0" required
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="school" id="school" placeholder=" @lang('lang.Medical_School_Here')"
+                            value="{{ $user->email ?? '' }}">
+                    </div>
+                    <div>
+                        <label class="text-[14px] font-normal" for="grduation">@lang('lang.Graduation_Year')</label>
+                        <input type="text" required
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="grduation" id="grduation" placeholder=" @lang('lang.Graduation_Year_Here')"
+                            value="{{ $user->email ?? '' }}">
+                    </div>
+                    <div>
+                        <label class="text-[14px] font-normal" for="residency">@lang('lang.Residency')</label>
+                        <input type="text" required
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="residency" id="residency" placeholder=" @lang('lang.Residency_Here')"
                             value="{{ $user->email ?? '' }}">
                     </div>
 
@@ -160,13 +178,6 @@
                         <input type="password" {{ isset($user->id) ? '' : 'required' }}
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="confirm_password" id="confirm_password" placeholder=" @lang('lang.Confirm_Password_Here')">
-                    </div>
-                    <div>
-                        <label class="text-[14px] font-normal" for="role">@lang('lang.Role')</label>
-                        <select name="role" id="role">
-                            <option value="admin" selected>
-                                @lang('lang.Admin')</option>
-                        </select>
                     </div>
 
                 </div>

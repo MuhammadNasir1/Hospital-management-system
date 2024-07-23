@@ -96,7 +96,7 @@ class authController extends Controller
         try {
             $validatedData = $request->validate([
                 'name' => 'required|string',
-                'company' => 'required|string',
+                'company' => 'nullable|string',
                 'phone' => 'required|numeric',
                 'email' => 'required|email|unique:users,email',
                 'address' => 'required|string',
@@ -104,14 +104,20 @@ class authController extends Controller
                 'confirm_password' => 'required|string|min:8| same:password',
                 'role' => 'nullable',
             ]);
+// if(session('user_det')['role'] == "admin"){
 
+// $company  = session('user_det')['user_Id'];
+// }else{
+
+//   $company =   $validatedData['company']
+// }
             $user = User::create([
                 'name' => $validatedData['name'],
                 'phone' => $validatedData['phone'],
                 'address' => $validatedData['address'],
                 'email' => $validatedData['email'],
                 'role' =>  $validatedData['role'],
-                'company' => $validatedData['company'],
+                'company' =>,
                 'password' => Hash::make($validatedData['password']),
                 'verification' => "approved",
             ]);
