@@ -99,7 +99,6 @@ class authController extends Controller
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required|string|min:8',
                 'role' => 'nullable',
-                'upload_image' => 'nullable',
             ]);
 
             $user = User::create([
@@ -110,12 +109,7 @@ class authController extends Controller
                 'verification' => "approved",
             ]);
 
-            if ($request->hasFile('upload_image')) {
-                $image = $request->file('upload_image');
-                $imageName = time() . '.' . $image->getClientOriginalExtension();
-                $image->storeAs('public/user_images', $imageName); // Adjust storage path as needed
-                $user->user_image = 'storage/user_images/' . $imageName;
-            }
+
             $user->save();
 
 

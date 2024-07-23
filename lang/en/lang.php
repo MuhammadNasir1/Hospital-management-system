@@ -324,4 +324,7 @@ return [
     "Client_Profile" => "Client Profile",
     "Client_Contact" => "Client Contact",
 
+    "Full_Name" => "Full Name",
+    "Full_Name_Here" => "Full Name Here",
+
 ];

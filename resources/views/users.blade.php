@@ -112,33 +112,31 @@
                         </svg>
                     </button>
                 </div>
-                <div class="h-[200px] w-[200px] relative mx-auto my-5 rounded-[50%]">
-                    <img id="img_view" height="200px" width="200px"
-                        class="h-[200px] w-[200px]  border border-primary  rounded-[50%] cursor-pointer object-contain "
-                        src=" {{ isset($user->user_image) ? asset($user->user_image) : 'images/owlicon.svg' }}"
-                        alt="user">
-                    <input class="absolute top-0 opacity-0     h-[210px] w-[200px] z-50 cursor-pointer " type="file"
-                        name="upload_image" id="user_image">
-                    <div class="absolute bottom-[6px] right-5  z-10">
-                        <button type="button">
-                            <svg width="42" height="42" viewBox="0 0 36 36" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="18" cy="18" r="18" fill="#EDBD58" />
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                    d="M16.1627 23.6197L22.3132 15.666C22.6474 15.2371 22.7663 14.7412 22.6549 14.2363C22.5583 13.7773 22.276 13.3408 21.8526 13.0097L20.8201 12.1895C19.9213 11.4747 18.8071 11.5499 18.1683 12.3701L17.4775 13.2663C17.3883 13.3785 17.4106 13.544 17.522 13.6343C17.522 13.6343 19.2676 15.0339 19.3048 15.064C19.4236 15.1769 19.5128 15.3274 19.5351 15.508C19.5722 15.8616 19.3271 16.1927 18.9631 16.2379C18.7922 16.2605 18.6288 16.2078 18.51 16.11L16.6752 14.6502C16.5861 14.5832 16.4524 14.5975 16.3781 14.6878L12.0178 20.3314C11.7355 20.6851 11.639 21.1441 11.7355 21.588L12.2927 24.0035C12.3224 24.1314 12.4338 24.2217 12.5675 24.2217L15.0188 24.1916C15.4645 24.1841 15.8804 23.9809 16.1627 23.6197ZM19.5948 22.8676H23.5918C23.9818 22.8676 24.299 23.1889 24.299 23.5839C24.299 23.9797 23.9818 24.3003 23.5918 24.3003H19.5948C19.2048 24.3003 18.8876 23.9797 18.8876 23.5839C18.8876 23.1889 19.2048 22.8676 19.5948 22.8676Z"
-                                    fill="white" />
-                            </svg>
-                        </button>
 
-                    </div>
-                </div>
                 <div class="grid md:grid-cols-2 gap-6 mx-6 my-6">
                     <div>
-                        <label class="text-[14px] font-normal" for="user_name">@lang('lang.User_Name')</label>
+                        <label class="text-[14px] font-normal" for="name">@lang('lang.Full_Name')</label>
                         <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="name" id="user_name" value="{{ $user->name ?? '' }}"
-                            placeholder=" @lang('lang.User_Name_Here')">
+                            name="name" id="name" value="{{ $user->name ?? '' }}"
+                            placeholder=" @lang('lang.Full_Name_Here')">
+                    </div>
+                    <div>
+                        <label class="text-[14px] font-normal" for="company">@lang('lang.Company_Name')</label>
+                        <input type="text" required
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="company" id="company" value="{{ $user->name ?? '' }}"
+                            placeholder=" @lang('lang.Company_Name_Here')">
+                    </div>
+
+                </div>
+                <div class="grid  md:grid-cols-3 gap-6 mx-6 my-6">
+                    <div>
+                        <label class="text-[14px] font-normal" for="phone">@lang('lang.Phone_No')</label>
+                        <input type="number" min="0" required
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="phone" id="phone" value="{{ $user->name ?? '' }}"
+                            placeholder=" @lang('lang.Phone_No_Here')">
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="user_email">@lang('lang.Email_Address')</label>
@@ -147,9 +145,13 @@
                             name="email" id="user_email" placeholder=" @lang('lang.Email_Address_Here')"
                             value="{{ $user->email ?? '' }}">
                     </div>
-
-                </div>
-                <div class="grid  md:grid-cols-3 gap-6 mx-6 my-6">
+                    <div>
+                        <label class="text-[14px] font-normal" for="address">@lang('lang.Address')</label>
+                        <input type="text" required
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="address" id="address" placeholder=" @lang('lang.Address_Here')"
+                            value="{{ $user->email ?? '' }}">
+                    </div>
 
                     <div>
                         <label class="text-[14px] font-normal" for="password">@lang('lang.Password')</label>
@@ -218,22 +220,11 @@
             });
         </script>
     @endif
+@endsection
+
+
+@section('js')
     <script>
-        let fileInput = document.getElementById('user_image');
-        let imageView = document.getElementById('img_view');
-
-        fileInput.addEventListener('change', function() {
-            const file = this.files[0];
-            const reader = new FileReader();
-
-            reader.onload = function() {
-                imageView.src = reader.result;
-            };
-
-            if (file) {
-                reader.readAsDataURL(file);
-            }
-        });
         $(document).ready(function() {
             $('.delButton').click(function() {
                 var id = $(this).attr('delId');
