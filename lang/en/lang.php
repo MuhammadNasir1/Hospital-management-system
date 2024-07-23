@@ -324,7 +324,14 @@ return [
     "Client_Profile" => "Client Profile",
     "Client_Contact" => "Client Contact",
 
+    "Admin" => "Admin",
+    "Companies" => "Companies",
     "Full_Name" => "Full Name",
+    "Company_Name" => "Company Name",
+    "Companies_List" => "Companies List",
+    "Add_Company" => "Add Company",
     "Full_Name_Here" => "Full Name Here",
+    "Company_Name_Here" => "Company Name Here",
+    "Phone_No_Here" => "Phone No Here",
 
 ];

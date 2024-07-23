@@ -96,15 +96,22 @@ class authController extends Controller
         try {
             $validatedData = $request->validate([
                 'name' => 'required|string',
+                'company' => 'required|string',
+                'phone' => 'required|numeric',
                 'email' => 'required|email|unique:users,email',
+                'address' => 'required|string',
                 'password' => 'required|string|min:8',
+                'confirm_password' => 'required|string|min:8| same:password',
                 'role' => 'nullable',
             ]);
 
             $user = User::create([
                 'name' => $validatedData['name'],
+                'phone' => $validatedData['phone'],
+                'address' => $validatedData['address'],
                 'email' => $validatedData['email'],
                 'role' =>  $validatedData['role'],
+                'company' => $validatedData['company'],
                 'password' => Hash::make($validatedData['password']),
                 'verification' => "approved",
             ]);

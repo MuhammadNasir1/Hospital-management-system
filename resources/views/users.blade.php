@@ -10,12 +10,12 @@
         <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
             <div>
                 <div class="flex justify-end sm:justify-between  items-center px-[20px] mb-3">
-                    <h3 class="text-[20px] text-black hidden sm:block">@lang('lang.Users_List')</h3>
+                    <h3 class="text-[20px] text-black hidden sm:block">@lang('lang.Companies_List')</h3>
                     <div>
 
                         <button data-modal-target="addcustomermodal" data-modal-toggle="addcustomermodal"
                             class="bg-primary cursor-pointer text-white h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
-                            @lang('lang.Add_User')</button>
+                            @lang('lang.Add_Company')</button>
                     </div>
                 </div>
                 <div class="overflow-x-auto">
@@ -23,10 +23,11 @@
                         <thead class="py-1 bg-primary text-white">
                             <tr>
                                 <th class="whitespace-nowrap">@lang('lang.STN')</th>
-                                <th class="whitespace-nowrap">@lang('lang.Image')</th>
+                                <th class="whitespace-nowrap">@lang('lang.Company_Name')</th>
                                 <th class="whitespace-nowrap">@lang('lang.Name')</th>
-                                <th class="whitespace-nowrap">@lang('lang.Email')</th>
                                 <th class="whitespace-nowrap">@lang('lang.Phone_No')</th>
+                                <th class="whitespace-nowrap">@lang('lang.Email')</th>
+                                <th class="whitespace-nowrap">@lang('lang.Address')</th>
                                 <th class="whitespace-nowrap">@lang('lang.Role')</th>
                                 <th class="flex  justify-center">@lang('lang.Action')</th>
                             </tr>
@@ -36,19 +37,13 @@
                                 <tr>
                                     <td>{{ $data->id }}</td>
                                     <td>
-                                        <div class="rounded-full flex justify-content-center ">
-                                            <img src="{{ isset($data->user_image) ? asset($data->user_image) : asset('images/comapnylogo.svg') }}"
-                                                class="object-contain rounded-full h-[80px] w-[80px] bg-slate-400"
-                                                width="80">
-                                        </div>
-
-                                        {{-- <img src="{{ $data->user_image }}" alt=""> --}}
-                                        {{-- {{ asset($data->user_image) }} --}}
+                                        {{ $data->company }}
                                     </td>
 
                                     <td>{{ $data->name }}</td>
+                                    <td>{{ $data->phone }}</td>
                                     <td>{{ $data->email }}</td>
-                                    <td>{{ $data->phone_no }}</td>
+                                    <td>{{ $data->address }}</td>
                                     <td>{{ $data->role }}</td>
                                     <td>
                                         <div class="flex gap-5 items-center justify-center">
@@ -100,7 +95,7 @@
             <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
                 <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
                     <h3 class="text-xl font-semibold text-white ">
-                        @lang('lang.Add_User')
+                        @lang('lang.Add_Company')
                     </h3>
                     <button type="button"
                         class=" absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
@@ -169,11 +164,8 @@
                     <div>
                         <label class="text-[14px] font-normal" for="role">@lang('lang.Role')</label>
                         <select name="role" id="role">
-                            <option value="seller" {{ isset($user->role) && $user->role == 'seller' ? 'selected' : '' }}>
-                                Seller</option>
-                            <option value="manager"
-                                {{ isset($user->role) && $user->role == 'manager' ? 'selected' : '' }}>
-                                Manager</option>
+                            <option value="admin" selected>
+                                @lang('lang.Admin')</option>
                         </select>
                     </div>
 

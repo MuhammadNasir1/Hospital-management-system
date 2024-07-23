@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->text('phone')->nullable();
             $table->text('address')->nullable();
+            $table->string('company')->nullable();
             $table->text('user_image')->nullable();
             $table->string('verification')->default("pending");
             $table->string('tax_number')->nullable();
