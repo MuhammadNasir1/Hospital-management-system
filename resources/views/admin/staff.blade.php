@@ -239,7 +239,7 @@
                 var id = $(this).attr('delId');
                 $('#delLink').attr('href', '../delCustomer/' + id);
             });
-            // Insert Data
+            // Insert Staff Data
             $("#staffData").submit(function(event) {
                 var url = "../registerdata";
                 event.preventDefault();
