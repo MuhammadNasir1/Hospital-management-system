@@ -354,4 +354,7 @@ return [
     "Inventory" => "Inventory",
     "Add_Inventory" => "Add Inventory",
     "Medicine_Name" => "Medicine Name",
+    "Packing" => "Packing",
+    "Batch_ID" => "Batch ID",
+    "Expiry_Date" => "Expiry Date",
 ];

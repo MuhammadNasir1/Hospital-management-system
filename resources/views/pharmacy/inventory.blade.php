@@ -56,7 +56,7 @@
                 <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
                     <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
                         <h3 class="text-xl font-semibold text-white ">
-                            @lang('lang.Add_Company')
+                            @lang('lang.Add_Inventory')
                         </h3>
                         <button type="button"
                             class=" absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
@@ -69,7 +69,7 @@
                         </button>
                     </div>
 
-                    <div class="grid md:grid-cols-2 gap-6 mx-6 my-6">
+                    <div class="grid md:grid-cols-3 gap-6 mx-6 my-6">
                         <div>
                             <label class="text-[14px] font-normal" for="name">@lang('lang.Name')</label>
                             <input type="text" required
@@ -77,52 +77,40 @@
                                 name="name" id="name" placeholder=" @lang('lang.Medicine_Name')">
                         </div>
                         <div>
-                            <label class="text-[14px] font-normal" for="company">@lang('lang.Total_Price')</label>
+                            <label class="text-[14px] font-normal" for="packing">@lang('lang.Packing')</label>
                             <input type="number" required
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="company" id="company" placeholder=" @lang('lang.Total_Price')">
+                                name="packing" id="packing" placeholder=" @lang('lang.Packing')">
                         </div>
 
-                    </div>
-                    <div class="grid  md:grid-cols-3 gap-6 mx-6 my-6">
+
+
                         <div>
-                            <label class="text-[14px] font-normal" for="phone">@lang('lang.Quantity')</label>
+                            <label class="text-[14px] font-normal" for="batch">@lang('lang.Batch_ID')</label>
                             <input type="number" min="0" required
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="phone" id="phone" placeholder=" @lang('lang.Quantity')">
+                                name="batch" id="batch" placeholder=" @lang('lang.Batch_ID')">
                         </div>
                         <div>
-                            <label class="text-[14px] font-normal" for="user_email">@lang('lang.Email_Address')</label>
-                            <input type="email" required
+                            <label class="text-[14px] font-normal" for="exp">@lang('lang.Expiry_Date')</label>
+                            <input type="date" required
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="email" id="user_email" placeholder=" @lang('lang.Email_Address_Here')">
+                                name="exp" id="exp" placeholder=" @lang('lang.Expiry_Date_Here')">
                         </div>
                         <div>
-                            <label class="text-[14px] font-normal" for="address">@lang('lang.Address')</label>
+                            <label class="text-[14px] font-normal" for="quantity">@lang('lang.Quantity')</label>
                             <input type="text" required
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="address" id="address" placeholder=" @lang('lang.Address_Here')">
+                                name="quantity" id="quantity" placeholder=" @lang('lang.Quantity_Here')">
                         </div>
 
                         <div>
-                            <label class="text-[14px] font-normal" for="password">@lang('lang.Password')</label>
-                            <input type="password"
+                            <label class="text-[14px] font-normal" for="price">@lang('lang.Price')</label>
+                            <input type="number" min="0"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="password" id="password" placeholder=" @lang('lang.Password_Here')">
+                                name="price" id="price" placeholder=" @lang('lang.Price')">
                         </div>
-                        <div>
-                            <label class="text-[14px] font-normal" for="confirm_password">@lang('lang.Confirm_Password')</label>
-                            <input type="password"
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="confirm_password" id="confirm_password" placeholder=" @lang('lang.Confirm_Password_Here')">
-                        </div>
-                        <div>
-                            <label class="text-[14px] font-normal" for="role">@lang('lang.Role')</label>
-                            <select name="role" id="role">
-                                <option value="admin" selected>
-                                    @lang('lang.Admin')</option>
-                            </select>
-                        </div>
+
 
                     </div>
 
