@@ -50,3 +50,9 @@ Route::get('register', function () {
 
     return view("register");
 });
+
+
+// pharmacy
+Route::get('/pharmacy/inventory', function () {
+    return view('pharmacy.inventory');
+});

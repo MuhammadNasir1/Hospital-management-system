@@ -351,5 +351,7 @@ return [
     "Company_Name_Here" => "Company Name Here",
     "Phone_No_Here" => "Phone No Here",
     "Education_&_Training" => "Education & Training",
-
+    "Inventory" => "Inventory",
+    "Add_Inventory" => "Add Inventory",
+    "Medicine_Name" => "Medicine Name",
 ];
