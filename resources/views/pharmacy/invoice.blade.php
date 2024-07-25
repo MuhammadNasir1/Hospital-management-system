@@ -59,44 +59,139 @@
                         </div>
                     </div>
                     <div class="overflow-x-auto">
-                        <table class="w-full mt-10 text-center">
+                        <table class="w-full mt-10 text-center" id="medicineTable">
                             <thead class="py-1 bg-primary text-white">
                                 <tr class="">
-                                    <th class="whitespace-nowrap rounded-l-md py-3">@lang('lang.STN')</th>
-                                    <th class="whitespace-nowrap">@lang('lang.Med._Name')</th>
-                                    <th class="whitespace-nowrap">@lang('lang.Batch_ID')</th>
-                                    <th class="whitespace-nowrap">@lang('lang.Expiry_Date')</th>
-                                    <th class="whitespace-nowrap">@lang('lang.Quantity')</th>
-                                    <th class="whitespace-nowrap">@lang('lang.Price')</th>
-                                    <th class="whitespace-nowrap">@lang('lang.Discount')</th>
-                                    <th class="whitespace-nowrap">@lang('lang.Total')</th>
-                                    <th class="whitespace-nowrap rounded-e-md">@lang('lang.Action')</th>
+                                    <th class="whitespace-nowrap py-3 px-3">@lang('lang.STN')</th>
+                                    <th class="whitespace-nowrap px-3">@lang('lang.Med._Name')</th>
+                                    <th class="whitespace-nowrap px-3">@lang('lang.Batch_ID')</th>
+                                    <th class="whitespace-nowrap px-3">@lang('lang.Expiry_Date')</th>
+                                    <th class="whitespace-nowrap px-3">@lang('lang.Quantity')</th>
+                                    <th class="whitespace-nowrap px-3">@lang('lang.Price')</th>
+                                    <th class="whitespace-nowrap px-3">@lang('lang.Discount')</th>
+                                    <th class="whitespace-nowrap px-3">@lang('lang.Total')</th>
+                                    <th class="whitespace-nowrap px-3">@lang('lang.Action')</th>
                                 </tr>
                             </thead>
                             <tbody>
 
                                 <tr>
-                                    <td class="border border-[#DEE2E6]"></td>
-                                    <td class="border border-[#DEE2E6]">
-                                        <div>
-                                            {{-- <select name="payment_type" class="border-0" id="payment_type">
-                                                <option value="cash" selected>@lang('lang.Cash_Payment')</option>
-                                            </select> --}}
-                                            Select Medicine
-                                        </div>
+                                    <td class="border border-[#DEE2E6] whitespace-nowrap px-3"></td>
+                                    <td class="border border-[#DEE2E6] whitespace-nowrap px-3">
+                                        <div>Select Medicine</div>
                                     </td>
-                                    <td class="border border-[#DEE2E6]">
+                                    <td class="border border-[#DEE2E6] whitespace-nowrap px-3">
                                         <div>
                                             <input type="text"
-                                                class="w-full   border-0 text-center rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                                                name="batch" id="batch" value="{{ $user['address'] ?? '' }}"
-                                                placeholder="@lang('lang.Batch_ID')" readonly>
+                                                class="w-full border-0 text-center rounded-[6px] focus:border-primary h-[46px] text-[14px]"
+                                                name="batch" id="batch" value="" placeholder="Batch ID"
+                                                readonly>
                                         </div>
+                                    </td>
+                                    <td class="border border-[#DEE2E6] whitespace-nowrap px-3">
+                                        <div>
+                                            <input type="text"
+                                                class="w-full border-0 text-center rounded-[6px] focus:border-primary h-[46px] text-[14px]"
+                                                name="exp" id="exp" value="" placeholder="Expiry Date"
+                                                readonly>
+                                        </div>
+                                    </td>
+                                    <td class="border border-[#DEE2E6] whitespace-nowrap px-3">
+                                        <div>
+                                            <input type="number" min="0"
+                                                class="w-full border-0 text-center rounded-[6px] focus:border-primary h-[46px] text-[14px]"
+                                                name="quantity" id="quantity" value="" placeholder="Quantity">
+                                        </div>
+                                    </td>
+                                    <td class="border border-[#DEE2E6] whitespace-nowrap px-3">
+                                        <div>
+                                            <input type="text"
+                                                class="w-full border-0 text-center rounded-[6px] focus:border-primary h-[46px] text-[14px]"
+                                                name="price" id="price" value="" placeholder="Price" readonly>
+                                        </div>
+                                    </td>
+                                    <td class="border border-[#DEE2E6] whitespace-nowrap px-3">
+                                        <div>
+                                            <input type="number" min="0"
+                                                class="w-full border-0 text-center rounded-[6px] focus:border-primary h-[46px] text-[14px]"
+                                                name="discount" id="discount" value="" placeholder="Discount">
+                                        </div>
+                                    </td>
+                                    <td class="border border-[#DEE2E6] whitespace-nowrap px-3">
+                                        <div>
+                                            <input type="number" min="0"
+                                                class="w-full border-0 text-center rounded-[6px] focus:border-primary h-[46px] text-[14px]"
+                                                name="total" id="total" value="" placeholder="Total"
+                                                readonly>
+                                        </div>
+                                    </td>
+                                    <td class="border border-[#DEE2E6] whitespace-nowrap px-3 flex gap-3 py-1 border-t-0">
+                                        <button
+                                            class="bg-primary py-2 px-4 rounded-md text-white font-extrabold add-row">+</button>
+                                        <button
+                                            class="bg-secondary py-2 px-4 rounded-md text-white font-extrabold delete-row">-</button>
                                     </td>
                                 </tr>
 
                             </tbody>
                         </table>
+                        <div class="grid grid-cols-4 mt-10 gap-5">
+                            <div></div>
+                            <div class=" w-full">
+                                <label class="text-[16px] font-semibold block  text-[#452C88]"
+                                    for="total_amount">@lang('lang.Total_Amount')</label>
+                                <input type="number" min="0"
+                                    class="w-full   border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
+                                    name="total_amount" id="total_amount" placeholder="@lang('lang.Total_Amount')"
+                                    value="{{ $user['name'] ?? '' }}" readonly>
+                            </div>
+
+                            <div class=" w-full">
+                                <label class="text-[16px] font-semibold block  text-[#452C88]"
+                                    for="total_discount">@lang('lang.Total_Discount')</label>
+                                <input type="number" min="0"
+                                    class="w-full   border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
+                                    name="total_discount" id="total_discount" placeholder="@lang('lang.Total_Discount')"
+                                    value="{{ $user['phone'] ?? '' }}">
+                            </div>
+                            <div class=" w-full">
+                                <label class="text-[16px] font-semibold block  text-[#452C88]"
+                                    for="net_total">@lang('lang.Net_Total').</label>
+                                <input type="number" min="0"
+                                    class="w-full   border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
+                                    name="net_total" id="net_total" placeholder="@lang('lang.Net_Total')."
+                                    value="{{ $user['address'] ?? '' }}">
+                            </div>
+
+                        </div>
+                        <div class="grid grid-cols-4 mt-4 gap-5">
+                            <button class="bg-primary text-white font-bold rounded-lg mt-5">
+                                @lang('lang.Save')
+                            </button>
+
+                            <button class="bg-secondary text-white font-bold rounded-lg mt-5">
+                                @lang('lang.Print')
+                            </button>
+
+                            <div class=" w-full">
+                                <label class="text-[16px] font-semibold block  text-[#452C88]"
+                                    for="paid_amount">@lang('lang.Paid_Amount')</label>
+                                <input type="number" min="0"
+                                    class="w-full   border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
+                                    name="paid_amount" id="paid_amount" placeholder="@lang('lang.Paid_Amount')"
+                                    value="{{ $user['phone'] ?? '' }}">
+                            </div>
+                            <div class=" w-full">
+                                <label class="text-[16px] font-semibold block  text-[#452C88]"
+                                    for="change">@lang('lang.Change')</label>
+                                <input type="number" min="0"
+                                    class="w-full   border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
+                                    name="change" id="change" placeholder="@lang('lang.Change')"
+                                    value="{{ $user['address'] ?? '' }}" readonly>
+                            </div>
+
+                        </div>
+
                     </div>
                 </div>
         </div>
@@ -106,4 +201,43 @@
 @endsection
 
 @section('js')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.add-row').forEach(function(button) {
+                button.addEventListener('click', addRow);
+            });
+
+            document.querySelectorAll('.delete-row').forEach(function(button) {
+                button.addEventListener('click', deleteRow);
+            });
+        });
+
+        function addRow(event) {
+            event.preventDefault();
+            const row = event.target.closest('tr');
+            const newRow = row.cloneNode(true);
+
+            newRow.querySelectorAll('input').forEach(function(input) {
+                input.value = '';
+            });
+
+            newRow.querySelectorAll('.add-row').forEach(function(button) {
+                button.addEventListener('click', addRow);
+            });
+
+            newRow.querySelectorAll('.delete-row').forEach(function(button) {
+                button.addEventListener('click', deleteRow);
+            });
+
+            row.parentNode.appendChild(newRow);
+        }
+
+        function deleteRow(event) {
+            event.preventDefault();
+            const row = event.target.closest('tr');
+            if (document.querySelectorAll('#medicineTable tbody tr').length > 1) {
+                row.remove();
+            }
+        }
+    </script>
 @endsection
