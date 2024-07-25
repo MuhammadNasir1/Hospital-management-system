@@ -13,7 +13,7 @@
                     <h3 class="text-[20px] text-black hidden sm:block">@lang('lang.Inventory')</h3>
                     <div>
 
-                        <button data-modal-target="addcustomermodal" data-modal-toggle="addcustomermodal"
+                        <button data-modal-target="addInventorymodal" data-modal-toggle="addInventorymodal"
                             class="bg-primary cursor-pointer text-white h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
                             @lang('lang.Add_Inventory')</button>
                     </div>
@@ -23,16 +23,28 @@
                         <thead class="py-1 bg-primary text-white">
                             <tr>
                                 <th class="whitespace-nowrap">@lang('lang.STN')</th>
-                                <th class="whitespace-nowrap">@lang('lang.Company_Name')</th>
                                 <th class="whitespace-nowrap">@lang('lang.Name')</th>
-                                <th class="whitespace-nowrap">@lang('lang.Phone_No')</th>
-                                <th class="whitespace-nowrap">@lang('lang.Email')</th>
-                                <th class="whitespace-nowrap">@lang('lang.Address')</th>
-                                <th class="whitespace-nowrap">@lang('lang.Role')</th>
+                                <th class="whitespace-nowrap">@lang('lang.Packing')</th>
+                                <th class="whitespace-nowrap">@lang('lang.Batch_ID')</th>
+                                <th class="whitespace-nowrap">@lang('lang.quantity')</th>
+                                <th class="whitespace-nowrap">@lang('lang.Expiry_Date')</th>
+                                <th class="whitespace-nowrap">@lang('lang.Price')</th>
                                 <th class="flex  justify-center">@lang('lang.Action')</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($medicines as $data)
+                                <tr>
+                                    <td>{{ $data->id }}</td>
+                                    <td>{{ $data->name }}</td>
+                                    <td>{{ $data->packing }}</td>
+                                    <td>{{ $data->batch_id }}</td>
+                                    <td>{{ $data->quantity }}</td>
+                                    <td>{{ $data->expiry_date }}</td>
+                                    <td>{{ $data->price }}</td>
+                                    <td></td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -45,7 +57,7 @@
 
 
     {{-- ============ add  customer modal  =========== --}}
-    <div id="addcustomermodal" data-modal-backdrop="static"
+    <div id="addInventorymodal" data-modal-backdrop="static"
         class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
         <div class="fixed inset-0 transition-opacity">
             <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
@@ -60,7 +72,7 @@
                         </h3>
                         <button type="button"
                             class=" absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
-                            data-modal-hide="addcustomermodal">
+                            data-modal-hide="addInventorymodal">
                             <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                 fill="none" viewBox="0 0 14 14">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -89,13 +101,13 @@
                             <label class="text-[14px] font-normal" for="batch">@lang('lang.Batch_ID')</label>
                             <input type="number" min="0" required
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="batch" id="batch" placeholder=" @lang('lang.Batch_ID')">
+                                name="batch_id" id="batch" placeholder=" @lang('lang.Batch_ID')">
                         </div>
                         <div>
                             <label class="text-[14px] font-normal" for="exp">@lang('lang.Expiry_Date')</label>
                             <input type="date" required
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="exp" id="exp" placeholder=" @lang('lang.Expiry_Date_Here')">
+                                name="expiry_date" id="exp" placeholder=" @lang('lang.Expiry_Date_Here')">
                         </div>
                         <div>
                             <label class="text-[14px] font-normal" for="quantity">@lang('lang.Quantity')</label>
@@ -150,7 +162,7 @@
     @if (isset($user))
         <script>
             $(document).ready(function() {
-                $('#addcustomermodal').removeClass("hidden");
+                $('#addInventorymodal').removeClass("hidden");
 
             });
         </script>
@@ -161,13 +173,10 @@
 @section('js')
     <script>
         $(document).ready(function() {
-            $('.delButton').click(function() {
-                var id = $(this).attr('delId');
-                $('#delLink').attr('href', '../delCustomer/' + id);
-            });
+
             // insert data
-            $("#customerData").submit(function(event) {
-                var url = "../registerdata";
+            $("#inventoryForm").submit(function(event) {
+                var url = "../addInventroy";
                 event.preventDefault();
                 var formData = new FormData(this);
                 $.ajax({
@@ -183,7 +192,7 @@
                         $('#addBtn').attr('disabled', true);
                     },
                     success: function(response) {
-                        window.location.href = '../companies';
+                        window.location.href = '../pharmacy/inventory';
 
 
                     },

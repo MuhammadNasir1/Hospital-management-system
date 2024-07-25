@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\authController;
+use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\Route;
 
@@ -53,6 +54,7 @@ Route::get('register', function () {
 
 
 // pharmacy
-Route::get('/pharmacy/inventory', function () {
-    return view('pharmacy.inventory');
-});
+Route::get('/pharmacy/inventory', [InventoryController::class, 'index']);
+
+
+Route::post('/addInventroy', [InventoryController::class, 'insert']);
