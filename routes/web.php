@@ -56,3 +56,6 @@ Route::get('register', function () {
 Route::get('/pharmacy/inventory', function () {
     return view('pharmacy.inventory');
 });
+Route::get('/pharmacy/create-invoice', function () {
+    return view('pharmacy.invoice');
+});
