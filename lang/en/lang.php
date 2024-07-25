@@ -357,4 +357,7 @@ return [
     "Packing" => "Packing",
     "Batch_ID" => "Batch ID",
     "Expiry_Date" => "Expiry Date",
+    "Create_New_Invoice" => "Create New Invoice",
+    "Cash_Payment" => "Cash Payment",
+    "Med._Name" => "Med. Name",
 ];
