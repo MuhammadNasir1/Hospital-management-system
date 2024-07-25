@@ -54,14 +54,12 @@ Route::get('register', function () {
 
 
 // pharmacy
-<<<<<<< HEAD
 Route::get('/pharmacy/inventory', function () {
     return view('pharmacy.inventory');
 });
 Route::get('/pharmacy/create-invoice', function () {
     return view('pharmacy.invoice');
 });
-=======
 Route::get('/pharmacy/inventory', [InventoryController::class, 'index']);
 
 
