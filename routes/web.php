@@ -60,6 +60,9 @@ Route::get('/pharmacy/inventory', function () {
 Route::get('/pharmacy/create-invoice', function () {
     return view('pharmacy.invoice');
 });
+Route::get('/pharmacy/billing', function () {
+    return view('pharmacy.billing');
+});
 Route::get('/pharmacy/inventory', [InventoryController::class, 'index']);
 
 
