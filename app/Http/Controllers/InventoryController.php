@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Inventory;
+use App\Models\OrderItems;
+use App\Models\PharmacyOrders;
 use Illuminate\Http\Request;
 
 class InventoryController extends Controller
@@ -11,6 +13,22 @@ class InventoryController extends Controller
     {
         $medicines = Inventory::all();
         return view('pharmacy.inventory', compact('medicines'));
+    }
+
+    public function invoiceData($order_id)
+    {
+        $orderData  =  PharmacyOrders::find($order_id);
+        $orderitems  = OrderItems::where('order_id', $orderData->id)->get();
+
+        $order = [];
+
+        $order = $orderData;
+        $medData = [];
+        foreach ($orderitems  as  $orderitem) {
+            $medicine  = Inventory::where('id', $orderitem->medicine_id)->first();
+            $medData[] = $medicine;
+        }
+        return view('pharmacy.billing', compact('orderData',  'medData'));
     }
     public function insert(Request $request)
     {

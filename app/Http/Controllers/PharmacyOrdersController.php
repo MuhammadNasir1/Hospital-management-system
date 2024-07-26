@@ -51,8 +51,8 @@ class PharmacyOrdersController extends Controller
                 ]);
                 $order_items->save();
             }
-
-            return response()->json(['success'  => true,  'message' => "Data add successfully"], 200);
+            $orderId = $order->id;
+            return response()->json(['success'  => true,  'message' => "Data add successfully", 'orderId' => $orderId], 200);
         } catch (\Exception $e) {
             return response()->json(['success'  => false,  'message' => $e->getMessage()], 500);
         }

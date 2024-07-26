@@ -271,7 +271,8 @@
                         $('#addBtn').attr('disabled', true);
                     },
                     success: function(response) {
-                        window.location.href = '../pharmacy/billing';
+                        let orderId = response.orderId;
+                        window.location.href = '../pharmacy/billing/' + orderId;
 
 
                     },
