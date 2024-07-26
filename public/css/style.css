@@ -140,3 +140,61 @@ table.dataTable.no-footer {
     gap: 10px;
     align-items: center;
 }
+
+/* Pharmacy Billing Invoice */
+.billing {
+    color: #939393;
+    padding: 20px;
+}
+.top-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.top-icon img {
+    height: 60px;
+}
+.top-icon h1,
+h2,
+p {
+    margin: 0;
+}
+.invoice-list ul {
+    padding: 0;
+}
+.invoice-list ul li {
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: 10rem 1fr;
+    padding: 5px 0px;
+}
+.billing-table {
+    width: 100%;
+}
+.billing-table thead th,
+.footer {
+    border-top: 2px solid #939393;
+    border-bottom: 2px solid #939393;
+}
+.billing-table .last {
+    text-align: end;
+}
+.billing-table .first {
+    text-align: start;
+}
+.billing-table th,
+td {
+    padding: 10px 0px;
+    text-align: center;
+}
+.footer ul {
+    padding: 0;
+}
+.footer ul li,
+.result {
+    padding: 5px 0px;
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+}

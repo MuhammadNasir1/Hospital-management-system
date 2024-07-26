@@ -364,4 +364,11 @@ return [
     "Create_New_Invoice" => "Create New Invoice",
     "Cash_Payment" => "Cash Payment",
     "Med._Name" => "Med. Name",
+    "Pharmacy_Name" => "Pharmacy Name",
+    "lisence_No" => "lisence No",
+    "Phone" => "Phone",
+    "Contact" => "Contact",
+    "Medicine" => "Medicine",
+    "Subtotal" => "Subtotal",
+    "U_Price" => "U.Price",
 ];
