@@ -23,12 +23,14 @@ class InventoryController extends Controller
         $order = [];
 
         $order = $orderData;
-        $medData = [];
-        foreach ($orderitems  as  $orderitem) {
-            $medicine  = Inventory::where('id', $orderitem->medicine_id)->first();
-            $medData[] = $medicine;
-        }
-        return view('pharmacy.billing', compact('orderData',  'medData'));
+        $order_items = $orderitems;
+        // $medData = [];
+        // foreach ($orderitems  as  $orderitem) {
+        //     $medicine  = Inventory::where('id', $orderitem->medicine_id)->first();
+        //     $medData[] = $medicine;
+        // }$order_items
+        // return response()->json($order_items);
+        return view('pharmacy.billing', compact('orderData',  'order_items'));
     }
     public function insert(Request $request)
     {
@@ -36,7 +38,8 @@ class InventoryController extends Controller
 
             $validatedData  = $request->validate([
                 'name' => 'required',
-                'packing' => 'required',
+
+                // }     'packing' => 'required',
                 'batch_id' => 'required',
                 'expiry_date' => 'required',
                 'quantity' => 'required',
