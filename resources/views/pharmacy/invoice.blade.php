@@ -12,7 +12,8 @@
         </div>
 
         <div id="reloadDiv" class="shadow-dark mt-3  rounded-xl  bg-white">
-            <form action="../updateSettings" method="post" enctype="multipart/form-data">
+            {{-- <form action="../pharmacyOrders" method="post" enctype="multipart/form-data"> --}}
+            <form id="orderForm" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="p-8">
 
@@ -22,24 +23,15 @@
                                 for="name">@lang('lang.Customer_Name')</label>
                             <input type="text"
                                 class="w-full   border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                                name="name" id="name" placeholder="@lang('lang.Customer_Name')"
+                                name="customer_name" id="name" placeholder="@lang('lang.Customer_Name')"
                                 value="{{ $user['name'] ?? '' }}">
-                        </div>
-
-                        <div class=" w-full">
-                            <label class="text-[16px] font-semibold block  text-[#452C88]"
-                                for="phone">@lang('lang.Invoice_No')</label>
-                            <input type="number" min="0"
-                                class="w-full   border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                                name="phone" id="phone" placeholder="@lang('lang.Invoice_No')"
-                                value="{{ $user['phone'] ?? '' }}">
                         </div>
                         <div class=" w-full">
                             <label class="text-[16px] font-semibold block  text-[#452C88]"
                                 for="city">@lang('lang.Contact_No')</label>
                             <input type="number" min="0"
                                 class="w-full   border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                                name="address" id="address" placeholder="@lang('lang.Contact_No')"
+                                name="customer_phone" id="customer_phone" placeholder="@lang('lang.Contact_No')"
                                 value="{{ $user['address'] ?? '' }}">
                         </div>
                         <div>
@@ -79,6 +71,9 @@
                                     <td class="border border-[#DEE2E6] whitespace-nowrap px-3"></td>
                                     <td class="border border-[#DEE2E6] whitespace-nowrap px-3">
                                         <div>Select Medicine</div>
+                                        <input type="text"
+                                            class="w-full border-0 text-center rounded-[6px] focus:border-primary h-[46px] text-[14px]"
+                                            name="medicine_id[]" id="batch" value="" placeholder="Batch ID">
                                     </td>
                                     <td class="border border-[#DEE2E6] whitespace-nowrap px-3">
                                         <div>
@@ -100,7 +95,7 @@
                                         <div>
                                             <input type="number" min="0"
                                                 class="w-full border-0 text-center rounded-[6px] focus:border-primary h-[46px] text-[14px]"
-                                                name="quantity" id="quantity" value="" placeholder="Quantity">
+                                                name="quantity[]" id="quantity" value="" placeholder="Quantity">
                                         </div>
                                     </td>
                                     <td class="border border-[#DEE2E6] whitespace-nowrap px-3">
@@ -126,9 +121,9 @@
                                         </div>
                                     </td>
                                     <td class="border border-[#DEE2E6] whitespace-nowrap px-3 flex gap-3 py-1 border-t-0">
-                                        <button
+                                        <button type="button"
                                             class="bg-primary py-2 px-4 rounded-md text-white font-extrabold add-row">+</button>
-                                        <button
+                                        <button type="button"
                                             class="bg-secondary py-2 px-4 rounded-md text-white font-extrabold delete-row">-</button>
                                     </td>
                                 </tr>
@@ -143,7 +138,7 @@
                                 <input type="number" min="0"
                                     class="w-full   border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
                                     name="total_amount" id="total_amount" placeholder="@lang('lang.Total_Amount')"
-                                    value="{{ $user['name'] ?? '' }}" readonly>
+                                    value="{{ $user['name'] ?? '' }}">
                             </div>
 
                             <div class=" w-full">
@@ -151,15 +146,15 @@
                                     for="total_discount">@lang('lang.Total_Discount')</label>
                                 <input type="number" min="0"
                                     class="w-full   border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                                    name="total_discount" id="total_discount" placeholder="@lang('lang.Total_Discount')"
+                                    name="discount" id="total_discount" placeholder="@lang('lang.Total_Discount')"
                                     value="{{ $user['phone'] ?? '' }}">
                             </div>
                             <div class=" w-full">
                                 <label class="text-[16px] font-semibold block  text-[#452C88]"
-                                    for="net_total">@lang('lang.Net_Total').</label>
+                                    for="net_total">@lang('lang.Grand_total').</label>
                                 <input type="number" min="0"
                                     class="w-full   border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
-                                    name="net_total" id="net_total" placeholder="@lang('lang.Net_Total')."
+                                    name="grand_total" id="net_total" placeholder="@lang('lang.Net_Total')."
                                     value="{{ $user['address'] ?? '' }}">
                             </div>
 
@@ -204,7 +199,7 @@
                                 <input type="number" min="0"
                                     class="w-full   border-2 border-[#DEE2E6] rounded-[6px] focus:border-primary   h-[46px] text-[14px]"
                                     name="change" id="change" placeholder="@lang('lang.Change')"
-                                    value="{{ $user['address'] ?? '' }}" readonly>
+                                    value="{{ $user['address'] ?? '' }}">
                             </div>
 
                         </div>
@@ -256,5 +251,50 @@
                 row.remove();
             }
         }
+
+
+        $(document).ready(function() {
+            $("#orderForm").submit(function(event) {
+                var url = "../pharmacyOrders";
+                event.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: formData,
+                    dataType: "json",
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function() {
+                        $('#spinner').removeClass('hidden');
+                        $('#text').addClass('hidden');
+                        $('#addBtn').attr('disabled', true);
+                    },
+                    success: function(response) {
+                        window.location.href = '../pharmacy/billing';
+
+
+                    },
+                    error: function(jqXHR) {
+                        let response = JSON.parse(jqXHR.responseText);
+                        console.log("error");
+                        Swal.fire(
+                            'Warning!',
+                            response.message,
+                            'warning'
+                        );
+
+                        $('#text').removeClass('hidden');
+                        $('#spinner').addClass('hidden');
+                        $('#addBtn').attr('disabled', false);
+                    }
+                });
+            });
+
+
+
+
+
+        });
     </script>
 @endsection

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\authController;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\PharmacyOrdersController;
 use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\Route;
 
@@ -67,3 +68,6 @@ Route::get('/pharmacy/inventory', [InventoryController::class, 'index']);
 
 
 Route::post('/addInventroy', [InventoryController::class, 'insert']);
+
+
+Route::post('/pharmacyOrders', [PharmacyOrdersController::class, 'insert']);
