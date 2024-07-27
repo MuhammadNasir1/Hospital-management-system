@@ -83,7 +83,6 @@
                                                 <option value="{{ $data->id }}">
                                             @endforeach
                                         </datalist>
-                                        {{--  --}}
 
                                     </td>
                                     <td class="border border-[#DEE2E6] whitespace-nowrap px-3">
