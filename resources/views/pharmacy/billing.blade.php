@@ -24,19 +24,19 @@
             <ul>
                 <li>
                     <strong>@lang('lang.Invoice_No'):</strong>
-                    <p>#123456</p>
+                    <p># {{ $orderData->id }}</p>
                 </li>
                 <li>
                     <strong>@lang('lang.Date'):</strong>
-                    <p>10-26-2007</p>
+                    <p>{{ $orderData->date }}</p>
                 </li>
                 <li>
                     <strong>@lang('lang.Customer'):</strong>
-                    <p>M-Arham Waheed</p>
+                    <p>{{ $orderData->customer_name }}</p>
                 </li>
                 <li>
                     <strong>@lang('lang.Contact'):</strong>
-                    <p>03035672559</p>
+                    <p>{{ $orderData->customer_phone }}</p>
                 </li>
             </ul>
         </div>
@@ -51,30 +51,30 @@
 
             </thead>
             <tbody>
-                <tr>
-                    <td class="first">Name Here</td>
-                    <td>02</td>
-                    <td>39.00</td>
-                    <td class="last">39.00</td>
-                </tr>
-                <tr>
-                    <td class="first">Name Here</td>
-                    <td>02</td>
-                    <td>39.00</td>
-                    <td class="last">39.00</td>
-                </tr>
-                <tr>
-                    <td class="first">Name Here</td>
-                    <td>02</td>
-                    <td>39.00</td>
-                    <td class="last">39.00</td>
-                </tr>
-                <tr>
-                    <td class="first">Name Here</td>
-                    <td>02</td>
-                    <td>39.00</td>
-                    <td class="last">39.00</td>
-                </tr>
+                @foreach ($order_items as $data)
+                    <tr>
+                        <td class="first">
+                            @php
+                                $name = DB::table('inventories')
+                                    ->where('id', $data->medicine_id)
+                                    ->value('name');
+                            @endphp
+                            {{ $name }}
+                        </td>
+                        <td>{{ $data->quantity }}</td>
+                        <td>
+                            @php
+                                $price = DB::table('inventories')
+                                    ->where('id', $data->medicine_id)
+                                    ->value('price');
+                            @endphp
+                            {{ $price }}
+                        </td>
+                        <td class="last" id="count">{{ $data->quantity * $price }}</td>
+                        <input type="hidden" class="subtotal" value="{{ $data->quantity * $price }}">
+                    </tr>
+                @endforeach
+
             </tbody>
         </table>
 
@@ -82,23 +82,33 @@
             <ul>
                 <li>
                     <strong>@lang('lang.Sub_Total')</strong>
-                    <p>0.00</p>
+                    <p>{{ $orderData->total_amount }}</p>
                 </li>
                 <li>
                     <strong>@lang('lang.Tax')</strong>
-                    <p>39.00</p>
+                    <p>18%</p>
                 </li>
                 <li>
                     <strong>@lang('lang.Discount')</strong>
-                    <p>0.00</p>
+                    <p>{{ $orderData->discount }}</p>
                 </li>
             </ul>
         </div>
         <div class="result">
             <strong>@lang('lang.Total')</strong>
-            <p>39.00</p>
+            <p id="total"></p>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            let total = 0;
+            document.querySelectorAll('.subtotal').forEach(function(element) {
+                total += parseFloat(element.value);
+            });
+            document.getElementById('total').innerText = 'Total: ' + total.toFixed(2);
+        });
+    </script>
 </body>
 
 </html>
