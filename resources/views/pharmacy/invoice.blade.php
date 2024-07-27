@@ -69,10 +69,21 @@
                                 <tr>
                                     <td class="border border-[#DEE2E6] whitespace-nowrap px-3"></td>
                                     <td class="border border-[#DEE2E6] whitespace-nowrap px-3">
-                                        <div>Select Medicine</div>
-                                        <input type="text"
+                                        {{-- <div>Select Medicine</div> --}}
+                                        {{-- <input type="text"
                                             class="w-full border-0 text-center rounded-[6px] focus:border-primary h-[46px] text-[14px]"
-                                            name="medicine_id[]" id="batch" value="" placeholder="Batch ID">
+                                            name="medicine_id[]" id="batch" value="" placeholder="Batch ID"> --}}
+
+                                        <input list="medicine" name="medicine_id[]" id="medicine_id"
+                                            placeholder="@lang('lang.Select_Medicine')"
+                                            class="w-full border-0 text-center rounded-[6px] focus:border-0 h-[46px] text-[14px]">
+
+                                        <datalist id="medicine" class="focus:border-0">
+                                            @foreach ($medicine as $data)
+                                                <option value="{{ $data->id }}">
+                                            @endforeach
+                                        </datalist>
+
                                     </td>
                                     <td class="border border-[#DEE2E6] whitespace-nowrap px-3">
                                         <div>
@@ -214,6 +225,8 @@
                 button.addEventListener('click', deleteRow);
             });
         });
+
+
 
         function addRow(event) {
             event.preventDefault();

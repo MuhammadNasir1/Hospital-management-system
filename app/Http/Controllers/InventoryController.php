@@ -62,4 +62,10 @@ class InventoryController extends Controller
             return response()->json(['success' => false,  'message' =>  $e->getMessage()], 500);
         }
     }
+
+    public function medicine()
+    {
+        $medicine = Inventory::all();
+        return view('pharmacy.invoice',  compact('medicine'));
+    }
 }

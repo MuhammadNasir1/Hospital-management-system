@@ -58,14 +58,12 @@ Route::get('register', function () {
 Route::get('/pharmacy/inventory', function () {
     return view('pharmacy.inventory');
 });
-Route::get('/pharmacy/create-invoice', function () {
-    return view('pharmacy.invoice');
-});
 Route::get('/pharmacy/billing/{order_id}', [InventoryController::class, 'invoiceData']);
 Route::get('/pharmacy/inventory', [InventoryController::class, 'index']);
 
 
 Route::post('/addInventroy', [InventoryController::class, 'insert']);
+Route::get('/pharmacy/create-invoice', [InventoryController::class, 'medicine']);
 
 
 Route::post('/pharmacyOrders', [PharmacyOrdersController::class, 'insert']);

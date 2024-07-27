@@ -370,5 +370,6 @@ return [
     "Contact" => "Contact",
     "Medicine" => "Medicine",
     "Subtotal" => "Subtotal",
+    "Select_Medicine" => "Select Medicine",
     "U_Price" => "U.Price",
 ];
