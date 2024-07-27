@@ -60,7 +60,6 @@
                                     <th class="whitespace-nowrap px-3">@lang('lang.Expiry_Date')</th>
                                     <th class="whitespace-nowrap px-3">@lang('lang.Quantity')</th>
                                     <th class="whitespace-nowrap px-3">@lang('lang.Price')</th>
-                                    <th class="whitespace-nowrap px-3">@lang('lang.Discount')</th>
                                     <th class="whitespace-nowrap px-3">@lang('lang.Total')</th>
                                     <th class="whitespace-nowrap px-3">@lang('lang.Action')</th>
                                 </tr>
@@ -109,15 +108,7 @@
                                         <div>
                                             <input type="number" min="0"
                                                 class="w-full border-0 text-center rounded-[6px] focus:border-primary h-[46px] text-[14px]"
-                                                name="discount" id="discount" value="" placeholder="Discount">
-                                        </div>
-                                    </td>
-                                    <td class="border border-[#DEE2E6] whitespace-nowrap px-3">
-                                        <div>
-                                            <input type="number" min="0"
-                                                class="w-full border-0 text-center rounded-[6px] focus:border-primary h-[46px] text-[14px]"
-                                                name="total" id="total" value="" placeholder="Total"
-                                                readonly>
+                                                name="total" id="total" value="" placeholder="Total" readonly>
                                         </div>
                                     </td>
                                     <td class="border border-[#DEE2E6] whitespace-nowrap px-3 flex gap-3 py-1 border-t-0">
