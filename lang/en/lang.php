@@ -391,6 +391,8 @@ return [
     "Specialization" => "Specialization",
     "Specialization_Here" => "Specialization Here",
     "Relation" => "Relation",
+    "Disease" => "Disease",
+    "Disease_Here" => "Disease Here",
     "CNIC_Here" => "CNIC Here",
     "Martial_Status" => "Martial Status",
     "Patient_Registration" => "Patient Registration",

@@ -88,6 +88,12 @@
                             placeholder=" @lang('lang.Name_Here')">
                     </div>
                     <div>
+                        <label class="text-[14px] font-normal" for="disease">@lang('lang.Disease')</label>
+                        <input type="text" required
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="disease" id="disease" value="{{ $user->name ?? '' }}" placeholder="@lang('lang.Disease_Here')">
+                    </div>
+                    <div>
                         <label class="text-[14px] font-normal" for="phone">@lang('lang.Phone_No')</label>
                         <input type="number" min="0" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
@@ -110,7 +116,8 @@
                         <label class="text-[14px] font-normal" for="cnic">@lang('lang.CNIC')</label>
                         <input type="number" min="0" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="cnic" id="cnic" value="{{ $user->name ?? '' }}" placeholder=" @lang('lang.CNIC_Here')">
+                            name="cnic" id="cnic" value="{{ $user->name ?? '' }}"
+                            placeholder=" @lang('lang.CNIC_Here')">
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="age">@lang('lang.Age')</label>

@@ -13,6 +13,7 @@ class PatientController extends Controller
             $validateData = $request->validate([
                 'name' => 'required',
                 'father_husband_name' => 'required',
+                'disease' => 'required',
                 'phone' => 'required|numeric',
                 'email' => 'required|email',
                 'dob' => 'required',
@@ -30,6 +31,7 @@ class PatientController extends Controller
             $patient->father_husband_name = $validateData['father_husband_name'];
             $patient->phone = $validateData['phone'];
             $patient->email = $validateData['email'];
+            $patient->disease = $validateData['disease'];
             $patient->dob = $validateData['dob'];
             $patient->cnic = $validateData['cnic'];
             $patient->age = $validateData['age'];

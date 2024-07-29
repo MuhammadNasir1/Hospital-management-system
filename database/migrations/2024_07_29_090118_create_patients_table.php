@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('father_husband_name');
+            $table->string('disease');
             $table->string('phone');
             $table->string('email');
             $table->string('dob');
