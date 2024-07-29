@@ -135,7 +135,8 @@
 
                     <div>
                         <label class="text-[14px] font-normal" for="role">@lang('lang.Role')</label>
-                        <select name="role" id="role">
+                        <select name="role" id="role" onchange="show()">
+                            <option disabled selected> @lang('lang.Select_Role')</option>
                             <option value="doctor"> @lang('lang.Doctor')</option>
                             <option value="nurse"> @lang('lang.Nurse')</option>
                             <option value="receptionist"> @lang('lang.Receptionist')</option>
@@ -150,6 +151,12 @@
 
                     <h1 class="font-semibold col-span-3">@lang('lang.Education_&_Training')</h1>
 
+                    <div id="specialization">
+                        <label class="text-[14px] font-normal" for="specialization">@lang('lang.Specialization')</label>
+                        <input type="text" required
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="specialization" placeholder="@lang('lang.Specialization_Here')" value="{{ $user->email ?? '' }}">
+                    </div>
                     <div>
                         <label class="text-[14px] font-normal" for="school">@lang('lang.Medical_School')</label>
                         <input type="text" required
@@ -282,5 +289,20 @@
 
 
         });
+
+
+        let specialization = document.getElementById("specialization");
+        let role = document.getElementById("role");
+
+
+        specialization.style.display = "none";
+
+        function show() {
+            if (role.value === 'doctor') {
+                specialization.style.display = "block";
+            } else {
+                specialization.style.display = "none";
+            }
+        }
     </script>
 @endsection

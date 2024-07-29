@@ -25,6 +25,7 @@ class User extends Authenticatable
         'dob',
         'age',
         'gender',
+        'specialization',
         'city',
         'school',
         'graduation',
