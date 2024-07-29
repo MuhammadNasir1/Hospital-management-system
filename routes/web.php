@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\authController;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PharmacyOrdersController;
 use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\Route;
@@ -58,6 +59,12 @@ Route::get('register', function () {
 Route::get('/pharmacy/inventory', function () {
     return view('pharmacy.inventory');
 });
+Route::get('/doctor/patients', function () {
+    return view('doctor.doctor');
+});
+Route::get('/reception/patients', function () {
+    return view('reception.patient');
+});
 Route::get('/pharmacy/billing/{order_id}', [InventoryController::class, 'invoiceData']);
 Route::get('/pharmacy/inventory', [InventoryController::class, 'index']);
 
@@ -67,3 +74,7 @@ Route::get('/pharmacy/create-invoice', [InventoryController::class, 'medicine'])
 
 
 Route::post('/pharmacyOrders', [PharmacyOrdersController::class, 'insert']);
+
+Route::controller(PatientController::class)->group(function () {
+    Route::post('/reception/patient', 'register');
+});
