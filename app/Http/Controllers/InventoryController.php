@@ -38,8 +38,7 @@ class InventoryController extends Controller
 
             $validatedData  = $request->validate([
                 'name' => 'required',
-
-                // }     'packing' => 'required',
+                'packing' => 'required',
                 'batch_id' => 'required',
                 'expiry_date' => 'required',
                 'quantity' => 'required',
