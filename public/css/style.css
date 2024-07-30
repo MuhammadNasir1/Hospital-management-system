@@ -160,13 +160,19 @@ h2,
 p {
     margin: 0;
 }
-.invoice-list ul {
+.invoice-list,
+.patient-detail ul {
     padding: 0;
 }
 .invoice-list ul li {
     list-style-type: none;
     display: grid;
-    grid-template-columns: 10rem 1fr;
+    grid-template-columns: 300px 1fr;
+    padding: 5px 0px;
+}
+.patient-detail ul li {
+    display: flex;
+    justify-content: space-between;
     padding: 5px 0px;
 }
 .billing-table {

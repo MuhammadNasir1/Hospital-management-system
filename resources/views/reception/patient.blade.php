@@ -221,6 +221,7 @@
 
 
                 <div class="flex justify-end ">
+
                     <button class="bg-primary text-white py-2 px-6 my-4 rounded-[4px]  mx-6 uaddBtn  font-semibold "
                         id="addBtn">
                         <div class=" text-center hidden" id="spinner">
@@ -236,10 +237,11 @@
                             </svg>
                         </div>
                         <div id="text">
-                            @lang('lang.Save')
+                            @lang('lang.Save&Print')
                         </div>
 
                     </button>
+
                 </div>
             </div>
             </form>
@@ -275,7 +277,8 @@
                         $('#addBtn').attr('disabled', true);
                     },
                     success: function(response) {
-                        window.location.href = '../../reception/patients';
+                        let patientId = response.patientId;
+                        window.location.href = '../reception/patient/print-detail/' + patientId;
 
 
                     },

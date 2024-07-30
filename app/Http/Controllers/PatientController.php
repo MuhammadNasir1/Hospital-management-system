@@ -42,9 +42,11 @@ class PatientController extends Controller
             $patient->address = $validateData['address'];
 
             $patient->save();
+            $patientId = $patient->id;
             return response()->json([
                 'success' => true,
                 'message' => 'Register successful',
+                'patientId' => $patientId,
             ], 201);
         } catch (\Exception $e) {
             return response()->json([
@@ -58,5 +60,10 @@ class PatientController extends Controller
     {
         $patients = Patient::all();
         return view('reception.patient', compact('patients'));
+    }
+    public function print(string $id)
+    {
+        $printData = Patient::find($id);
+        return view('reception.patient_detail', compact('printData'));
     }
 }
