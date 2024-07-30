@@ -388,6 +388,7 @@ return [
     "CNIC" => "CNIC",
     "Married" => "Married",
     "Single" => "Single",
+    "Token" => "Token",
     "Specialization" => "Specialization",
     "Specialization_Here" => "Specialization Here",
     "Relation" => "Relation",

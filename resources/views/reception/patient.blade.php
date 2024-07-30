@@ -20,19 +20,61 @@
                     <table id="datatable">
                         <thead class="py-1 bg-primary text-white">
                             <tr>
-                                <th class="whitespace-nowrap">@lang('lang.STN')</th>
-                                <th class="whitespace-nowrap">@lang('lang.Company_Name')</th>
-                                <th class="whitespace-nowrap">@lang('lang.Name')</th>
-                                <th class="whitespace-nowrap">@lang('lang.Phone_No')</th>
-                                <th class="whitespace-nowrap">@lang('lang.Email')</th>
-                                <th class="whitespace-nowrap">@lang('lang.Address')</th>
-                                <th class="whitespace-nowrap">@lang('lang.Role')</th>
+                                <th class="whitespace-nowrap ">@lang('lang.STN')</th>
+                                <th class="whitespace-nowrap ">@lang('lang.Token')</th>
+                                <th class="whitespace-nowrap ">@lang('lang.Name')</th>
+                                <th class="whitespace-nowrap ">@lang('lang.Phone_No')</th>
+                                <th class="whitespace-nowrap ">@lang('lang.Email')</th>
+                                <th class="whitespace-nowrap ">@lang('lang.Age')</th>
+                                <th class="whitespace-nowrap ">@lang('lang.Disease')</th>
                                 <th class="flex  justify-center">@lang('lang.Action')</th>
                             </tr>
                         </thead>
                         <tbody>
 
+                            @foreach ($patients as $data)
+                                <tr class="capitalize">
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $data->id }}</td>
+                                    <td> {{ $data->name }} </td>
+                                    <td>{{ $data->phone }}</td>
+                                    <td>{{ $data->email }}</td>
+                                    <td>{{ $data->age }}</td>
+                                    <td>{{ $data->disease }}</td>
+                                    <td>
+                                        <div class="flex gap-5 items-center justify-center">
+                                            <a href="">
+                                                <div class="bg-secondary w-9 rounded-full p-1.5 text-white">
+                                                    <svg class="w-6 h-6 a-gray-800 dark:text-white" aria-hidden="true"
+                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        fill="currentColor" viewBox="0 0 24 24">
+                                                        <path fill-rule="evenodd"
+                                                            d="M8 3a2 2 0 0 0-2 2v3h12V5a2 2 0 0 0-2-2H8Zm-3 7a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h1v-4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v4h1a2 2 0 0 0 2-2v-5a2 2 0 0 0-2-2H5Zm4 11a1 1 0 0 1-1-1v-4h8v4a1 1 0 0 1-1 1H9Z"
+                                                            clip-rule="evenodd" />
+                                                    </svg>
+                                                </div>
+                                            </a>
 
+                                            <a href="">
+                                                <button data-modal-target="Updateproductmodal"
+                                                    data-modal-toggle="Updateproductmodal"
+                                                    class=" updateBtn cursor-pointer  w-[42px]"
+                                                    updateId="{{ $data->id }}"><img width="38px"
+                                                        src="{{ asset('images/icons/edit.svg') }}" alt="update"></button>
+                                            </a>
+                                            <a href="">
+                                                <button data-modal-target="deleteData" data-modal-toggle="deleteData"
+                                                    class="delButton" delId="{{ $data->id }}">
+                                                    <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
+                                                        alt="delete" class="cursor-pointer">
+                                                </button>
+                                            </a>
+
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -78,7 +120,8 @@
                         <label class="text-[14px] font-normal" for="name">@lang('lang.Full_Name')</label>
                         <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="name" id="name" value="{{ $user->name ?? '' }}" placeholder=" @lang('lang.Full_Name_Here')">
+                            name="name" id="name" value="{{ $user->name ?? '' }}"
+                            placeholder=" @lang('lang.Full_Name_Here')">
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="father_husband_name">@lang('lang.Father_Husband_Name')</label>
@@ -91,13 +134,15 @@
                         <label class="text-[14px] font-normal" for="disease">@lang('lang.Disease')</label>
                         <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="disease" id="disease" value="{{ $user->name ?? '' }}" placeholder="@lang('lang.Disease_Here')">
+                            name="disease" id="disease" value="{{ $user->name ?? '' }}"
+                            placeholder="@lang('lang.Disease_Here')">
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="phone">@lang('lang.Phone_No')</label>
                         <input type="number" min="0" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="phone" id="phone" value="{{ $user->name ?? '' }}" placeholder=" @lang('lang.Phone_No_Here')">
+                            name="phone" id="phone" value="{{ $user->name ?? '' }}"
+                            placeholder=" @lang('lang.Phone_No_Here')">
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="user_email">@lang('lang.Email_Address')</label>

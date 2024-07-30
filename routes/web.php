@@ -62,9 +62,6 @@ Route::get('/pharmacy/inventory', function () {
 Route::get('/doctor/patients', function () {
     return view('doctor.doctor');
 });
-Route::get('/reception/patients', function () {
-    return view('reception.patient');
-});
 Route::get('/pharmacy/billing/{order_id}', [InventoryController::class, 'invoiceData']);
 Route::get('/pharmacy/inventory', [InventoryController::class, 'index']);
 
@@ -77,4 +74,5 @@ Route::post('/pharmacyOrders', [PharmacyOrdersController::class, 'insert']);
 
 Route::controller(PatientController::class)->group(function () {
     Route::post('/reception/patient', 'register');
+    Route::get('/reception/patients', 'view');
 });

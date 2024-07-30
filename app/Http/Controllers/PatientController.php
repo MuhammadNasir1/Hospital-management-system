@@ -53,4 +53,10 @@ class PatientController extends Controller
             ], 500);
         }
     }
+
+    public function view()
+    {
+        $patients = Patient::all();
+        return view('reception.patient', compact('patients'));
+    }
 }
