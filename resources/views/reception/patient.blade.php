@@ -43,7 +43,7 @@
                                     <td>{{ $data->disease }}</td>
                                     <td>
                                         <div class="flex gap-5 items-center justify-center">
-                                            <a href="">
+                                            <a href="{{ route('printPatient', $data->id) }}">
                                                 <div class="bg-secondary w-9 rounded-full p-1.5 text-white">
                                                     <svg class="w-6 h-6 a-gray-800 dark:text-white" aria-hidden="true"
                                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -62,7 +62,7 @@
                                                     updateId="{{ $data->id }}"><img width="38px"
                                                         src="{{ asset('images/icons/edit.svg') }}" alt="update"></button>
                                             </a>
-                                            <a href="">
+                                            <a href="{{ route('delPatient', $data->id) }}">
                                                 <button data-modal-target="deleteData" data-modal-toggle="deleteData"
                                                     class="delButton" delId="{{ $data->id }}">
                                                     <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
@@ -255,10 +255,10 @@
 @section('js')
     <script>
         $(document).ready(function() {
-            // $('.delButton').click(function() {
-            //     var id = $(this).attr('delId');
-            //     $('#delLink').attr('href', '../delCustomer/' + id);
-            // });
+            $('.delButton').click(function() {
+                var id = $(this).attr('delId');
+                $('#delLink').attr('href', '../patient/delete-patient/' + id);
+            });
             // insert data
             $("#patientData").submit(function(event) {
                 var url = "../reception/patient";

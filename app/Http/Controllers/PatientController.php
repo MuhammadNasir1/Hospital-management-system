@@ -66,4 +66,10 @@ class PatientController extends Controller
         $printData = Patient::find($id);
         return view('reception.patient_detail', compact('printData'));
     }
+    public function delete(string $id)
+    {
+        $delPateint = Patient::find($id);
+        $delPateint->delete();
+        return redirect('../reception/patients');
+    }
 }
