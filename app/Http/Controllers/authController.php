@@ -95,13 +95,13 @@ class authController extends Controller
 
         try {
 
-            // if(session('user_det')['role'] == "admin"){
+            if (session('user_det')['role'] == "admin") {
 
-            // $company  = session('user_det')['user_Id'];
-            // }else{
+                $company  = session('user_det')['user_id'];
+            } else {
 
-            //   $company =   $validatedData['company']
-            // }
+                $company =   $request->company;
+            }
             $user = User::create([
                 'name' => $request->name,
                 'phone' => $request->phone,
@@ -109,7 +109,7 @@ class authController extends Controller
                 'specialization' => $request->specialization,
                 'email' => $request->email,
                 'role' =>  $request->role,
-                'company' => $request->company,
+                'company' => $company,
                 'dob' => $request->dob,
                 'age' => $request->age,
                 'gender' => $request->gender,
