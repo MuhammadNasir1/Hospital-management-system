@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('company')->nullable();
             $table->string('gender')->nullable();
             $table->string('specialization')->nullable();
+            $table->string('lisence_no')->nullable();
+            $table->string('issuing_authority')->nullable();
+            $table->string('exp_date')->nullable();
             $table->string('age')->nullable();
             $table->string('dob')->nullable();
             $table->string('school')->nullable();

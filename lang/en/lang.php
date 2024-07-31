@@ -408,5 +408,10 @@ return [
     "Father_Husband_Name" => "Father/Husband Name",
     "Add_Patient" => "Add Patient",
     "Get_Appointment" => "Get Appointment",
+    "Pharmassist" => "Pharmassist",
+    "Lisence_No" => "Lisence No",
+    "Issuing_Authority" => "Issuing Authority",
+    "Expiration_Date" => "Expiration  Date",
+    "Lisence_No_Here" => "Lisence No Here",
     "Select_Doctor" => "Select Doctor",
 ];

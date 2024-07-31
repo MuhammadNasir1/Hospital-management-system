@@ -60,7 +60,7 @@ class PatientController extends Controller
     public function view()
     {
         $patients = Patient::all();
-        $doctors = User::where('role', 'doctor')->get();
+        $doctors = User::where('role', 'doctor')->where('company', session('user_det')['user_id'])->get();
         // return $doctors;
         return view('reception.patient', compact('patients', 'doctors'));
     }

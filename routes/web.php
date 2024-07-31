@@ -31,6 +31,7 @@ Route::middleware('custom')->group(function () {
     });
 
     Route::get('/companies', [userController::class, 'users']);
+    Route::get('/staff', [userController::class, 'staff']);
     Route::get('/deleteUser/{id}', [userController::class, 'deleteUser'])->name("deleteUser");
     Route::get('/update-user/{id}', [userController::class, 'updateUser'])->name("updateUser");
     Route::post('/updateUserCar/{id}', [userController::class, 'updateUserCar']);
@@ -42,10 +43,6 @@ Route::middleware('custom')->group(function () {
     Route::get('resources', function () {
 
         return view("resources");
-    });
-    Route::get('staff', function () {
-
-        return view("admin.staff");
     });
 });
 

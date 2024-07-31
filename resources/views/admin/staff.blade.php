@@ -34,7 +34,46 @@
                         </thead>
                         <tbody>
 
+                            @foreach ($staff as $data)
+                                <tr>
+                                    <td>{{ $data->id }}</td>
+                                    <td>
+                                        @php
+                                            $name = DB::table('users')
+                                                ->where('role', 'admin')
+                                                ->where('id', $data->company)
+                                                ->value('company');
+                                        @endphp
+                                        {{ $name }}
+                                    </td>
 
+                                    <td>{{ $data->name }}</td>
+                                    <td>{{ $data->phone }}</td>
+                                    <td>{{ $data->email }}</td>
+                                    <td>{{ $data->address }}</td>
+                                    <td>{{ $data->role }}</td>
+                                    <td>
+                                        <div class="flex gap-5 items-center justify-center">
+
+                                            <a href="{{ route('updateUser', $data->id) }}">
+                                                <button data-modal-target="Updateproductmodal"
+                                                    data-modal-toggle="Updateproductmodal"
+                                                    class=" updateBtn cursor-pointer  w-[42px]"
+                                                    updateId="{{ $data->id }}"><img width="38px"
+                                                        src="{{ asset('images/icons/edit.svg') }}" alt="update"></button>
+                                            </a>
+                                            <a href="{{ route('deleteUser', $data->id) }}">
+                                                <button data-modal-target="deleteData" data-modal-toggle="deleteData"
+                                                    class="delButton" delId="{{ $data->id }}">
+                                                    <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
+                                                        alt="delete" class="cursor-pointer">
+                                                </button>
+                                            </a>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -80,13 +119,15 @@
                         <label class="text-[14px] font-normal" for="name">@lang('lang.Full_Name')</label>
                         <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="name" id="name" value="{{ $user->name ?? '' }}" placeholder=" @lang('lang.Full_Name_Here')">
+                            name="name" id="name" value="{{ $user->name ?? '' }}"
+                            placeholder=" @lang('lang.Full_Name_Here')">
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="phone">@lang('lang.Phone_No')</label>
                         <input type="number" min="0" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="phone" id="phone" value="{{ $user->name ?? '' }}" placeholder=" @lang('lang.Phone_No_Here')">
+                            name="phone" id="phone" value="{{ $user->name ?? '' }}"
+                            placeholder=" @lang('lang.Phone_No_Here')">
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="user_email">@lang('lang.Email_Address')</label>
@@ -114,7 +155,8 @@
                         <label class="text-[14px] font-normal" for="age">@lang('lang.Age')</label>
                         <input type="number" min="0" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="age" id="age" value="{{ $user->name ?? '' }}" placeholder=" @lang('lang.Age_Here')">
+                            name="age" id="age" value="{{ $user->name ?? '' }}"
+                            placeholder=" @lang('lang.Age_Here')">
                     </div>
 
                     <div>
@@ -152,11 +194,29 @@
 
                     <h1 class="font-semibold col-span-3">@lang('lang.Education_&_Training')</h1>
 
-                    <div id="specialization">
+                    <div class="doctor">
                         <label class="text-[14px] font-normal" for="specialization">@lang('lang.Specialization')</label>
                         <input type="text"
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            class="w-full border-[#DEE2E6]  rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="specialization" placeholder="@lang('lang.Specialization_Here')" value="">
+                    </div>
+                    <div class="doctor">
+                        <label class="text-[14px] font-normal" for="lisence_no">@lang('lang.Lisence_No')</label>
+                        <input type="text"
+                            class="w-full border-[#DEE2E6]  rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="lisence_no" placeholder="@lang('lang.Lisence_No_Here')" value="">
+                    </div>
+                    <div class="doctor">
+                        <label class="text-[14px] font-normal" for="issuing_authority">@lang('lang.Issuing_Authority')</label>
+                        <input type="text"
+                            class="w-full border-[#DEE2E6]  rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="issuing_authority" placeholder="@lang('lang.Issuing_Authority')" value="">
+                    </div>
+                    <div class="doctor">
+                        <label class="text-[14px] font-normal" for="exp_date">@lang('lang.Expiration_Date')</label>
+                        <input type="date"
+                            class="w-full border-[#DEE2E6]  rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="exp_date" placeholder="@lang('lang.Expiration_Date')" value="">
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="school">@lang('lang.Medical_School')</label>
@@ -242,18 +302,21 @@
 
 @section('js')
     <script>
-        let specialization = document.getElementById("specialization");
+        let specialization = document.querySelectorAll(".doctor");
         let role = document.getElementById("role");
 
-
-        specialization.style.display = "none";
+        specialization.forEach(function(elem) {
+            elem.style.display = "none";
+        });
 
         function show() {
-            if (role.value === 'doctor') {
-                specialization.style.display = "block";
-            } else {
-                specialization.style.display = "none";
-            }
+            specialization.forEach(function(elem) {
+                if (role.value === 'doctor') {
+                    elem.style.display = "block";
+                } else {
+                    elem.style.display = "none";
+                }
+            });
         }
         $(document).ready(function() {
             $('.delButton').click(function() {

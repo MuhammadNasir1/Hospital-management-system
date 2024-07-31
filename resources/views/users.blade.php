@@ -34,7 +34,7 @@
                         </thead>
                         <tbody>
                             @foreach ($users as $data)
-                                <tr>
+                                <tr class="capitalize">
                                     <td>{{ $data->id }}</td>
                                     <td>
                                         {{ $data->company }}

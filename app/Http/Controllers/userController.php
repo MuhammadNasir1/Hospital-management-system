@@ -24,6 +24,7 @@ class userController extends Controller
         return view('users', ['users'  => $users]);
     }
 
+
     public function  addCustomer(Request $request)
     {
         try {
@@ -204,5 +205,11 @@ class userController extends Controller
 
             return redirect('../users');
         }
+    }
+
+    public function staff()
+    {
+        $staff = User::where('company', session('user_det')['user_id'])->get();
+        return view('admin.staff', compact('staff'));
     }
 }
