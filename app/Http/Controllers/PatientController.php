@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Patient;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PatientController extends Controller
@@ -59,7 +60,9 @@ class PatientController extends Controller
     public function view()
     {
         $patients = Patient::all();
-        return view('reception.patient', compact('patients'));
+        $doctors = User::where('role', 'doctor')->get();
+        // return $doctors;
+        return view('reception.patient', compact('patients', 'doctors'));
     }
     public function print(string $id)
     {

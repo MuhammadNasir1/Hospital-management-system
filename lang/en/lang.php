@@ -390,6 +390,7 @@ return [
     "Single" => "Single",
     "Token" => "Token",
     "Reg" => "Reg",
+    "OPD" => "OPD",
     "Specialization" => "Specialization",
     "Specialization_Here" => "Specialization Here",
     "Relation" => "Relation",
@@ -405,4 +406,6 @@ return [
     "Relation_To_Applicant" => "Relation To Applicant",
     "Father_Husband_Name" => "Father/Husband Name",
     "Add_Patient" => "Add Patient",
+    "Get_Appointment" => "Get Appointment",
+    "Select_Doctor" => "Select Doctor",
 ];
