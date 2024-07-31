@@ -54,7 +54,7 @@
                                                 </svg>
                                             </div>
 
-                                            <a href="{{ route('printPatient', $data->id) }}">
+                                            <a href="{{ route('printPatient', $data->id) }}" target="_Blank">
                                                 <div class="bg-secondary w-9 rounded-full p-1.5 text-white">
                                                     <svg class="w-6 h-6 a-gray-800 dark:text-white" aria-hidden="true"
                                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24"
