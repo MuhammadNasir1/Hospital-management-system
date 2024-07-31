@@ -94,23 +94,7 @@ class authController extends Controller
     {
 
         try {
-            $validatedData = $request->validate([
-                'name' => 'required|string',
-                'company' => 'nullable|string',
-                'age' => 'nullable|numeric',
-                'gender' => 'nullable|string',
-                'city' => 'nullable|string',
-                'note' => 'nullable|string',
-                'school' => 'nullable|string',
-                'graduation' => 'nullable|string',
-                'residency' => 'nullable|string',
-                'phone' => 'required|numeric',
-                'email' => 'required|email|unique:users,email',
-                'address' => 'required|string',
-                'password' => 'required|string|min:8',
-                'confirm_password' => 'required|string|min:8| same:password',
-                'role' => 'nullable',
-            ]);
+
             // if(session('user_det')['role'] == "admin"){
 
             // $company  = session('user_det')['user_Id'];
@@ -119,12 +103,12 @@ class authController extends Controller
             //   $company =   $validatedData['company']
             // }
             $user = User::create([
-                'name' => $validatedData['name'],
-                'phone' => $validatedData['phone'],
-                'address' => $validatedData['address'],
+                'name' => $request->name,
+                'phone' => $request->phone,
+                'address' => $request->address,
                 'specialization' => $request->specialization,
-                'email' => $validatedData['email'],
-                'role' =>  $validatedData['role'],
+                'email' => $request->email,
+                'role' =>  $request->role,
                 'company' => $request->company,
                 'dob' => $request->dob,
                 'age' => $request->age,
@@ -134,7 +118,7 @@ class authController extends Controller
                 'school' => $request->school,
                 'graduation' => $request->graduation,
                 'residency' => $request->residency,
-                'password' => Hash::make($validatedData['password']),
+                'password' => Hash::make($request->password),
                 'verification' => "approved",
             ]);
 

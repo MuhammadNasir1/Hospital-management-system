@@ -391,6 +391,7 @@ return [
     "Token" => "Token",
     "Reg" => "Reg",
     "OPD" => "OPD",
+    "Appoinments" => "Appoinments",
     "Specialization" => "Specialization",
     "Specialization_Here" => "Specialization Here",
     "Relation" => "Relation",

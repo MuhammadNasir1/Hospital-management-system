@@ -140,6 +140,7 @@
                             <option value="doctor"> @lang('lang.Doctor')</option>
                             <option value="nurse"> @lang('lang.Nurse')</option>
                             <option value="receptionist"> @lang('lang.Receptionist')</option>
+                            <option value="pharmassist"> @lang('lang.Pharmassist')</option>
                         </select>
                     </div>
 
@@ -153,9 +154,9 @@
 
                     <div id="specialization">
                         <label class="text-[14px] font-normal" for="specialization">@lang('lang.Specialization')</label>
-                        <input type="text" required
+                        <input type="text"
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="specialization" placeholder="@lang('lang.Specialization_Here')" value="{{ $user->email ?? '' }}">
+                            name="specialization" placeholder="@lang('lang.Specialization_Here')" value="">
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="school">@lang('lang.Medical_School')</label>
@@ -241,6 +242,19 @@
 
 @section('js')
     <script>
+        let specialization = document.getElementById("specialization");
+        let role = document.getElementById("role");
+
+
+        specialization.style.display = "none";
+
+        function show() {
+            if (role.value === 'doctor') {
+                specialization.style.display = "block";
+            } else {
+                specialization.style.display = "none";
+            }
+        }
         $(document).ready(function() {
             $('.delButton').click(function() {
                 var id = $(this).attr('delId');
@@ -289,20 +303,5 @@
 
 
         });
-
-
-        let specialization = document.getElementById("specialization");
-        let role = document.getElementById("role");
-
-
-        specialization.style.display = "none";
-
-        function show() {
-            if (role.value === 'doctor') {
-                specialization.style.display = "block";
-            } else {
-                specialization.style.display = "none";
-            }
-        }
     </script>
 @endsection

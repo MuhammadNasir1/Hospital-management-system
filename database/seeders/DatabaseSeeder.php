@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@email.com',
             'password' => Hash::make('12345678'),
-            'role' => 'admin',
+            'role' => 'superadmin',
             'verification' => 'approved',
         ]);
         DB::table('users')->insert([
