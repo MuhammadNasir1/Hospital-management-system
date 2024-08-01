@@ -37,12 +37,18 @@
                                 <tr class="capitalize">
                                     <td>{{ $data->id }}</td>
                                     <td>
-                                        {{ $data->company }}
+                                        @php
+                                            $name = DB::table('users')
+                                                ->where('role', 'admin')
+                                                ->where('id', $data->company)
+                                                ->value('company_name');
+                                        @endphp
+                                        {{ $name }}
                                     </td>
 
                                     <td>{{ $data->name }}</td>
                                     <td>{{ $data->phone }}</td>
-                                    <td>{{ $data->email }}</td>
+                                    <td class="lowercase">{{ $data->email }}</td>
                                     <td>{{ $data->address }}</td>
                                     <td>{{ $data->role }}</td>
                                     <td>
