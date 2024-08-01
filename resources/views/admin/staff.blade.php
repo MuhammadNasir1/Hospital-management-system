@@ -5,6 +5,8 @@
 @endsection
 
 @section('content')
+    {{ session('user_det')['company_id'] }}
+    {{ session('user_det')['user_id'] }}
     <div class="md:mx-4 mt-12">
 
         <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
@@ -42,7 +44,7 @@
                                             $name = DB::table('users')
                                                 ->where('role', 'admin')
                                                 ->where('id', $data->company)
-                                                ->value('company');
+                                                ->value('company_name');
                                         @endphp
                                         {{ $name }}
                                     </td>

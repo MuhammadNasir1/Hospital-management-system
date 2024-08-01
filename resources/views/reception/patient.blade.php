@@ -3,6 +3,8 @@
     Patient Registration
 @endsection
 @section('content')
+    {{ session('user_det')['company_id'] }}
+    {{ session('user_det')['user_id'] }}
     <div class="md:mx-4 mt-12">
 
         <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
@@ -45,7 +47,8 @@
                                         <div class="flex gap-5 items-center justify-center">
 
 
-                                            <div data-modal-target="assignDoctor" data-modal-toggle="assignDoctor"
+                                            <div onclick="getId({{ $data->id }})" data-modal-target="assignDoctor"
+                                                id="patientId{{ $data->id }}" data-modal-toggle="assignDoctor"
                                                 class="bg-primary size-9 rounded-full cursor-pointer  flex justify-center items-center text-white">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
                                                     class="size-5 fill-white">
@@ -268,11 +271,11 @@
         <div class="fixed inset-0 transition-opacity">
             <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
         </div>
-        <div class="relative p-4 w-full   max-w-6xl max-h-full ">
+        <div class="relative p-4 w-full   max-w-3xl max-h-full ">
             @if (isset($user))
                 <form action="../updateUserCar/{{ $user->id }}" method="post" enctype="multipart/form-data">
                 @else
-                    <form id="patientData" method="post" enctype="multipart/form-data">
+                    <form id="appointmentData" method="post" enctype="multipart/form-data">
             @endif
             @csrf
             <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
@@ -293,7 +296,8 @@
 
 
                 <div class="p-10">
-                    <div class="grid grid-cols-2">
+                    <input type="hidden" name="patient" value="" id="patient">
+                    <div class="grid grid-cols-3 gap-2">
                         <div>
                             <label class="text-[14px] font-normal" for="doctor">@lang('lang.Doctor')</label>
                             <select name="doctor" id="doctor">
@@ -304,47 +308,19 @@
                                     </option>
                                 @endforeach
                             </select>
-                            <div>
-
-                                <button
-                                    class="bg-primary text-white py-2 px-6 my-4 rounded-[4px]  mx-auto uaddBtn  font-semibold "
-                                    id="addBtn">
-                                    <div class=" text-center hidden" id="spinner">
-                                        <svg aria-hidden="true"
-                                            class="w-5 h-5 mx-auto text-center text-gray-200 animate-spin fill-primary"
-                                            viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                                                fill="currentColor" />
-                                            <path
-                                                d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                                                fill="currentFill" />
-                                        </svg>
-                                    </div>
-                                    <div id="text">
-                                        @lang('lang.Get_Appointment')
-                                    </div>
-
-                                </button>
-                            </div>
                         </div>
-                        <div class="px-5">
-                            <table class="w-full">
-                                <thead class="bg-primary text-white">
-                                    <th class="py-2">@lang('lang.OPD')</th>
-                                    <th class="py-2">@lang('lang.Doctor')</th>
-                                    <th class="py-2">@lang('lang.Price')</th>
-                                    <th class="py-2">@lang('lang.Action')</th>
-                                </thead>
-                                <tbody>
-                                    <tr class="border-b border-dark">
-                                        <td>hsag</td>
-                                        <td>M-Arham Waheed</td>
-                                        <td>85000</td>
-                                        <td>Delete</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div>
+                            <label class="text-[14px] font-normal" for="price">@lang('lang.Price')</label>
+                            <input type="number" min="0" required
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="price" id="price" placeholder=" @lang('lang.Price_Here')"
+                                value="{{ $user->email ?? '' }}">
+                        </div>
+                        <div>
+                            <label class="text-[14px] font-normal" for="date">@lang('lang.Date')</label>
+                            <input type="date" required
+                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                                name="date" id="date" value="{{ $user->email ?? '' }}">
                         </div>
                     </div>
 
@@ -367,7 +343,7 @@
                             </svg>
                         </div>
                         <div id="text">
-                            @lang('lang.Save&Print')
+                            @lang('lang.Get_Appointment')
                         </div>
 
                     </button>
@@ -384,11 +360,16 @@
 @endsection
 @section('js')
     <script>
+        function getId(id) {
+            let patient = document.getElementById('patient').value = id;
+        }
+
         $(document).ready(function() {
             $('.delButton').click(function() {
                 var id = $(this).attr('delId');
                 $('#delLink').attr('href', '../patient/delete-patient/' + id);
             });
+
             // insert data
             $("#patientData").submit(function(event) {
                 var url = "../reception/patient";
@@ -408,7 +389,48 @@
                     },
                     success: function(response) {
                         let patientId = response.patientId;
-                        window.location.href = '../reception/patient/print-detail/' + patientId;
+                        window.location.href = '../reception/patient/print-detail/' +
+                            patientId;
+
+
+                    },
+                    error: function(jqXHR) {
+                        let response = JSON.parse(jqXHR.responseText);
+                        console.log("error");
+                        Swal.fire(
+                            'Warning!',
+                            response.message,
+                            'warning'
+                        );
+
+                        $('#text').removeClass('hidden');
+                        $('#spinner').addClass('hidden');
+                        $('#addBtn').attr('disabled', false);
+                    }
+                });
+            });
+
+
+            $("#assignDoctor").submit(function(event) {
+                var url = "../reception/patient";
+                event.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: formData,
+                    dataType: "json",
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function() {
+                        $('#spinner').removeClass('hidden');
+                        $('#text').addClass('hidden');
+                        $('#addBtn').attr('disabled', true);
+                    },
+                    success: function(response) {
+                        let patientId = response.patientId;
+                        window.location.href = '../reception/patient/print-detail/' +
+                            patientId;
 
 
                     },

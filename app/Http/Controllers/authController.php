@@ -95,13 +95,7 @@ class authController extends Controller
 
         try {
 
-            if (session('user_det')['role'] == "admin") {
 
-                $company  = session('user_det')['user_id'];
-            } else {
-
-                $company =   $request->company;
-            }
             $user = User::create([
                 'name' => $request->name,
                 'phone' => $request->phone,
@@ -112,7 +106,8 @@ class authController extends Controller
                 'exp_date' => $request->exp_date,
                 'email' => $request->email,
                 'role' =>  $request->role,
-                'company' => $company,
+                'company' => 0,
+                'company_name' => $request->company,
                 'dob' => $request->dob,
                 'age' => $request->age,
                 'gender' => $request->gender,
@@ -125,7 +120,17 @@ class authController extends Controller
                 'verification' => "approved",
             ]);
 
+            $upd = User::find($user->id);
+            if (session('user_det')['role'] == "superadmin") {
 
+
+                $company = $user->id;
+            } else {
+
+                $company =   session('user_det')['user_id'];
+            }
+            $upd->company = $company;
+            $upd->update();
             $user->save();
 
 
@@ -172,6 +177,7 @@ class authController extends Controller
                 $token = $user->createToken($request->email)->plainTextToken;
                 session(['user_det' => [
                     'user_id' => $user->id,
+                    'company_id' => $user->company,
                     'name' => $name,
                     'email' => $validatedData['email'],
                     'role' =>  $role,
