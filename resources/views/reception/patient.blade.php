@@ -3,8 +3,6 @@
     Patient Registration
 @endsection
 @section('content')
-    {{ session('user_det')['company_id'] }}
-    {{ session('user_det')['user_id'] }}
     <div class="md:mx-4 mt-12">
 
         <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
@@ -411,8 +409,8 @@
             });
 
 
-            $("#assignDoctor").submit(function(event) {
-                var url = "../reception/patient";
+            $("#appointmentData").submit(function(event) {
+                var url = "../reception/assign-doctor";
                 event.preventDefault();
                 var formData = new FormData(this);
                 $.ajax({
@@ -429,9 +427,7 @@
                     },
                     success: function(response) {
                         let patientId = response.patientId;
-                        window.location.href = '../reception/patient/print-detail/' +
-                            patientId;
-
+                        window.location.href = '../reception/patients'
 
                     },
                     error: function(jqXHR) {

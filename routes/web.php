@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AappointmentController;
 use App\Http\Controllers\authController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\PatientController;
@@ -77,4 +78,7 @@ Route::controller(PatientController::class)->group(function () {
     Route::get('/reception/patients', 'view');
     Route::get('/reception/patient/print-detail/{id}', 'print')->name('printPatient');
     Route::get('/reception/patient/delete-patient/{id}', 'delete')->name('delPatient');
+});
+Route::controller(AappointmentController::class)->group(function () {
+    Route::post('/reception/assign-doctor', 'appoimtment');
 });

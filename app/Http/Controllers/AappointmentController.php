@@ -23,7 +23,7 @@ class AappointmentController extends Controller
             $appointment->patient_id = $request->patient;
             $appointment->doctor_id = $validateData['doctor'];
             $appointment->price = $validateData['price'];
-            $appointment->date = $validateData['date'];
+            $appointment->time = $validateData['date'];
             $appointment->save();
             return response()->json([
                 'success' => true,

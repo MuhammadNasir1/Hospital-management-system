@@ -28,6 +28,7 @@ class PatientController extends Controller
             ]);
 
             $patient = new Patient;
+            $patient->added_by = session('user_det')['user_id'];
             $patient->name = $validateData['name'];
             $patient->father_husband_name = $validateData['father_husband_name'];
             $patient->phone = $validateData['phone'];

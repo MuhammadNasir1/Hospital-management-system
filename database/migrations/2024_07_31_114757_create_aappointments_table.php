@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('patient_id');
             $table->string('doctor_id');
             $table->string('price');
-            $table->string('time');
+            $table->string('date');
             $table->timestamps();
         });
     }
