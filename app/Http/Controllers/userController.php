@@ -209,7 +209,7 @@ class userController extends Controller
 
     public function staff()
     {
-        $staff = User::where('company', session('user_det')['company_id'])->get();
+        $staff = User::where('company', session('user_det')['company_id'])->whereNot('role', 'admin')->get();
         return view('admin.staff', compact('staff'));
     }
 }
