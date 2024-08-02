@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AappointmentController;
 use App\Http\Controllers\authController;
+use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PharmacyOrdersController;
@@ -81,4 +82,7 @@ Route::controller(PatientController::class)->group(function () {
 });
 Route::controller(AappointmentController::class)->group(function () {
     Route::post('/reception/assign-doctor', 'appoimtment');
+});
+Route::controller(DoctorController::class)->group(function () {
+    Route::get('/doctor/appointments', 'view');
 });
