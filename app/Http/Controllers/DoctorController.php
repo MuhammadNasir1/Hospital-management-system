@@ -13,14 +13,24 @@ class DoctorController extends Controller
     public function view()
     {
         $date = Carbon::now();
-        $patients = Aappointment::where('date', $date->toDateString())
-            ->where('status', 'unchecked')
-            ->where('doctor_id', session('user_det')['user_id'])
-            ->get();
-        $checkedPatients = Aappointment::where('date', $date->toDateString())
-            ->where('status', 'checked')
-            ->where('doctor_id', session('user_det')['user_id'])
-            ->get();
+        if (session('user_det')['role'] == 'doctor') {
+            $patients = Aappointment::where('date', $date->toDateString())
+                ->where('status', 'unchecked')
+                ->where('doctor_id', session('user_det')['user_id'])
+                ->get();
+            $checkedPatients = Aappointment::where('date', $date->toDateString())
+                ->where('status', 'checked')
+                ->where('doctor_id', session('user_det')['user_id'])
+                ->get();
+        } elseif (session('user_det')['role'] == 'admin') {
+            $patients = Aappointment::where('date', $date->toDateString())
+                ->where('status', 'unchecked')
+                ->get();
+            $checkedPatients = Aappointment::where('date', $date->toDateString())
+                ->where('status', 'checked')
+                ->get();
+        }
+
         $medicine = Inventory::where('company_id', session('user_det')['company_id'])
             ->get();
 
