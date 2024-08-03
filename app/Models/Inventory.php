@@ -17,6 +17,8 @@ class Inventory extends Model
         'name',
         'packing',
         'batch_id',
+        'company_id',
+        'added_by',
         'expiry_date',
         'quantity',
         'price'

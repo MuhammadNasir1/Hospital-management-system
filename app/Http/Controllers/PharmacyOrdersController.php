@@ -40,6 +40,7 @@ class PharmacyOrdersController extends Controller
                 'paid_amount' =>  $validateDate['paid_amount'],
                 'change' =>  $validateDate['change'],
                 'grand_total' =>  $validateDate['grand_total'],
+                'company_id' => session('user_det')['company_id'],
 
             ]);
             $medicines = $request->input('medicine_id');

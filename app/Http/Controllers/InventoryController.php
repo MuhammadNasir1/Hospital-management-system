@@ -11,7 +11,7 @@ class InventoryController extends Controller
 {
     public function index()
     {
-        $medicines = Inventory::all();
+        $medicines = Inventory::where('company_id', session('user_det')['company_id'])->get();
         return view('pharmacy.inventory', compact('medicines'));
     }
 
@@ -52,6 +52,8 @@ class InventoryController extends Controller
                 'expiry_date' => $validatedData['expiry_date'],
                 'quantity' => $validatedData['quantity'],
                 'price' => $validatedData['price'],
+                'company_id' => session('user_det')['company_id'],
+                'added_by' => session('user_det')['user_id'],
 
             ]);
 

@@ -414,4 +414,5 @@ return [
     "Expiration_Date" => "Expiration  Date",
     "Lisence_No_Here" => "Lisence No Here",
     "Select_Doctor" => "Select Doctor",
+    "Create_Invoice" => "Create Invoice",
 ];

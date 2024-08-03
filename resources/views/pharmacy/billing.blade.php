@@ -56,7 +56,7 @@
                         <td class="first">
                             @php
                                 $name = DB::table('inventories')
-                                    ->where('id', $data->medicine_id)
+                                    ->where('id', $data->id)
                                     ->value('name');
                             @endphp
                             {{ $name }}
@@ -65,7 +65,7 @@
                         <td>
                             @php
                                 $price = DB::table('inventories')
-                                    ->where('id', $data->medicine_id)
+                                    ->where('id', $data->id)
                                     ->value('price');
                             @endphp
                             {{ $price }}
