@@ -32,7 +32,7 @@
 
                 <div class="xl:w-[250px] w-full xl:h-[100%] h-[300px] overflow-y-auto font-inter">
                     <h1 class="text-2xl font-bold">@lang('lang.Patients')</h1>
-                    <p class="font-inter text-sm">@lang('lang.Date') : 25 - 02 - 2024</p>
+                    <p class="font-inter text-sm">@lang('lang.Date') : {{ $data['date'] }}</p>
 
                     <form action="#" method="get" class="pt-3 relative">
                         <input placeholder="@lang('lang.Patient_Tocken')" type="text" name="search" id="search"
@@ -62,89 +62,38 @@
                             </ul>
                         </div>
                         <div class="mt-3" id="queue">
-                            <div class="patient flex items-center gap-5 h-[60px] my-5 rounded-[5px] w-full bg-[#d9d9d963]">
-                                <div class="w-[10%] bg-primary rounded-l-[5px] h-[100%]">
+                            @foreach ($data['patients'] as $patientGroup)
+                                @foreach ($patientGroup as $patient)
+                                    <div
+                                        class="patient flex items-center gap-5 h-[60px] my-5 rounded-[5px] w-full bg-[#d9d9d963]">
+                                        <div class="w-[10%] bg-primary rounded-l-[5px] h-[100%]">
 
-                                </div>
-                                <div>
-                                    <h2 class="font-semibold ps-0.5">Maryam</h2>
-                                    <h3 class="text-dark">#010203</h3>
-                                </div>
-                            </div>
-                            <div class="patient flex items-center gap-5 h-[60px] my-5 rounded-[5px] w-full bg-[#d9d9d963]">
-                                <div class="w-[10%] bg-primary rounded-l-[5px] h-[100%]">
-
-                                </div>
-                                <div>
-                                    <h2 class="font-semibold ps-0.5">Maryam</h2>
-                                    <h3 class="text-dark">#010203</h3>
-                                </div>
-                            </div>
-                            <div class="patient flex items-center gap-5 h-[60px] my-5 rounded-[5px] w-full bg-[#d9d9d963]">
-                                <div class="w-[10%] bg-primary rounded-l-[5px] h-[100%]">
-
-                                </div>
-                                <div>
-                                    <h2 class="font-semibold ps-0.5">Maryam</h2>
-                                    <h3 class="text-dark">#010203</h3>
-                                </div>
-                            </div>
-                            <div class="patient flex items-center gap-5 h-[60px] my-5 rounded-[5px] w-full bg-[#d9d9d963]">
-                                <div class="w-[10%] bg-primary rounded-l-[5px] h-[100%]">
-
-                                </div>
-                                <div>
-                                    <h2 class="font-semibold ps-0.5">Maryam</h2>
-                                    <h3 class="text-dark">#010203</h3>
-                                </div>
-                            </div>
-                            <div class="patient flex items-center gap-5 h-[60px] my-5 rounded-[5px] w-full bg-[#d9d9d963]">
-                                <div class="w-[10%] bg-primary rounded-l-[5px] h-[100%]">
-
-                                </div>
-                                <div>
-                                    <h2 class="font-semibold ps-0.5">Maryam</h2>
-                                    <h3 class="text-dark">#010203</h3>
-                                </div>
-                            </div>
-                            <div class="patient flex items-center gap-5 h-[60px] my-5 rounded-[5px] w-full bg-[#d9d9d963]">
-                                <div class="w-[10%] bg-primary rounded-l-[5px] h-[100%]">
-
-                                </div>
-                                <div>
-                                    <h2 class="font-semibold ps-0.5">Maryam</h2>
-                                    <h3 class="text-dark">#010203</h3>
-                                </div>
-                            </div>
-                            <div class="patient flex items-center gap-5 h-[60px] my-5 rounded-[5px] w-full bg-[#d9d9d963]">
-                                <div class="w-[10%] bg-primary rounded-l-[5px] h-[100%]">
-
-                                </div>
-                                <div>
-                                    <h2 class="font-semibold ps-0.5">Maryam</h2>
-                                    <h3 class="text-dark">#010203</h3>
-                                </div>
-                            </div>
+                                        </div>
+                                        <div>
+                                            <h2 class="font-semibold ps-0.5">{{ $patient->name }}</h2>
+                                            <h3 class="text-dark"># {{ $patient->id }}</h3>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endforeach
                         </div>
                         <div class="mt-3 hidden" id="checked">
-                            <div class="patient flex items-center gap-5 h-[60px] my-5 rounded-[5px] w-full bg-[#d9d9d963]">
-                                <div class="w-[10%] bg-primary rounded-l-[5px] h-[100%]">
+                            @foreach ($data['checked'] as $n)
+                                @foreach ($n as $checked)
+                                    <div
+                                        class="patient flex items-center gap-5 h-[60px] my-5 rounded-[5px] w-full bg-[#d9d9d963]">
+                                        <div class="w-[10%] bg-primary rounded-l-[5px] h-[100%]">
 
-                                </div>
-                                <div>
-                                    <h2 class="font-semibold ps-0.5">Maryam</h2>
-                                    <h3 class="text-dark">#010203</h3>
-                                </div>
-                            </div>
-                            <div class="patient flex items-center gap-5 h-[60px] my-5 rounded-[5px] w-full bg-[#d9d9d963]">
-                                <div class="w-[10%] bg-primary rounded-l-[5px] h-[100%]">
+                                        </div>
+                                        <div>
+                                            <h2 class="font-semibold ps-0.5">{{ $checked->name }}</h2>
+                                            <h3 class="text-dark"># {{ $checked->id }}</h3>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endforeach
 
-                                </div>
-                                <div>
-                                    <h2 class="font-semibold ps-0.5">Maryam</h2>
-                                    <h3 class="text-dark">#010203</h3>
-                                </div>
-                            </div>
+
                         </div>
 
                     </div>
@@ -209,8 +158,8 @@
                                                 onclick="showTab2(event, 'tests')">Tests</a>
                                         </li>
                                         <li class="me-2">
-                                            <a href="#" class="inline-block a p-2 font-semibold"
-                                                id="checkedPatients" onclick="showTab2(event, 'ad')">Ad</a>
+                                            <a href="#" class="inline-block a p-2 font-semibold" id="checkedPatients"
+                                                onclick="showTab2(event, 'ad')">Ad</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -226,20 +175,11 @@
 
                                 </form>
                                 <div class="mt-3" id="medicines">
-
-
-                                    <div class="py-2 border-b">
-                                        <h2 class="">Medicine</h2>
-                                    </div>
-                                    <div class="py-2 border-b">
-                                        <h2 class="">Medicine</h2>
-                                    </div>
-                                    <div class="py-2 border-b">
-                                        <h2 class="">Medicine</h2>
-                                    </div>
-                                    <div class="py-2 border-b">
-                                        <h2 class="">Medicine</h2>
-                                    </div>
+                                    @foreach ($data['medicine'] as $item)
+                                        <div class="py-2 border-b">
+                                            <h2 class="">{{ $item->name }}</h2>
+                                        </div>
+                                    @endforeach
                                 </div>
                                 <div class="mt-3 hidden" id="tests">
 
