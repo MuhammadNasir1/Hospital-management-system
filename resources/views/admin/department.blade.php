@@ -20,19 +20,59 @@
                     <table id="datatable">
                         <thead class="py-1 bg-primary text-white">
                             <tr>
-                                <th class="whitespace-nowrap">@lang('lang.STN')</th>
+                                <th class="whitespace-nowrap">@lang('lang.Sr')</th>
                                 <th class="whitespace-nowrap">@lang('lang.Company_Name')</th>
+                                <th class="whitespace-nowrap">@lang('lang.Department_Name')</th>
                                 <th class="whitespace-nowrap">@lang('lang.Name')</th>
-                                <th class="whitespace-nowrap">@lang('lang.Phone_No')</th>
+                                <th class="whitespace-nowrap">@lang('lang.Block_No')</th>
                                 <th class="whitespace-nowrap">@lang('lang.Email')</th>
-                                <th class="whitespace-nowrap">@lang('lang.Address')</th>
+                                <th class="whitespace-nowrap">@lang('lang.Specialist')</th>
                                 <th class="whitespace-nowrap">@lang('lang.Role')</th>
                                 <th class="flex  justify-center">@lang('lang.Action')</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($department as $data)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>
+                                        @php
+                                            $name = DB::table('users')
+                                                ->where('role', 'admin')
+                                                ->where('id', $data->company)
+                                                ->value('company_name');
+                                        @endphp
+                                        {{ $name }}
+                                    </td>
 
+                                    <td>{{ $data->dpt_name }}</td>
+                                    <td>{{ $data->name }}</td>
+                                    <td>{{ $data->block_no }}</td>
+                                    <td>{{ $data->email }}</td>
+                                    <td>{{ $data->specialization }}</td>
+                                    <td>{{ $data->role }}</td>
+                                    <td>
+                                        <div class="flex gap-5 items-center justify-center">
 
+                                            <a href="{{ route('updateUser', $data->id) }}">
+                                                <button data-modal-target="Updateproductmodal"
+                                                    data-modal-toggle="Updateproductmodal"
+                                                    class=" updateBtn cursor-pointer  w-[42px]"
+                                                    updateId="{{ $data->id }}"><img width="38px"
+                                                        src="{{ asset('images/icons/edit.svg') }}" alt="update"></button>
+                                            </a>
+                                            <a href="{{ route('deleteUser', $data->id) }}">
+                                                <button data-modal-target="deleteData" data-modal-toggle="deleteData"
+                                                    class="delButton" delId="{{ $data->id }}">
+                                                    <img width="38px" src="{{ asset('images/icons/delete.svg') }}"
+                                                        alt="delete" class="cursor-pointer">
+                                                </button>
+                                            </a>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -96,13 +136,15 @@
                         <label class="text-[14px] font-normal" for="name">@lang('lang.Name')</label>
                         <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="name" id="name" value="{{ $user->name ?? '' }}" placeholder=" @lang('lang.Name_Here')">
+                            name="name" id="name" value="{{ $user->name ?? '' }}"
+                            placeholder=" @lang('lang.Name_Here')">
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="email">@lang('lang.Email')</label>
                         <input type="email" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="email" id="email" value="{{ $user->name ?? '' }}" placeholder=" @lang('lang.Email_Here')">
+                            name="email" id="email" value="{{ $user->name ?? '' }}"
+                            placeholder=" @lang('lang.Email_Here')">
                     </div>
                     <div>
                         <label class="text-[14px] font-normal" for="specialist">@lang('lang.Specialist')</label>
