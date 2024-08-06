@@ -422,5 +422,6 @@ return [
     "Specialist" => "Specialist",
     "Department_Head" => "Department Head",
     "Department_Name" => "Department Name",
+    "Select_Department" => "Select Department",
 
 ];

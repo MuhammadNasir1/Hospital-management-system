@@ -15,6 +15,7 @@ return new class extends Migration
             $table->text('phone')->nullable();
             $table->text('address')->nullable();
             $table->string('dpt_name')->nullable();
+            $table->string('department')->nullable();
             $table->string('block_no')->nullable();
             $table->string('company')->nullable();
             $table->string('company_name')->nullable();

@@ -100,6 +100,7 @@ class authController extends Controller
                 'name' => $request->name,
                 'phone' => $request->phone,
                 'dpt_name' => $request->dpt_name,
+                'department' => $request->department,
                 'block_no' => $request->block_no,
                 'address' => $request->address,
                 'specialization' => $request->specialization,

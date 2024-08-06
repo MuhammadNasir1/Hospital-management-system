@@ -87,7 +87,7 @@
 
     {{-- ============ add  customer modal  =========== --}}
     <div id="addcustomermodal" data-modal-backdrop="static"
-        class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
+        class="fixed inset-0 overflow-y-auto flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
         <div class="fixed inset-0 transition-opacity">
             <div id="backdrop" class="absolute inset-0 bg-slate-800 opacity-75"></div>
         </div>
@@ -205,6 +205,15 @@
                         <input type="text"
                             class="w-full border-[#DEE2E6]  rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="lisence_no" placeholder="@lang('lang.Lisence_No_Here')" value="">
+                    </div>
+                    <div class="doctor">
+                        <label class="text-[14px] font-normal" for="department">@lang('lang.Select_Department')</label>
+                        <select name="department" id="department">
+                            <option disabled selected> @lang('lang.Select_Department')</option>
+                            @foreach ($department as $data)
+                                <option value="{{ $data->id }}">{{ $data->dpt_name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="doctor">
                         <label class="text-[14px] font-normal" for="issuing_authority">@lang('lang.Issuing_Authority')</label>
