@@ -52,7 +52,7 @@ Route::get('register', function () {
 
     return view("register");
 });
-Route::get('add-department', function () {
+Route::get('departments', function () {
 
     return view("admin.department");
 });

@@ -54,7 +54,7 @@
             @if (isset($user))
                 <form action="../updateUserCar/{{ $user->id }}" method="post" enctype="multipart/form-data">
                 @else
-                    <form id="staffData" method="post" enctype="multipart/form-data">
+                    <form id="departmentData" method="post" enctype="multipart/form-data">
             @endif
             @csrf
             <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
@@ -74,17 +74,20 @@
                 </div>
 
                 <div class="grid md:grid-cols-3 gap-5 mx-6 my-6">
+                    <input type="hidden" name="role" value="department">
                     <div>
-                        <label class="text-[14px] font-normal" for="name">@lang('lang.Department_Name')</label>
+                        <label class="text-[14px] font-normal" for="dpt_name">@lang('lang.Department_Name')</label>
                         <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="name" id="name" value="{{ $user->name ?? '' }}" placeholder=" @lang('lang.Department_Name')">
+                            name="dpt_name" id="dpt_name" value="{{ $user->name ?? '' }}"
+                            placeholder=" @lang('lang.Department_Name')">
                     </div>
                     <div>
-                        <label class="text-[14px] font-normal" for="block">@lang('lang.Block_No')</label>
+                        <label class="text-[14px] font-normal" for="block_no">@lang('lang.Block_No')</label>
                         <input type="number" min="0" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="block" id="block" value="{{ $user->name ?? '' }}" placeholder=" @lang('lang.Block_No')">
+                            name="block_no" id="block_no" value="{{ $user->name ?? '' }}"
+                            placeholder=" @lang('lang.Block_No')">
                     </div>
 
                     <h2 class="col-span-3 font-semibold">@lang('lang.Department_Head')</h2>
@@ -105,7 +108,7 @@
                         <label class="text-[14px] font-normal" for="specialist">@lang('lang.Specialist')</label>
                         <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="specialist" id="specialist" value="{{ $user->name ?? '' }}"
+                            name="specialization" id="specialist" value="{{ $user->name ?? '' }}"
                             placeholder=" @lang('lang.Specialist')">
                     </div>
 
@@ -173,7 +176,7 @@
                 $('#delLink').attr('href', '../delCustomer/' + id);
             });
             // Insert Staff Data
-            $("#staffData").submit(function(event) {
+            $("#departmentData").submit(function(event) {
                 var url = "../registerdata";
                 event.preventDefault();
                 var formData = new FormData(this);
@@ -190,7 +193,7 @@
                         $('#addBtn').attr('disabled', true);
                     },
                     success: function(response) {
-                        window.location.href = '../staff';
+                        window.location.href = '../departments';
 
 
                     },
