@@ -84,6 +84,7 @@ Route::controller(PatientController::class)->group(function () {
 });
 Route::controller(AappointmentController::class)->group(function () {
     Route::post('/reception/assign-doctor', 'appoimtment');
+    Route::get('/reception/patient/print-token/{id}', 'printToken');
 });
 Route::controller(DoctorController::class)->group(function () {
     Route::get('/doctor/appointments', 'view');

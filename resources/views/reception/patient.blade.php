@@ -463,8 +463,9 @@
                         $('#addBtn').attr('disabled', true);
                     },
                     success: function(response) {
-                        let patientId = response.patientId;
-                        window.location.href = '../reception/patients'
+                        let appointmentId = response.appointmentId;
+                        window.location.href = '../reception/patient/print-token/' +
+                            appointmentId;
 
                     },
                     error: function(jqXHR) {

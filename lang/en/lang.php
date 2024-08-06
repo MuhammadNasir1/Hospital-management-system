@@ -423,5 +423,6 @@ return [
     "Department_Head" => "Department Head",
     "Department_Name" => "Department Name",
     "Select_Department" => "Select Department",
+    "Fee_Status" => "Fee Status",
 
 ];

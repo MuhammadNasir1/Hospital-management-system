@@ -74,7 +74,28 @@ class PatientController extends Controller
     public function print(string $id)
     {
         $printData = Patient::find($id);
-        return view('reception.patient_detail', compact('printData'));
+        $company = User::where('id', session('user_det')['company_id'])
+            ->first();
+
+        $all = [
+            'printData' => $printData,
+            'company' => $company,
+        ];
+        // return $all;
+        return view('reception.patient_detail', compact('all'));
+    }
+    public function token(string $id)
+    {
+        $printData = Patient::find($id);
+        $company = User::where('id', session('user_det')['company_id'])
+            ->first();
+
+        $all = [
+            'printData' => $printData,
+            'company' => $company,
+        ];
+        // return $all;
+        return view('reception.patient_detail', compact('all'));
     }
     public function delete(string $id)
     {
