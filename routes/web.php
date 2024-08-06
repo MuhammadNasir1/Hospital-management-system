@@ -53,6 +53,10 @@ Route::get('register', function () {
 
     return view("register");
 });
+Route::get('/pharmacy', function () {
+
+    return view("admin.pharmcy");
+});
 
 
 // pharmacy
