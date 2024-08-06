@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('pharmacy_orders', function (Blueprint $table) {
             $table->id();
             $table->string('user_id');
+            $table->string('company_id');
             $table->string('customer_name');
             $table->string('customer_phone');
             $table->string('payment_type');

@@ -158,7 +158,7 @@ class userController extends Controller
     {
         $del = User::find($id);
         $del->delete();
-        return redirect("../companies");
+        return redirect()->back();
     }
 
     public function updateUser(string $id)

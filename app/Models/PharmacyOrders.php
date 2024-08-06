@@ -16,6 +16,7 @@ class PharmacyOrders extends Model
 
     protected $fillable  = [
         'user_id',
+        'company_id',
         'customer_name',
         'customer_phone',
         'payment_type',

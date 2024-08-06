@@ -414,4 +414,12 @@ return [
     "Expiration_Date" => "Expiration  Date",
     "Lisence_No_Here" => "Lisence No Here",
     "Select_Doctor" => "Select Doctor",
+    "Create_Invoice" => "Create Invoice",
+    "Add_Department" => "Add Department",
+    "Department_List" => "Department List",
+    "Block_No" => "Block No",
+    "Specialist" => "Specialist",
+    "Department_Head" => "Department Head",
+    "Department_Name" => "Department Name",
+
 ];
