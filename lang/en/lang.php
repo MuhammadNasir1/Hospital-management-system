@@ -291,6 +291,7 @@ return [
     "Details" => "Details",
     "Narration" => "Narration",
     "Type" => "Type",
+    "Sr" => "Sr",
     "PKR" => "PKR",
     "PayPal" => "PayPal",
     "Payoneer" => "Payoneer",
