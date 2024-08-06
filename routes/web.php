@@ -52,6 +52,10 @@ Route::get('register', function () {
 
     return view("register");
 });
+Route::get('add-department', function () {
+
+    return view("admin.department");
+});
 
 
 // pharmacy
