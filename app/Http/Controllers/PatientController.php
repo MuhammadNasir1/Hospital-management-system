@@ -61,8 +61,15 @@ class PatientController extends Controller
     public function view()
     {
         $patients = Patient::all();
-        $doctors = User::where('role', 'doctor')->where('company', session('user_det')['company_id'])->get();
-        return view('reception.patient', compact('patients', 'doctors'));
+        $department = User::where('company', session('user_det')['company_id'])
+            ->where('role', 'department')
+            ->get();
+        $all = [
+            'patients' => $patients,
+            'department' => $department,
+        ];
+        // return $data;
+        return view('reception.patient', compact('all'));
     }
     public function print(string $id)
     {
@@ -74,5 +81,19 @@ class PatientController extends Controller
         $delPateint = Patient::find($id);
         $delPateint->delete();
         return redirect('../reception/patients');
+    }
+
+    public function fetch(string $id)
+    {
+        try {
+
+            $doctor = User::where('company', session('user_det')['company_id'])
+                ->where('role', 'doctor')
+                ->where('department', $id)
+                ->get();
+            return response()->json(["messsage" => "data get successfully", "doctors" => $doctor], 200);
+        } catch (\Exception $e) {
+            return response()->json(["messsage" => $e->getMessage()], 500);
+        }
     }
 }
