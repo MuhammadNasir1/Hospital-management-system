@@ -415,4 +415,5 @@ return [
     "Lisence_No_Here" => "Lisence No Here",
     "Select_Doctor" => "Select Doctor",
     "Create_Invoice" => "Create Invoice",
+    "Add_Department" => "Add Department",
 ];
