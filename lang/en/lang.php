@@ -427,6 +427,7 @@ return [
     "Pharmacy_List" => "Pharmacy List",
     "Add_Pharmacy" => "Add Pharmacy",
     "Telephone" => "Telephone",
+    "Register" => "Register",
     "Telephone_Here" => "Telephone Here",
     "Login_Details" => "Login Details",
     "Work_Experience" => "Work Experience",
