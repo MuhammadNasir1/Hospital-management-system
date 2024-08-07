@@ -14,6 +14,7 @@ Route::get('/lang', [userController::class, 'language_change']);
 // Authentication
 Route::post('login', [authController::class, 'login']);
 Route::post('registerdata', [authController::class, 'register']);
+Route::post('registerCompany', [authController::class, 'company']);
 Route::post('updateUser/{id}', [authController::class, 'update'])->name("update");
 Route::match(['get',  'post'], 'weblogout', [authController::class, 'weblogout']);
 

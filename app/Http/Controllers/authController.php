@@ -94,7 +94,10 @@ class authController extends Controller
     {
 
         try {
-
+            $verification = 'pending';
+            if (session('user_det')['verification'] == true) {
+                $verification = 'approved';
+            }
 
             $user = User::create([
                 'name' => $request->name,
@@ -120,7 +123,7 @@ class authController extends Controller
                 'graduation' => $request->graduation,
                 'residency' => $request->residency,
                 'password' => Hash::make($request->password),
-                'verification' => "approved",
+                'verification' => $verification,
             ]);
 
             $upd = User::find($user->id);
@@ -158,7 +161,40 @@ class authController extends Controller
         }
     }
 
+    public function company(Request $request)
+    {
+        try {
 
+            $user = User::create([
+                'name' => $request->name,
+                'phone' => $request->phone,
+                'address' => $request->address,
+                'role' => 'admin',
+                'email' => $request->email,
+                'company_name' => $request->company,
+                'password' => Hash::make($request->password),
+                'verification' => 'pending',
+            ]);
+            $token = $user->createToken($request->email)->plainTextToken;
+            return response()->json([
+                'token' => $token,
+                'success' => true,
+                'user' => $user,
+                'message' => 'Register successful',
+            ], 201);
+        } catch (ValidationException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid credentials',
+                'errors' => $e->validator->getMessageBag(),
+            ], 422);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
     public function login(Request $request)
     {
         try {
@@ -181,6 +217,7 @@ class authController extends Controller
                 session(['user_det' => [
                     'user_id' => $user->id,
                     'company_id' => $user->company,
+                    'verification' => true,
                     'name' => $name,
                     'email' => $validatedData['email'],
                     'role' =>  $role,

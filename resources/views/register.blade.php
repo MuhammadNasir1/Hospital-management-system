@@ -69,40 +69,40 @@
                         <p class="text-[#000000] opacity-[50%]">Request For a Service</p>
                     </div>
 
-                    <form id="login_data" method="post" class="mt-7">
+                    <form id="registerCompany" class="mt-7">
                         @csrf
 
                         <div class="mt-3">
                             <label class="text-[14px] font-normal" for="name">@lang('lang.Name')</label>
-                            <input type="text" required
+                            <input type="text"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                                 name="name" id="name" value="{{ $user->name ?? '' }}"
                                 placeholder="@lang('lang.Name_Here')">
                         </div>
                         <div class="mt-3">
                             <label class="text-[14px] font-normal" for="company">@lang('lang.Company_Name')</label>
-                            <input type="text" required
+                            <input type="text"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                                 name="company" id="company" value="{{ $user->name ?? '' }}"
                                 placeholder="@lang('lang.Company_Name_Here')">
                         </div>
                         <div class="mt-3">
                             <label class="text-[14px] font-normal" for="phone">@lang('lang.Phone')</label>
-                            <input type="number" min="0" required
+                            <input type="number" min="0"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                                 name="phone" id="phone" value="{{ $user->name ?? '' }}"
                                 placeholder="@lang('lang.Phone_Here')">
                         </div>
                         <div class="mt-3">
                             <label class="text-[14px] font-normal" for="email">@lang('lang.Email')</label>
-                            <input type="email" required
+                            <input type="email"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                                 name="email" id="email" value="{{ $user->name ?? '' }}"
                                 placeholder="@lang('lang.Email_Here')">
                         </div>
                         <div class="mt-3">
                             <label class="text-[14px] font-normal" for="address">@lang('lang.Address')</label>
-                            <input type="email" required
+                            <input type="email"
                                 class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                                 name="address" id="address" value="{{ $user->name ?? '' }}"
                                 placeholder="@lang('lang.Address_Here')">
@@ -132,7 +132,7 @@
 
 
                         <div class="flex items-center flex-col mt-3">
-                            <button id="loginbutton"
+                            <button
                                 class="w-[55%] gradient-bakground active:text-black active:w-[60%] duration-150 mx-auto mt-6 py-3 rounded-full text-white uppercase">@lang('lang.Register')</button>
                             <p class="text-[#000000] mt-3 opacity-[50%]">Already Have an Account <a href="../login"
                                     class="text-blue-600">Login</a></p>
@@ -167,58 +167,42 @@
             });
         });
 
-        document.getElementById('rememberMeCheckbox').addEventListener('change', function() {
-            if (this.checked) {
-                console.log("Remember Me toggled on");
-            } else {
-                console.log("Remember Me toggled off");
-            }
-        });
-        $(document).ready(function() {
-            $("#login_data").submit(function(event) {
-                event.preventDefault();
-                var formData = $(this).serialize();
-                // Send the AJAX request
-                $.ajax({
-                    type: "POST",
-                    url: "/login",
-                    data: formData,
-                    dataType: "json",
-                    beforeSend: function() {
-                        $('#spinner').removeClass('hidden');
-                        $('#text').addClass('hidden');
-                        $('#loginbutton').attr('disabled', true);
-                    },
-                    success: function(response) {
-                        // Handle the success response here
-                        if (response.success == true) {
-                            $('#text').removeClass('hidden');
-                            $('#spinner').addClass('hidden');
 
-                            window.location.href = '/';
+        // insert data
+        $("#registerCompany").submit(function(event) {
+            var url = "../registerCompany";
+            event.preventDefault();
+            var formData = new FormData(this);
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: formData,
+                dataType: "json",
+                contentType: false,
+                processData: false,
+                beforeSend: function() {
+                    $('#spinner').removeClass('hidden');
+                    $('#text').addClass('hidden');
+                    $('#addBtn').attr('disabled', true);
+                },
+                success: function(response) {
+                    window.location.href = '../companies';
 
-                        } else if (response.success == false) {
-                            Swal.fire(
-                                'Warning!',
-                                response.message,
-                                'warning'
-                            )
-                        }
-                    },
-                    error: function(jqXHR) {
 
-                        let response = JSON.parse(jqXHR.responseText);
+                },
+                error: function(jqXHR) {
+                    let response = JSON.parse(jqXHR.responseText);
+                    console.log("error");
+                    Swal.fire(
+                        'Warning!',
+                        response.message,
+                        'warning'
+                    );
 
-                        Swal.fire(
-                            'Warning!',
-                            response.message,
-                            'warning'
-                        )
-                        $('#text').removeClass('hidden');
-                        $('#spinner').addClass('hidden');
-                        $('#loginbutton').attr('disabled', false);
-                    }
-                });
+                    $('#text').removeClass('hidden');
+                    $('#spinner').addClass('hidden');
+                    $('#addBtn').attr('disabled', false);
+                }
             });
         });
     </script>
