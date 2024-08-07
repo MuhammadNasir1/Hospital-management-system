@@ -109,16 +109,24 @@
                         </div>
                         <div class="mt-3">
                             <label class="text-[14px] font-normal" for="password">@lang('lang.Password')</label>
-                            <input type="password"
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="password" id="password" placeholder=" @lang('lang.Password_Here')"
-                                {{ isset($user->id) ? '' : 'required' }}>
+                            <div class="relative">
+                                <input type="password"
+                                    class="w-full border-[#DEE2E6] passinput rounded-[4px] focus:border-primary h-[40px] text-[14px]"
+                                    name="password" id="password" placeholder="@lang('lang.Password_Here')"
+                                    {{ isset($user->id) ? '' : 'required' }}>
+                                <img src="{{ asset('images/icons/eye-invisible.png') }}" data-toggle="password"
+                                    class="absolute eyebtns cursor-pointer right-2 bottom-3" alt="">
+                            </div>
                         </div>
                         <div class="mt-3">
                             <label class="text-[14px] font-normal" for="confirm_password">@lang('lang.Confirm_Password')</label>
-                            <input type="password" {{ isset($user->id) ? '' : 'required' }}
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="confirm_password" id="confirm_password" placeholder=" @lang('lang.Confirm_Password_Here')">
+                            <div class="relative">
+                                <input type="password" {{ isset($user->id) ? '' : 'required' }}
+                                    class="w-full border-[#DEE2E6] passinput rounded-[4px] focus:border-primary h-[40px] text-[14px]"
+                                    name="confirm_password" id="confirm_password" placeholder="@lang('lang.Confirm_Password_Here')">
+                                <img src="{{ asset('images/icons/eye-invisible.png') }}" data-toggle="password"
+                                    class="absolute cursor-pointer eyebtns right-2 bottom-3" alt="">
+                            </div>
                         </div>
 
 
@@ -126,7 +134,7 @@
                         <div class="flex items-center flex-col mt-3">
                             <button id="loginbutton"
                                 class="w-[55%] gradient-bakground active:text-black active:w-[60%] duration-150 mx-auto mt-6 py-3 rounded-full text-white uppercase">@lang('lang.Register')</button>
-                            <p class="text-[#000000] mt-3 opacity-[50%]">Already Have an Account <a href="../register"
+                            <p class="text-[#000000] mt-3 opacity-[50%]">Already Have an Account <a href="../login"
                                     class="text-blue-600">Login</a></p>
                         </div>
 
@@ -146,6 +154,19 @@
 
 
     <script>
+        document.querySelectorAll('img[data-toggle="password"]').forEach(function(eyeIcon) {
+            eyeIcon.addEventListener('click', function() {
+                let inputField = this.previousElementSibling;
+                if (inputField.type === "password") {
+                    inputField.type = "text";
+                    this.src = "{{ asset('images/icons/eye-visible.png') }}";
+                } else {
+                    inputField.type = "password";
+                    this.src = "{{ asset('images/icons/eye-invisible.png') }}";
+                }
+            });
+        });
+
         document.getElementById('rememberMeCheckbox').addEventListener('change', function() {
             if (this.checked) {
                 console.log("Remember Me toggled on");
@@ -198,24 +219,6 @@
                         $('#loginbutton').attr('disabled', false);
                     }
                 });
-            });
-        });
-
-        //  register page password show and hide
-
-        let passinputs = document.querySelectorAll('.passinput');
-        let eyebtns = document.querySelectorAll(".eyeicon");
-
-        eyebtns.forEach((btn, index) => {
-            btn.addEventListener("click", () => {
-                let passinput = passinputs[index];
-                if (passinput.type === "password") {
-                    passinput.type = "text";
-                    btn.src = "images/icons/eye-visible.png";
-                } else {
-                    passinput.type = "password";
-                    btn.src = "images/icons/eye-invisible.png";
-                }
             });
         });
     </script>
