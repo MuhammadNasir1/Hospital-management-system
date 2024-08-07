@@ -424,5 +424,11 @@ return [
     "Department_Name" => "Department Name",
     "Select_Department" => "Select Department",
     "Fee_Status" => "Fee Status",
+    "Pharmacy_List" => "Pharmacy List",
+    "Add_Pharmacy" => "Add Pharmacy",
+    "Telephone" => "Telephone",
+    "Telephone_Here" => "Telephone Here",
+    "Login_Details" => "Login Details",
+    "Work_Experience" => "Work Experience",
 
 ];

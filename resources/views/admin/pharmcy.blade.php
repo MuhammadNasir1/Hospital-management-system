@@ -8,12 +8,12 @@
         <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
             <div>
                 <div class="flex justify-end sm:justify-between  items-center px-[20px] mb-3">
-                    <h3 class="text-[20px] text-black hidden sm:block">@lang('lang.Department_List')</h3>
+                    <h3 class="text-[20px] text-black hidden sm:block">@lang('lang.Pharmacy_List')</h3>
                     <div>
 
                         <button data-modal-target="addcustomermodal" data-modal-toggle="addcustomermodal"
                             class="bg-primary cursor-pointer text-white h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
-                            @lang('lang.Add_Department')</button>
+                            @lang('lang.Add_Pharmacy')</button>
                     </div>
                 </div>
                 <div class="overflow-x-auto">
@@ -60,7 +60,7 @@
             <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
                 <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
                     <h3 class="text-xl font-semibold text-white ">
-                        @lang('lang.Add_Department')
+                        @lang('lang.Add_Pharmacy')
                     </h3>
                     <button type="button"
                         class=" absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
@@ -76,48 +76,68 @@
                 <div class="grid md:grid-cols-3 gap-5 mx-6 my-6">
                     <input type="hidden" name="role" value="department">
                     <div>
-                        <label class="text-[14px] font-normal" for="dpt_name">@lang('lang.Department_Name')</label>
-                        <input type="text" required
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="dpt_name" id="dpt_name" value="{{ $user->name ?? '' }}"
-                            placeholder=" @lang('lang.Department_Name')">
-                    </div>
-                    <div>
-                        <label class="text-[14px] font-normal" for="block_no">@lang('lang.Block_No')</label>
-                        <input type="number" min="0" required
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="block_no" id="block_no" value="{{ $user->name ?? '' }}"
-                            placeholder=" @lang('lang.Block_No')">
-                    </div>
-
-                    <h2 class="col-span-3 font-semibold">@lang('lang.Department_Head')</h2>
-
-                    <div>
                         <label class="text-[14px] font-normal" for="name">@lang('lang.Name')</label>
                         <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="name" id="name" value="{{ $user->name ?? '' }}" placeholder=" @lang('lang.Name_Here')">
                     </div>
                     <div>
+                        <label class="text-[14px] font-normal" for="phone">@lang('lang.Phone')</label>
+                        <input type="number" min="0" required
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="phone" id="phone" value="{{ $user->name ?? '' }}" placeholder=" @lang('lang.Phone_Here')">
+                    </div>
+                    <div>
+                        <label class="text-[14px] font-normal" for="telephone">@lang('lang.Telephone')</label>
+                        <input type="number" min="0" required
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="telephone" id="telephone" value="{{ $user->name ?? '' }}"
+                            placeholder=" @lang('lang.Telephone_Here')">
+                    </div>
+                    <div>
+                        <label class="text-[14px] font-normal" for="lisence_no">@lang('lang.Lisence_No')</label>
+                        <input type="text" required
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="lisence_no" id="lisence_no" value="{{ $user->name ?? '' }}"
+                            placeholder=" @lang('lang.Lisence_No')">
+                    </div>
+                    <div>
+                        <label class="text-[14px] font-normal" for="experience">@lang('lang.Work_Experience')</label>
+                        <input type="text" required
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="experience" id="experience" value="{{ $user->name ?? '' }}"
+                            placeholder=" @lang('lang.Work_Experience')">
+                    </div>
+                    <div class="col-span-3">
+                        <label class="text-[14px] font-normal" for="address">@lang('lang.Address')</label>
+                        <textarea class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   min-h-[80px] text-[14px]" name="address"
+                            id="address" placeholder="@lang('lang.Address_Here')"></textarea>
+                    </div>
+
+                    <h2 class="col-span-3 font-semibold">@lang('lang.Login_Details')</h2>
+
+                    <div>
                         <label class="text-[14px] font-normal" for="email">@lang('lang.Email')</label>
                         <input type="email" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="email" id="email" value="{{ $user->name ?? '' }}" placeholder=" @lang('lang.Email_Here')">
+                            name="email" id="email" value="{{ $user->name ?? '' }}"
+                            placeholder=" @lang('lang.Email_Here')">
+                    </div>
+
+                    <div>
+                        <label class="text-[14px] font-normal" for="password">@lang('lang.Password')</label>
+                        <input type="password"
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="password" id="password" placeholder=" @lang('lang.Password_Here')"
+                            {{ isset($user->id) ? '' : 'required' }}>
                     </div>
                     <div>
-                        <label class="text-[14px] font-normal" for="specialist">@lang('lang.Specialist')</label>
-                        <input type="text" required
+                        <label class="text-[14px] font-normal" for="confirm_password">@lang('lang.Confirm_Password')</label>
+                        <input type="password" {{ isset($user->id) ? '' : 'required' }}
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="specialization" id="specialist" value="{{ $user->name ?? '' }}"
-                            placeholder=" @lang('lang.Specialist')">
+                            name="confirm_password" id="confirm_password" placeholder=" @lang('lang.Confirm_Password_Here')">
                     </div>
 
-
-                    <div class="col-span-3">
-                        <label class="text-[14px] font-normal" for="note">@lang('lang.Note')</label>
-                        <textarea class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   min-h-[80px] text-[14px]" name="note"
-                            id="note" placeholder="@lang('lang.Note_Here')"></textarea>
-                    </div>
                 </div>
 
 
