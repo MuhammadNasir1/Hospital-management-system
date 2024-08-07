@@ -431,5 +431,7 @@ return [
     "Telephone_Here" => "Telephone Here",
     "Login_Details" => "Login Details",
     "Work_Experience" => "Work Experience",
+    "All_Requests" => "All Requests",
+    "Requests" => "Requests",
 
 ];

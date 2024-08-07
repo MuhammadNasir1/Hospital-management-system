@@ -23,6 +23,11 @@ class userController extends Controller
         $users =  User::where('role', 'admin')->where('verification', 'approved')->get();
         return view('users', ['users'  => $users]);
     }
+    public function requests()
+    {
+        $users =  User::where('role', 'admin')->where('verification', 'pending')->get();
+        return view('admin.requsets', ['users'  => $users]);
+    }
 
 
     public function  addCustomer(Request $request)

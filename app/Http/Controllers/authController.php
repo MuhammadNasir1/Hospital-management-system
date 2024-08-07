@@ -171,10 +171,15 @@ class authController extends Controller
                 'address' => $request->address,
                 'role' => 'admin',
                 'email' => $request->email,
+                'company' => 0,
                 'company_name' => $request->company,
                 'password' => Hash::make($request->password),
                 'verification' => 'pending',
             ]);
+            $upd = User::find($user->id);
+            $upd->company = $user->id;
+            $upd->update();
+            $user->save();
             $token = $user->createToken($request->email)->plainTextToken;
             return response()->json([
                 'token' => $token,
@@ -182,6 +187,50 @@ class authController extends Controller
                 'user' => $user,
                 'message' => 'Register successful',
             ], 201);
+        } catch (ValidationException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid credentials',
+                'errors' => $e->validator->getMessageBag(),
+            ], 422);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+    public function approvedCompany(Request $request, string $id)
+    {
+        try {
+
+            $company = User::find($id);
+            $company->verification = 'approved';
+
+            $company->update();
+            return redirect()->back();
+        } catch (ValidationException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid credentials',
+                'errors' => $e->validator->getMessageBag(),
+            ], 422);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+    public function cancelCompany(Request $request, string $id)
+    {
+        try {
+
+            $company = User::find($id);
+            $company->verification = 'canceled';
+
+            $company->update();
+            return redirect()->back();
         } catch (ValidationException $e) {
             return response()->json([
                 'success' => false,
