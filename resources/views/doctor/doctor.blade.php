@@ -65,7 +65,7 @@
                             @foreach ($data['patients'] as $patientGroup)
                                 @foreach ($patientGroup as $patient)
                                     <div
-                                        class="patient flex items-center gap-5 h-[60px] my-5 rounded-[5px] w-full bg-[#d9d9d963]">
+                                        class="patient flex cursor-pointer items-center gap-5 h-[60px] my-5 rounded-[5px] w-full bg-[#d9d9d963]">
                                         <div class="w-[10%] bg-primary rounded-l-[5px] h-[100%]"></div>
                                         <div>
                                             <h2 class="font-semibold ps-0.5">{{ $patient->name }}</h2>
@@ -93,7 +93,7 @@
                             @foreach ($data['checked'] as $n)
                                 @foreach ($n as $checked)
                                     <div
-                                        class="patient2 flex items-center gap-5 h-[60px] my-5 rounded-[5px] w-full bg-[#d9d9d963]">
+                                        class="patient2 cursor-pointer flex items-center gap-5 h-[60px] my-5 rounded-[5px] w-full bg-[#d9d9d963]">
                                         <div class="w-[10%] bg-primary rounded-l-[5px] h-[100%]">
 
                                         </div>
@@ -190,11 +190,11 @@
                                 </form>
                                 <div class="mt-3" id="medicines">
                                     @foreach ($data['medicine'] as $item)
-                                        <div class="py-2 border-b medicine">
-                                            <h2 class="medicineName">{{ $item->name }}</h2>
+                                        <div class="py-2 cursor-pointer border-b medicine">
+                                            <h2 class="me dicineName">{{ $item->name }}</h2>
                                         </div>
                                     @endforeach
-                                    <div id="error3" class="text-center mt-10 hidden">
+                                    <div id="error3" class="text-center mt-10  hidden ">
                                         <p>No Data Found</p>
                                     </div>
                                 </div>
