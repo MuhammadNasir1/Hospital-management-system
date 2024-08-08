@@ -32,18 +32,8 @@
 
                 <div class="xl:w-[250px] w-full xl:h-[100%] h-[300px] overflow-y-auto font-inter">
                     <h1 class="text-2xl font-bold">@lang('lang.Patients')</h1>
-                    <p class="font-inter text-sm">@lang('lang.Date') : {{ $data['date'] }}</p>
+                    <p class="font-inter text-sm pb-3">@lang('lang.Date') : {{ $data['date'] }}</p>
 
-                    <form action="#" method="get" class="pt-3 relative">
-                        <input placeholder="@lang('lang.Patient_Tocken')" type="text" name="search" id="searchPatient"
-                            class="rounded-[5px] w-full bg-[#d9d9d963] border-0 focus:border-0">
-                        <svg class="w-6 h-6 absolute right-2 top-5 pt-0.5 text-[#6d6d6d] dark:text-white" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                            viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
-                                d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
-                        </svg>
-                    </form>
 
 
                     <div>
@@ -62,6 +52,16 @@
                             </ul>
                         </div>
                         <div class="mt-3" id="queue">
+                            <form action="#" method="get" class="pt-3 relative">
+                                <input placeholder="@lang('lang.Patient_Tocken')" type="text" name="search" id="searchPatient"
+                                    class="rounded-[5px] w-full bg-[#d9d9d963] border-0 focus:border-0">
+                                <svg class="w-6 h-6 absolute right-2 top-5 pt-0.5 text-[#6d6d6d] dark:text-white"
+                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                                        d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
+                                </svg>
+                            </form>
                             @foreach ($data['patients'] as $patientGroup)
                                 @foreach ($patientGroup as $patient)
                                     <div
@@ -80,21 +80,33 @@
                             </div>
                         </div>
                         <div class="mt-3 hidden" id="checked">
+                            <form action="#" method="get" class="pt-3 relative">
+                                <input placeholder="@lang('lang.Patient_Tocken')" type="text" name="search" id="searchPatient2"
+                                    class="rounded-[5px] w-full bg-[#d9d9d963] border-0 focus:border-0">
+                                <svg class="w-6 h-6 absolute right-2 top-5 pt-0.5 text-[#6d6d6d] dark:text-white"
+                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
+                                        d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
+                                </svg>
+                            </form>
                             @foreach ($data['checked'] as $n)
                                 @foreach ($n as $checked)
                                     <div
-                                        class="patient flex items-center gap-5 h-[60px] my-5 rounded-[5px] w-full bg-[#d9d9d963]">
+                                        class="patient2 flex items-center gap-5 h-[60px] my-5 rounded-[5px] w-full bg-[#d9d9d963]">
                                         <div class="w-[10%] bg-primary rounded-l-[5px] h-[100%]">
 
                                         </div>
                                         <div>
                                             <h2 class="font-semibold ps-0.5">{{ $checked->name }}</h2>
-                                            <h3 class="text-dark"># {{ $checked->id }}</h3>
+                                            <h3 class="text-dark patientToken2"># {{ $checked->id }}</h3>
                                         </div>
                                     </div>
                                 @endforeach
                             @endforeach
-
+                            <div id="error2" class="text-center mt-10 hidden">
+                                <p>No Data Found</p>
+                            </div>
 
                         </div>
 
@@ -160,28 +172,31 @@
                                                 onclick="showTab2(event, 'tests')">Tests</a>
                                         </li>
                                         <li class="me-2">
-                                            <a href="#" class="inline-block a p-2 font-semibold" id="checkedPatients"
-                                                onclick="showTab2(event, 'ad')">Ad</a>
+                                            <a href="#" class="inline-block a p-2 font-semibold"
+                                                id="checkedPatients" onclick="showTab2(event, 'ad')">Ad</a>
                                         </li>
                                     </ul>
                                 </div>
                                 <form action="#" method="get" class="pt-3 relative">
-                                    <input placeholder="@lang('lang.Search_Patient_Tocken')" type="text" name="search" id="search"
+                                    <input placeholder="@lang('lang.Patient_Tocken')" type="text" name="search"
+                                        id="searchMedicine"
                                         class="rounded-[5px] w-full bg-[#d9d9d963] border-0 focus:border-0">
-                                    <svg class="w-6 h-6 absolute right-2 top-5 pt-0.5 text-dark dark:text-white"
+                                    <svg class="w-6 h-6 absolute right-2 top-5 pt-0.5 text-[#6d6d6d] dark:text-white"
                                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                         height="24" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-width="2"
                                             d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
                                     </svg>
-
                                 </form>
                                 <div class="mt-3" id="medicines">
                                     @foreach ($data['medicine'] as $item)
-                                        <div class="py-2 border-b">
-                                            <h2 class="">{{ $item->name }}</h2>
+                                        <div class="py-2 border-b medicine">
+                                            <h2 class="medicineName">{{ $item->name }}</h2>
                                         </div>
                                     @endforeach
+                                    <div id="error3" class="text-center mt-10 hidden">
+                                        <p>No Data Found</p>
+                                    </div>
                                 </div>
                                 <div class="mt-3 hidden" id="tests">
 
@@ -395,44 +410,52 @@
 
     <script>
         $(document).ready(function() {
-            $('#searchPatient').on('input', function() {
-                var searchValue = $(this).val().toLowerCase();
-                var searchChars = searchValue.split('');
-                var matchFound = false;
+            function searchFunction(searchInputId, itemClass, tokenClass, errorId) {
+                $(searchInputId).on('input', function() {
+                    var searchValue = $(this).val().toLowerCase();
+                    var searchChars = searchValue.split('');
+                    var matchFound = false;
 
-                if (searchValue != '') {
-                    $('.patient').each(function() {
-                        var tokenText = $(this).find('.patientToken').text().toLowerCase();
-                        var match = false;
+                    if (searchValue != '') {
+                        $(itemClass).each(function() {
+                            var tokenText = $(this).find(tokenClass).text().toLowerCase();
+                            var match = false;
 
-                        for (var i = 0; i < searchChars.length; i++) {
-                            if (tokenText.includes(searchChars[i])) {
-                                match = true;
-                                break;
+                            for (var i = 0; i < searchChars.length; i++) {
+                                if (tokenText.includes(searchChars[i])) {
+                                    match = true;
+                                    break;
+                                }
                             }
-                        }
 
-                        if (match) {
-                            $(this).show();
-                            matchFound = true;
+                            if (match) {
+                                $(this).show();
+                                matchFound = true;
+                            } else {
+                                $(this).hide();
+                            }
+                        });
+
+                        if (matchFound) {
+                            $(errorId).hide();
                         } else {
-                            $(this).hide();
+                            $(errorId).show();
                         }
-                    });
-
-                    if (matchFound) {
-                        $('#error').hide();
                     } else {
-                        $('#error').show();
+                        $(itemClass).each(function() {
+                            $(this).show();
+                        });
+                        $(errorId).hide();
                     }
-                } else {
-                    $('.patient').each(function() {
-                        $(this).show();
-                    });
-                    $('#error').hide();
-                }
-            });
+                });
+            }
+
+            // Applying the searchFunction to each input
+            searchFunction('#searchPatient', '.patient', '.patientToken', '#error');
+            searchFunction('#searchPatient2', '.patient2', '.patientToken2', '#error2');
+            searchFunction('#searchMedicine', '.medicine', '.medicineName', '#error3');
         });
+
 
         function showTab(event, tabId) {
             event.preventDefault();
