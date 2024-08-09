@@ -66,7 +66,7 @@
                                 @foreach ($patientGroup as $patient)
                                     <a href="../reception/fetchpatientData/{{ $patient->id }}">
                                         <div
-                                            class="patient flex cursor-pointer items-center gap-5 h-[60px] my-5 rounded-[5px] w-full bg-[#d9d9d963]">
+                                            class="patient flex cursor-pointer items-center gap-5 h-[60px] my-5 rounded-[5px] w-full active:bg-primary active:text-white active:duration-75  bg-[#d9d9d963]">
                                             <div class="w-[10%] bg-primary rounded-l-[5px] h-[100%]"></div>
                                             <div>
                                                 <h2 class="font-semibold ps-0.5">{{ $patient->name }}</h2>
