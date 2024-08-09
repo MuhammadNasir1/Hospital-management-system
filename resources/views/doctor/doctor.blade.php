@@ -124,7 +124,7 @@
                                     alt="">
                             </div>
                             <div class="ps-10">
-                                <h2 class="font-semibold text-2xl ps-0.5 patientName">@lang('lang.Patient_Name')</h2>
+                                <h2 class="font-semibold capitalize text-2xl ps-0.5 patientName">@lang('lang.Patient_Name')</h2>
                                 <h3 class="text-dark patientId">#010203</h3>
                             </div>
                         </div>
