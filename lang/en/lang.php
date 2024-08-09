@@ -434,5 +434,6 @@ return [
     "Work_Experience" => "Work Experience",
     "All_Requests" => "All Requests",
     "Requests" => "Requests",
+    "Patient_Name" => "Patient Name",
 
 ];

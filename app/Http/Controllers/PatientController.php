@@ -117,4 +117,15 @@ class PatientController extends Controller
             return response()->json(["messsage" => $e->getMessage()], 500);
         }
     }
+    public function fetchPatient(string $id)
+    {
+        try {
+
+            $patient = Patient::where('id', $id)
+                ->first();
+            return response()->json(["messsage" => "data get successfully", "patient" => $patient], 200);
+        } catch (\Exception $e) {
+            return response()->json(["messsage" => $e->getMessage()], 500);
+        }
+    }
 }

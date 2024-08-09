@@ -64,14 +64,16 @@
                             </form>
                             @foreach ($data['patients'] as $patientGroup)
                                 @foreach ($patientGroup as $patient)
-                                    <div
-                                        class="patient flex cursor-pointer items-center gap-5 h-[60px] my-5 rounded-[5px] w-full bg-[#d9d9d963]">
-                                        <div class="w-[10%] bg-primary rounded-l-[5px] h-[100%]"></div>
-                                        <div>
-                                            <h2 class="font-semibold ps-0.5">{{ $patient->name }}</h2>
-                                            <h3 class="text-dark patientToken"># {{ $patient->id }}</h3>
+                                    <a href="../reception/fetchpatientData/{{ $patient->id }}">
+                                        <div
+                                            class="patient flex cursor-pointer items-center gap-5 h-[60px] my-5 rounded-[5px] w-full bg-[#d9d9d963]">
+                                            <div class="w-[10%] bg-primary rounded-l-[5px] h-[100%]"></div>
+                                            <div>
+                                                <h2 class="font-semibold ps-0.5">{{ $patient->name }}</h2>
+                                                <h3 class="text-dark patientToken"># {{ $patient->id }}</h3>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 @endforeach
                             @endforeach
 
@@ -122,25 +124,23 @@
                                     alt="">
                             </div>
                             <div class="ps-10">
-                                <h2 class="font-semibold text-2xl ps-0.5">Maryam</h2>
-                                <h3 class="text-dark">#010203</h3>
+                                <h2 class="font-semibold text-2xl ps-0.5 patientName">@lang('lang.Patient_Name')</h2>
+                                <h3 class="text-dark patientId">#010203</h3>
                             </div>
                         </div>
 
-                        <div class="flex ">
+                        <div class="flex capitalize">
                             <div class="age">
-                                <h2 class="font-semibold text-xl px-10 ps-0.5">28</h2>
+                                <h2 class="font-semibold text-xl px-10 ps-0.5 patientAge">28</h2>
                             </div>
                             <div class="gender">
-                                <h2 class="font-semibold text-xl px-10 ps-0.5">Female</h2>
+                                <h2 class="font-semibold patientGender text-xl px-10 ps-0.5">Female</h2>
                             </div>
                             <div class="Blood">
-                                <h2 class="font-semibold text-xl px-10 ps-0.5">B+</h2>
+                                <h2 class="font-semibold patientBloodGroup text-xl px-10 ps-0.5">B+</h2>
                             </div>
                         </div>
-                        <div class="xl:w-[20%] xl:bg-red-300 bg-blue-700">
 
-                        </div>
 
                     </div>
 
@@ -489,5 +489,66 @@
 
             event.currentTarget.classList.add('active');
         }
+
+
+
+        $(document).ready(function() {
+            $('.patient').on('click', function(e) {
+                e.preventDefault(); // Prevent the default anchor tag behavior
+
+                var patientId = $(this).closest('a').attr('href').split('/')
+                    .pop(); // Extract patient ID from the href
+
+                // AJAX request to fetch patient details
+                $.ajax({
+                    url: '/reception/fetchpatientData/' + patientId,
+                    type: 'GET',
+                    success: function(response) {
+                        if (response.patient) {
+                            // Update the details section with the fetched data
+                            $('.patientName').text(response.patient.name);
+                            $('.patientId').text('#' + response.patient.id);
+                            $('.patientAge').text(response.patient.age);
+                            $('.patientGender').text(response.patient.gender);
+                            $('.patientBloodGroup').text(response.patient.blood_group);
+                        } else {
+                            alert('Patient data not found');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error fetching patient data:', error);
+                    }
+                });
+            });
+        });
+
+        // $(document).ready(function() {
+        //     $('.patient').click(function() {
+        //         // Get the patient ID from the clicked element
+        //         let patientId = $(this).find('.patientToken').text().replace('# ', '');
+
+        //         // Send an AJAX request to fetch patient details
+        //         $.ajax({
+        //             url: '/reception/fetchpatientData/' + patientId,
+        //             type: 'GET',
+        //             success: function(response) {
+        //                 if (response.patient) {
+        //                     // Update the details section with the fetched data
+        //                     $('.patientName').text(response.patient.name);
+        //                     $('.patientId').text('#' + response.patient.id);
+        //                     $('.patientAge').text(response.patient.age);
+        //                     $('.patientGender').text(response.patient.gender);
+        //                     $('.patientBloodGroup').text(response.patient.blood_group);
+        //                 } else {
+        //                     alert('Patient data not found');
+        //                 }
+        //             },
+        //             error: function(xhr, status, error) {
+        //                 console.error('Error:', error); // Logs detailed error
+        //                 alert('Error fetching patient data');
+        //             }
+        //         });
+        //     });
+        // });
     </script>
 @endsection
