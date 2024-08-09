@@ -114,7 +114,7 @@
                 </div>
                 <div class="w-full xl:mt-0 mt-5">
                     {{-- Pateint Details --}}
-                    <div class="h-[100px] w-[100%] bg-[#F0F6FF] shad rounded-[5px] flex items-center justify-between">
+                    <div class="h-[100px] w-[100%] bg-white  rounded-[5px] flex items-center justify-between">
 
                         <div class="flex items-center">
                             <div class="bg-[#f26ecd91] h-[74px] w-[74px] rounded-full ms-3">
@@ -148,7 +148,7 @@
 
 
 
-                        <div class="xl:w-[25%] w-full  min-h-[70vh] mt-3 rounded-md shad bg-white p-5">
+                        <div class="xl:w-[25%] w-full  min-h-[70vh] mt-3 rounded-md  bg-white p-5">
                             <form action="#" method="get" class="pt-3 relative">
                                 <select name="" id=""
                                     class="rounded-[5px] w-full bg-[#6d6d6d] border-0 focus:border-0">
@@ -246,7 +246,7 @@
 
                             </div>
                         </div>
-                        <div class="xl:w-[75%] w-full  min-h-[70vh] mt-3 rounded-md shad bg-white">
+                        <div class="xl:w-[75%] w-full  min-h-[70vh] mt-3 rounded-md  bg-white">
 
                             <h1 class="text-xl font-bold p-5">Medicine Prescribed</h1>
 
@@ -274,7 +274,7 @@
                             <h1 class="text-xl font-bold p-5">Test Prescribed</h1>
 
                             <div
-                                class=" bg-[#d9d9d963] px-5 w-[95%] shad rounded-sm mx-auto grid xl:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-3">
+                                class=" bg-[#d9d9d963] px-5 w-[95%]                                                                                                                       rounded-sm mx-auto grid xl:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-3">
 
                                 <div class="bg-white rounded-md shd my-3 min-h-[70px] w-full text-center">
                                     <h2 class="font-semibold  pt-3">Test Name</h2>

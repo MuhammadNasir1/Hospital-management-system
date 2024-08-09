@@ -23,7 +23,7 @@
             <ul>
                 <li>
                     <strong>@lang('lang.Fee_Status')#</strong>
-                    <p>{{ $all['printData']->id }}</p>
+                    <p>@lang('lang.Paid')</p>
                 </li>
                 <li>
                     <strong>@lang('lang.Date'):</strong>
