@@ -91,6 +91,7 @@ Route::controller(PatientController::class)->group(function () {
     Route::get('/reception/patients', 'view');
     Route::get('/reception/fetchpatient/{id}', 'fetch');
     Route::get('/reception/fetchpatientData/{id}', 'fetchPatient');
+    Route::get('/reception/fetchMedicine/{id}', 'fetchMedicine');
     Route::get('/reception/patient/print-detail/{id}', 'print')->name('printPatient');
     Route::get('/reception/patient/delete-patient/{id}', 'delete')->name('delPatient');
 });

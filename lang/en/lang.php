@@ -435,5 +435,16 @@ return [
     "All_Requests" => "All Requests",
     "Requests" => "Requests",
     "Patient_Name" => "Patient Name",
+    "Days" => "Days",
+    "Monday" => "Monday",
+    "Tuesday" => "Tuesday",
+    "Wednesday" => "Wednesday",
+    "Thursday" => "Thursday",
+    "Friday" => "Friday",
+    "Saturday" => "Saturday",
+    "Sunday" => "Sunday",
+    "Morning" => "Morning",
+    "Afternoon" => "Afternoon",
+    "Night" => "Night",
 
 ];

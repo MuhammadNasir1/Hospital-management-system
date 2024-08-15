@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Inventory;
 use App\Models\Patient;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -124,6 +125,17 @@ class PatientController extends Controller
             $patient = Patient::where('id', $id)
                 ->first();
             return response()->json(["messsage" => "data get successfully", "patient" => $patient], 200);
+        } catch (\Exception $e) {
+            return response()->json(["messsage" => $e->getMessage()], 500);
+        }
+    }
+    public function fetchMedicine(string $id)
+    {
+        try {
+
+            $medicine = Inventory::where('id', $id)
+                ->first();
+            return response()->json(["messsage" => "data get successfully", "medicine" => $medicine], 200);
         } catch (\Exception $e) {
             return response()->json(["messsage" => $e->getMessage()], 500);
         }
