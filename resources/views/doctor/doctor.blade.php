@@ -444,7 +444,7 @@
                                         class="bg-red-600 decrement text-white font-bold h-7 w-7 rounded-md">-</button>
                                     <input type="number" value="0" min="0"
                                         class="text-center bg-gray-300 text-gray-900 w-16 font-semibold h-7  quantity rounded"
-                                        name="mor_med">
+                                        name="mor_med" readonly>
                                     <button type="button"
                                         class="bg-green-600 increment text-white font-bold h-7 w-7 rounded-md">+</button>
                                 </div>
@@ -462,7 +462,7 @@
                                         class="bg-red-600 decrement text-white font-bold h-7 w-7 rounded-md">-</button>
                                     <input type="number" value="0" min="0"
                                         class="text-center bg-gray-300 text-gray-900 w-16 font-semibold h-7  quantity rounded"
-                                        name="aft_med">
+                                        name="aft_med" readonly>
                                     <button type="button"
                                         class="bg-green-600 increment text-white font-bold h-7 w-7 rounded-md">+</button>
                                 </div>
@@ -479,7 +479,7 @@
                                         class="bg-red-600 decrement text-white font-bold h-7 w-7 rounded-md">-</button>
                                     <input type="number" value="0" min="0"
                                         class="text-center bg-gray-300 text-gray-900 w-16 font-semibold h-7  quantity rounded"
-                                        name="night_med">
+                                        name="night_med" readonly>
                                     <button type="button"
                                         class="bg-green-600 increment text-white font-bold h-7 w-7 rounded-md">+</button>
                                 </div>
@@ -532,61 +532,31 @@
 
 
 @section('js')
-    {{-- <script>
-    $('.updateBtn').click(function() {
-        console.log("ghgh");
-        var updateId = $(this).attr('updateId');
-        var url = "/fetchdataphramacy/" + updateId;
-        console.log(updateId)
-        $.ajax({
-            type: "GET",
-            url: url,
-            dataType: "json",
-            success: function(response) {
-                var phamacy = response.phamacy;
-                $('#update_id').val(phamacy.id);
-                $('#name').val(phamacy.name);
-                $('#phone').val(phamacy.phone);
-                $('#telephone').val(phamacy.telephone);
-                $('#email').val(phamacy.email);
-                $('#address').val(phamacy.address);
-                $('#fname').val(phamacy.fname);
-                $('#l_name').val(phamacy.l_name);
-                $('#datebirth').val(phamacy.datebirth);
-                $('#phoneno').val(phamacy.phoneno);
-                $('#email').val(phamacy.email);
-                $('#city').val(phamacy.city);
-                $('#Addresses').val(phamacy.addresses);
-                $('#license').val(phamacy.license);
-                $('#work').val(phamacy.work);
-                $('.update_phramcey').attr('action', '/phramacyupdate/' + phamacy.id);
-            },
-        });
-    });
-
-    function showAlert() {
-        var myText = "Are You sure delete this data";
-        alert(myText);
-
-
-    }
-</script> --}}
-
     <script>
         $(document).ready(function() {
             // Increment quantity
             $('.increment').on('click', function() {
-                var $input = $(this).closest('div').find('input.quantity');
-                var value = parseInt($input.val());
-                $input.val(value + 1);
+                var $parentDiv = $(this).closest('div');
+                var $input = $parentDiv.find('input.quantity');
+                var $checkbox = $parentDiv.siblings('div').find('input[type="checkbox"]');
+
+                if ($checkbox.is(':checked')) {
+                    var value = parseInt($input.val());
+                    $input.val(value + 1);
+                }
             });
 
             // Decrement quantity
             $('.decrement').on('click', function() {
-                var $input = $(this).closest('div').find('input.quantity');
-                var value = parseInt($input.val());
-                if (value > 0) {
-                    $input.val(value - 1);
+                var $parentDiv = $(this).closest('div');
+                var $input = $parentDiv.find('input.quantity');
+                var $checkbox = $parentDiv.siblings('div').find('input[type="checkbox"]');
+
+                if ($checkbox.is(':checked')) {
+                    var value = parseInt($input.val());
+                    if (value > 0) {
+                        $input.val(value - 1);
+                    }
                 }
             });
         });
