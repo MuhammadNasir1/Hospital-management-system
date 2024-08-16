@@ -446,5 +446,7 @@ return [
     "Morning" => "Morning",
     "Afternoon" => "Afternoon",
     "Night" => "Night",
+    "If_V_I_P" => "If V.I.P",
+    "V_I_P" => "V.I.P",
 
 ];

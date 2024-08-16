@@ -296,7 +296,7 @@
                 <div class="p-10">
                     <input type="hidden" name="patient" value="" id="patient">
                     <div class="grid grid-cols-2 gap-2">
-                        <div>
+                        <div class="col-span-2">
                             <label class="text-[14px] font-normal" for="department">@lang('lang.Select_Department')</label>
                             <select name="department" id="viewDoctor">
                                 <option disabled selected>@lang('lang.Select_Department')</option>
@@ -311,6 +311,13 @@
                             <label class="text-[14px] font-normal" for="doctor">@lang('lang.Doctor')</label>
                             <select name="doctor" id="doctor">
                                 <option disabled selected>@lang('lang.Select_Doctor')</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="text-[14px] font-normal" for="patient_type">@lang('lang.Patient_Type')</label>
+                            <select name="patient_type" id="patient_type">
+                                <option selected disabled>@lang('lang.If_V_I_P')</option>
+                                <option value="vip">@lang('lang.V_I_P')</option>
                             </select>
                         </div>
                         <div>

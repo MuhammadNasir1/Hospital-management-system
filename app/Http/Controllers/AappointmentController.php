@@ -19,6 +19,7 @@ class AappointmentController extends Controller
                 'doctor' => 'required | string',
                 'price' => 'required | numeric',
                 'date' => 'required | string | date',
+                'patient_type' => 'nullable',
             ]);
 
             $appointment = new Aappointment;
@@ -27,6 +28,7 @@ class AappointmentController extends Controller
             $appointment->receptionist_id = session('user_det')['user_id'];
             $appointment->patient_id = $request->patient;
             $appointment->doctor_id = $validateData['doctor'];
+            $appointment->vip = $validateData['patient_type'];
             $appointment->price = $validateData['price'];
             $appointment->status = 'unchecked';
             $appointment->date = $validateData['date'];
