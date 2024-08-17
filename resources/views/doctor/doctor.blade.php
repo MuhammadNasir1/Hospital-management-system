@@ -64,7 +64,6 @@
                             @foreach ($data['patients'] as $patientGroup)
                                 @foreach ($patientGroup as $patient)
                                     @php
-                                        // Find the appointment for the patient (assuming each patient has one appointment)
                                         $appointment = $data['appointment']->firstWhere('patient_id', $patient->id);
                                     @endphp
 
