@@ -25,6 +25,7 @@
 
         }
     </style>
+
     <div class="md:mx-4 mt-12">
 
         <div class="shadow-dark mt-3  rounded-xl   bg-white p-5">
@@ -33,8 +34,6 @@
                 <div class="xl:w-[250px] w-full xl:h-[100%] h-[300px] overflow-y-auto font-inter">
                     <h1 class="text-2xl font-bold">@lang('lang.Patients')</h1>
                     <p class="font-inter text-sm pb-3">@lang('lang.Date') : {{ $data['date'] }}</p>
-
-
 
                     <div>
 
@@ -64,18 +63,31 @@
                             </form>
                             @foreach ($data['patients'] as $patientGroup)
                                 @foreach ($patientGroup as $patient)
+                                    @php
+                                        // Find the appointment for the patient (assuming each patient has one appointment)
+                                        $appointment = $data['appointment']->firstWhere('patient_id', $patient->id);
+                                    @endphp
+
                                     <a href="../reception/fetchpatientData/{{ $patient->id }}">
                                         <div
-                                            class="patient flex cursor-pointer items-center gap-5 h-[60px] my-5 rounded-[5px] w-full active:bg-primary active:text-white active:duration-75  bg-[#d9d9d963]">
+                                            class="patient flex cursor-pointer items-center gap-5 h-[60px] my-5 rounded-[5px] w-full active:bg-primary relative active:text-white active:duration-75 bg-[#d9d9d963]">
                                             <div class="w-[10%] bg-primary rounded-l-[5px] h-[100%]"></div>
-                                            <div>
-                                                <h2 class="font-semibold ps-0.5">{{ $patient->name }}</h2>
-                                                <h3 class="text-dark patientToken"># {{ $patient->id }}</h3>
+                                            <div class="flex">
+                                                <div>
+                                                    <h2 class="font-semibold ps-0.5">{{ $patient->name }}</h2>
+                                                    <h3 class="text-dark patientToken"># {{ $patient->id }}</h3>
+                                                </div>
                                             </div>
+                                            @if ($appointment && $appointment->vip == 'vip')
+                                                <div class="absolute right-3">
+                                                    <i class="fas text-secondary fa-crown mt-7"></i>
+                                                </div>
+                                            @endif
                                         </div>
                                     </a>
                                 @endforeach
                             @endforeach
+
 
                             <div id="error" class="text-center mt-10 hidden">
                                 <p>No Data Found</p>
@@ -189,7 +201,7 @@
                                     </svg>
                                 </form>
                                 <div class="mt-3" id="medicines">
-                                    @foreach ($data['medicine'] as $item)
+                                    {{-- @foreach ($data['medicine'] as $item)
                                         <div class="py-2 cursor-pointer border-b medicine"
                                             data-modal-target="addcustomermodal" data-modal-toggle="addcustomermodal">
                                             <h2 class="me dicineName">{{ $item->name }}</h2>
@@ -197,7 +209,7 @@
                                     @endforeach
                                     <div id="error3" class="text-center mt-10  hidden ">
                                         <p>No Data Found</p>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="mt-3 hidden" id="tests">
 

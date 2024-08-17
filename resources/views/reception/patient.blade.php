@@ -316,7 +316,8 @@
                         <div>
                             <label class="text-[14px] font-normal" for="patient_type">@lang('lang.Patient_Type')</label>
                             <select name="patient_type" id="patient_type">
-                                <option selected disabled>@lang('lang.If_V_I_P')</option>
+                                <option selected disabled>@lang('lang.Select_Patient_type')</option>
+                                <option value="defualt">@lang('lang.Defualt')</option>
                                 <option value="vip">@lang('lang.V_I_P')</option>
                             </select>
                         </div>

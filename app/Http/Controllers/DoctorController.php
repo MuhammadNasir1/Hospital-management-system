@@ -30,9 +30,12 @@ class DoctorController extends Controller
                 ->where('status', 'checked')
                 ->get();
         }
-
-        $medicine = Inventory::where('company_id', session('user_det')['company_id'])
+        $appointment = Aappointment::where('date', $date->toDateString())
+            ->where('status', 'unchecked')
+            ->where('doctor_id', session('user_det')['user_id'])
             ->get();
+        $medicine = Inventory::where('company_id', session('user_det')['company_id'])
+            ->first();
 
         $allData = [];
         $allDataChecked = [];
@@ -49,6 +52,7 @@ class DoctorController extends Controller
             'patients' => $allData,
             'medicine' => $medicine,
             'checked' => $allDataChecked,
+            'appointment' => $appointment,
             'date' => $date->toDateString(),
         ];
 
