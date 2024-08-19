@@ -35,7 +35,7 @@ class DoctorController extends Controller
             ->where('doctor_id', session('user_det')['user_id'])
             ->get();
         $medicine = Inventory::where('company_id', session('user_det')['company_id'])
-            ->first();
+            ->get();
 
         $allData = [];
         $allDataChecked = [];
@@ -59,5 +59,16 @@ class DoctorController extends Controller
         // return $data;
 
         return view('doctor.doctor', compact('data'));
+    }
+    public function getMedicine(string $id)
+    {
+        try {
+
+            $medicine = Inventory::where('id', $id)
+                ->first();
+            return response()->json(["messsage" => "data get successfully", "medicine" => $medicine], 200);
+        } catch (\Exception $e) {
+            return response()->json(["messsage" => $e->getMessage()], 500);
+        }
     }
 }

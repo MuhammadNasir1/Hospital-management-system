@@ -101,4 +101,5 @@ Route::controller(AappointmentController::class)->group(function () {
 });
 Route::controller(DoctorController::class)->group(function () {
     Route::get('/doctor/appointments', 'view');
+    Route::get('/doctor/fetchMedicine/{id}', 'getMedicine');
 });
