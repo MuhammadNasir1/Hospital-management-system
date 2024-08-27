@@ -22,44 +22,20 @@
         <div class="patient-detail">
             <ul>
                 <li>
-                    <strong>@lang('lang.Reg')#</strong>
-                    <p>{{ $all['printData']->id }}</p>
+                    <strong>@lang('lang.Fee_Status')#</strong>
+                    <p>@lang('lang.Paid')</p>
                 </li>
                 <li>
-                    <strong>@lang('lang.Name'):</strong>
+                    <strong>@lang('lang.Date'):</strong>
+                    <p>{{ $all['time'] }}</p>
+                </li>
+                <li>
+                    <strong>@lang('lang.Customer'):</strong>
                     <p>{{ $all['printData']->name }}</p>
                 </li>
                 <li>
-                    <strong>@lang('lang.Relation_To_Applicant'):</strong>
-                    <p>{{ $all['printData']->relation }}</p>
-                </li>
-                <li>
-                    <strong>@lang('lang.Gender'):</strong>
-                    <p>{{ $all['printData']->gender }}</p>
-                </li>
-                <li>
-                    <strong>@lang('lang.Age'):</strong>
-                    <p>{{ $all['printData']->age }}</p>
-                </li>
-                <li>
-                    <strong>@lang('lang.Patient_Type'):</strong>
-                    <p>{{ $all['printData']->disease }}</p>
-                </li>
-                <li>
-                    <strong>@lang('lang.Material_Status'):</strong>
-                    <p>{{ $all['printData']->material_status }}</p>
-                </li>
-                <li>
-                    <strong>@lang('lang.Father_Husband_Name'):</strong>
-                    <p>{{ $all['printData']->father_husband_name }}</p>
-                </li>
-                <li>
-                    <strong>@lang('lang.Phone'):</strong>
+                    <strong>@lang('lang.Contact'):</strong>
                     <p>{{ $all['printData']->phone }}</p>
-                </li>
-                <li>
-                    <strong>@lang('lang.CNIC'):</strong>
-                    <p>{{ $all['printData']->cnic }}</p>
                 </li>
             </ul>
         </div>

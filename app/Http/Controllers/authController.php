@@ -94,12 +94,16 @@ class authController extends Controller
     {
 
         try {
-
+            $verification = 'pending';
+            if (session('user_det')['verification'] == true) {
+                $verification = 'approved';
+            }
 
             $user = User::create([
                 'name' => $request->name,
                 'phone' => $request->phone,
                 'dpt_name' => $request->dpt_name,
+                'department' => $request->department,
                 'block_no' => $request->block_no,
                 'address' => $request->address,
                 'specialization' => $request->specialization,
@@ -119,7 +123,7 @@ class authController extends Controller
                 'graduation' => $request->graduation,
                 'residency' => $request->residency,
                 'password' => Hash::make($request->password),
-                'verification' => "approved",
+                'verification' => $verification,
             ]);
 
             $upd = User::find($user->id);
@@ -157,7 +161,89 @@ class authController extends Controller
         }
     }
 
+    public function company(Request $request)
+    {
+        try {
 
+            $user = User::create([
+                'name' => $request->name,
+                'phone' => $request->phone,
+                'address' => $request->address,
+                'role' => 'admin',
+                'email' => $request->email,
+                'company' => 0,
+                'company_name' => $request->company,
+                'password' => Hash::make($request->password),
+                'verification' => 'pending',
+            ]);
+            $upd = User::find($user->id);
+            $upd->company = $user->id;
+            $upd->update();
+            $user->save();
+            $token = $user->createToken($request->email)->plainTextToken;
+            return response()->json([
+                'token' => $token,
+                'success' => true,
+                'user' => $user,
+                'message' => 'Register successful',
+            ], 201);
+        } catch (ValidationException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid credentials',
+                'errors' => $e->validator->getMessageBag(),
+            ], 422);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+    public function approvedCompany(Request $request, string $id)
+    {
+        try {
+
+            $company = User::find($id);
+            $company->verification = 'approved';
+
+            $company->update();
+            return redirect()->back();
+        } catch (ValidationException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid credentials',
+                'errors' => $e->validator->getMessageBag(),
+            ], 422);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+    public function cancelCompany(Request $request, string $id)
+    {
+        try {
+
+            $company = User::find($id);
+            $company->verification = 'canceled';
+
+            $company->update();
+            return redirect()->back();
+        } catch (ValidationException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid credentials',
+                'errors' => $e->validator->getMessageBag(),
+            ], 422);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
     public function login(Request $request)
     {
         try {
@@ -180,6 +266,7 @@ class authController extends Controller
                 session(['user_det' => [
                     'user_id' => $user->id,
                     'company_id' => $user->company,
+                    'verification' => true,
                     'name' => $name,
                     'email' => $validatedData['email'],
                     'role' =>  $role,

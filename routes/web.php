@@ -14,7 +14,10 @@ Route::get('/lang', [userController::class, 'language_change']);
 // Authentication
 Route::post('login', [authController::class, 'login']);
 Route::post('registerdata', [authController::class, 'register']);
+Route::post('registerCompany', [authController::class, 'company']);
 Route::post('updateUser/{id}', [authController::class, 'update'])->name("update");
+Route::get('approvedCompany/{id}', [authController::class, 'approvedCompany'])->name("update");
+Route::get('cancelCompany/{id}', [authController::class, 'cancelCompany'])->name("update");
 Route::match(['get',  'post'], 'weblogout', [authController::class, 'weblogout']);
 
 Route::get('/login', function () {
@@ -22,6 +25,9 @@ Route::get('/login', function () {
 });
 Route::get('/notifications', function () {
     return view('notification');
+});
+Route::get('/requests', function () {
+    return view('admin.requsets');
 });
 
 Route::middleware('custom')->group(function () {
@@ -33,6 +39,7 @@ Route::middleware('custom')->group(function () {
     });
 
     Route::get('/companies', [userController::class, 'users']);
+    Route::get('/requests', [userController::class, 'requests']);
     Route::get('/departments', [userController::class, 'departments']);
     Route::get('/staff', [userController::class, 'staff']);
     Route::get('/deleteUser/{id}', [userController::class, 'deleteUser'])->name("deleteUser");
@@ -52,6 +59,10 @@ Route::middleware('custom')->group(function () {
 Route::get('register', function () {
 
     return view("register");
+});
+Route::get('/pharmacy', function () {
+
+    return view("admin.pharmcy");
 });
 
 
@@ -78,12 +89,17 @@ Route::post('/pharmacyOrders', [PharmacyOrdersController::class, 'insert']);
 Route::controller(PatientController::class)->group(function () {
     Route::post('/reception/patient', 'register');
     Route::get('/reception/patients', 'view');
+    Route::get('/reception/fetchpatient/{id}', 'fetch');
+    Route::get('/reception/fetchpatientData/{id}', 'fetchPatient');
+    Route::get('/reception/fetchMedicine/{id}', 'fetchMedicine');
     Route::get('/reception/patient/print-detail/{id}', 'print')->name('printPatient');
     Route::get('/reception/patient/delete-patient/{id}', 'delete')->name('delPatient');
 });
 Route::controller(AappointmentController::class)->group(function () {
     Route::post('/reception/assign-doctor', 'appoimtment');
+    Route::get('/reception/patient/print-token/{id}', 'printToken');
 });
 Route::controller(DoctorController::class)->group(function () {
     Route::get('/doctor/appointments', 'view');
+    Route::get('/doctor/fetchMedicine/{id}', 'getMedicine');
 });

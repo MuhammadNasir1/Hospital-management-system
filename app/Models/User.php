@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name',
         'dpt_name',
         'block_no',
+        'department',
         'email',
         'company',
         'company_name',

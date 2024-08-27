@@ -32,7 +32,7 @@
                         </thead>
                         <tbody>
 
-                            @foreach ($patients as $data)
+                            @foreach ($all['patients'] as $data)
                                 <tr class="capitalize">
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $data->id }}</td>
@@ -295,16 +295,30 @@
 
                 <div class="p-10">
                     <input type="hidden" name="patient" value="" id="patient">
-                    <div class="grid grid-cols-3 gap-2">
+                    <div class="grid grid-cols-2 gap-2">
+                        <div class="col-span-2">
+                            <label class="text-[14px] font-normal" for="department">@lang('lang.Select_Department')</label>
+                            <select name="department" id="viewDoctor">
+                                <option disabled selected>@lang('lang.Select_Department')</option>
+                                @foreach ($all['department'] as $new)
+                                    <option value="{{ $new->id }}"> {{ $new->name }}
+                                        ({{ $new->specialization }})
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
                         <div>
                             <label class="text-[14px] font-normal" for="doctor">@lang('lang.Doctor')</label>
                             <select name="doctor" id="doctor">
                                 <option disabled selected>@lang('lang.Select_Doctor')</option>
-                                @foreach ($doctors as $data)
-                                    <option value="{{ $data->id }}"> {{ $data->name }}
-                                        ({{ $data->specialization }})
-                                    </option>
-                                @endforeach
+                            </select>
+                        </div>
+                        <div>
+                            <label class="text-[14px] font-normal" for="patient_type">@lang('lang.Patient_Type')</label>
+                            <select name="patient_type" id="patient_type">
+                                <option selected disabled>@lang('lang.Select_Patient_type')</option>
+                                <option value="defualt">@lang('lang.Defualt')</option>
+                                <option value="vip">@lang('lang.V_I_P')</option>
                             </select>
                         </div>
                         <div>
@@ -361,6 +375,37 @@
         function getId(id) {
             let patient = document.getElementById('patient').value = id;
         }
+        $(document).ready(function() {
+            $('#viewDoctor').on('change', function() {
+                var departmentId = $(this).val();
+                if (departmentId) {
+                    $.ajax({
+                        url: '/reception/fetchpatient/' + departmentId,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(data) {
+                            $('#doctor').empty();
+                            $('#doctor').append(
+                                '<option disabled selected>@lang('lang.Select_Doctor')</option>');
+                            if (data.doctors && data.doctors.length > 0) {
+                                $.each(data.doctors, function(key, doctor) {
+                                    $('#doctor').append('<option value="' + doctor.id +
+                                        '">' + doctor.name + '</option>');
+                                });
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('AJAX Error:', status, error);
+                            console.log(xhr.responseText);
+                        }
+                    });
+                } else {
+                    $('#doctor').empty();
+                    $('#doctor').append('<option disabled selected>@lang('lang.Select_Doctor')</option>');
+                }
+            });
+        });
+
 
         $(document).ready(function() {
             $('.delButton').click(function() {
@@ -426,8 +471,9 @@
                         $('#addBtn').attr('disabled', true);
                     },
                     success: function(response) {
-                        let patientId = response.patientId;
-                        window.location.href = '../reception/patients'
+                        let appointmentId = response.appointmentId;
+                        window.location.href = '../reception/patient/print-token/' +
+                            appointmentId;
 
                     },
                     error: function(jqXHR) {

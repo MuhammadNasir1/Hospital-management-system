@@ -1,38 +1,86 @@
 @extends('layouts.layout')
+
 @section('title')
-    @lang('lang.Add_Department')
+    @if ($users->count() === 0)
+        Requests
+    @else
+        Requests({{ $users->count() }})
+    @endif
 @endsection
+
 @section('content')
     <div class="md:mx-4 mt-12">
 
         <div class="shadow-dark mt-3  rounded-xl pt-8  bg-white">
             <div>
                 <div class="flex justify-end sm:justify-between  items-center px-[20px] mb-3">
-                    <h3 class="text-[20px] text-black hidden sm:block">@lang('lang.Pharmacy_List')</h3>
-                    <div>
+                    <h3 class="text-[20px] text-black hidden sm:block">@lang('lang.All_Requests')({{ $users->count() }})</h3>
 
-                        <button data-modal-target="addcustomermodal" data-modal-toggle="addcustomermodal"
-                            class="bg-primary cursor-pointer text-white h-12 px-5 rounded-[6px]  shadow-sm font-semibold ">+
-                            @lang('lang.Add_Pharmacy')</button>
-                    </div>
                 </div>
                 <div class="overflow-x-auto">
                     <table id="datatable">
                         <thead class="py-1 bg-primary text-white">
                             <tr>
-                                <th class="whitespace-nowrap">@lang('lang.Sr')</th>
+                                <th class="whitespace-nowrap">@lang('lang.STN')</th>
                                 <th class="whitespace-nowrap">@lang('lang.Company_Name')</th>
-                                <th class="whitespace-nowrap">@lang('lang.Department_Name')</th>
                                 <th class="whitespace-nowrap">@lang('lang.Name')</th>
-                                <th class="whitespace-nowrap">@lang('lang.Block_No')</th>
+                                <th class="whitespace-nowrap">@lang('lang.Phone_No')</th>
                                 <th class="whitespace-nowrap">@lang('lang.Email')</th>
-                                <th class="whitespace-nowrap">@lang('lang.Specialist')</th>
+                                <th class="whitespace-nowrap">@lang('lang.Address')</th>
                                 <th class="whitespace-nowrap">@lang('lang.Role')</th>
                                 <th class="flex  justify-center">@lang('lang.Action')</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($users as $data)
+                                <tr class="capitalize">
+                                    <td>{{ $data->id }}</td>
+                                    <td>
+                                        @php
+                                            $name = DB::table('users')
+                                                ->where('role', 'admin')
+                                                ->where('id', $data->company)
+                                                ->value('company_name');
+                                        @endphp
+                                        {{ $name }}
+                                    </td>
 
+                                    <td>{{ $data->name }}</td>
+                                    <td>{{ $data->phone }}</td>
+                                    <td class="lowercase">{{ $data->email }}</td>
+                                    <td>{{ $data->address }}</td>
+                                    <td>{{ $data->role }}</td>
+                                    <td>
+                                        <div class="flex gap-5 items-center justify-center">
+
+                                            <a href="../cancelCompany/{{ $data->id }}">
+                                                <button
+                                                    class=" updateBtn cursor-pointer  rounded-full bg-primary size-10  flex justify-center items-center"
+                                                    updateId="{{ $data->id }}"><svg xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 384 512" class=" h-6 fill-white">
+                                                        <path
+                                                            d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+                                                    </svg></button>
+                                            </a>
+                                            <a href="../approvedCompany/{{ $data->id }}">
+                                                <button
+                                                    class="delButton  cursor-pointer  rounded-full font-bold bg-secondary size-10  flex justify-center items-center"
+                                                    delId="{{ $data->id }}">
+                                                    <svg class="text-white h-6 dark:text-white" aria-hidden="true"
+                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        fill="none" viewBox="0 0 24 24">
+                                                        <path stroke="currentColor" stroke-linecap="round"
+                                                            stroke-linejoin="round" stroke-width="2"
+                                                            d="M5 11.917 9.724 16.5 19 7.5" />
+                                                    </svg>
+
+                                                </button>
+                                            </a>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -54,13 +102,13 @@
             @if (isset($user))
                 <form action="../updateUserCar/{{ $user->id }}" method="post" enctype="multipart/form-data">
                 @else
-                    <form id="departmentData" method="post" enctype="multipart/form-data">
+                    <form id="customerData" method="post" enctype="multipart/form-data">
             @endif
             @csrf
             <div class="relative bg-white shadow-dark rounded-lg  dark:bg-gray-700  ">
                 <div class="flex items-center   justify-start  p-5  rounded-t dark:border-gray-600 bg-primary">
                     <h3 class="text-xl font-semibold text-white ">
-                        @lang('lang.Add_Pharmacy')
+                        @lang('lang.Add_Company')
                     </h3>
                     <button type="button"
                         class=" absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto "
@@ -73,55 +121,44 @@
                     </button>
                 </div>
 
-                <div class="grid md:grid-cols-3 gap-5 mx-6 my-6">
-                    <input type="hidden" name="role" value="department">
+                <div class="grid md:grid-cols-2 gap-6 mx-6 my-6">
                     <div>
-                        <label class="text-[14px] font-normal" for="name">@lang('lang.Name')</label>
+                        <label class="text-[14px] font-normal" for="name">@lang('lang.Full_Name')</label>
                         <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="name" id="name" value="{{ $user->name ?? '' }}" placeholder=" @lang('lang.Name_Here')">
+                            name="name" id="name" value="{{ $user->name ?? '' }}"
+                            placeholder=" @lang('lang.Full_Name_Here')">
                     </div>
                     <div>
-                        <label class="text-[14px] font-normal" for="phone">@lang('lang.Phone')</label>
-                        <input type="number" min="0" required
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="phone" id="phone" value="{{ $user->name ?? '' }}" placeholder=" @lang('lang.Phone_Here')">
-                    </div>
-                    <div>
-                        <label class="text-[14px] font-normal" for="telephone">@lang('lang.Telephone')</label>
-                        <input type="number" min="0" required
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="telephone" id="telephone" value="{{ $user->name ?? '' }}"
-                            placeholder=" @lang('lang.Telephone_Here')">
-                    </div>
-                    <div>
-                        <label class="text-[14px] font-normal" for="lisence_no">@lang('lang.Lisence_No')</label>
+                        <label class="text-[14px] font-normal" for="company">@lang('lang.Company_Name')</label>
                         <input type="text" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="lisence_no" id="lisence_no" value="{{ $user->name ?? '' }}"
-                            placeholder=" @lang('lang.Lisence_No')">
-                    </div>
-                    <div>
-                        <label class="text-[14px] font-normal" for="experience">@lang('lang.Work_Experience')</label>
-                        <input type="text" required
-                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="experience" id="experience" value="{{ $user->name ?? '' }}"
-                            placeholder=" @lang('lang.Work_Experience')">
-                    </div>
-                    <div class="col-span-3">
-                        <label class="text-[14px] font-normal" for="address">@lang('lang.Address')</label>
-                        <textarea class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   min-h-[80px] text-[14px]" name="address"
-                            id="address" placeholder="@lang('lang.Address_Here')"></textarea>
+                            name="company" id="company" value="{{ $user->name ?? '' }}"
+                            placeholder=" @lang('lang.Company_Name_Here')">
                     </div>
 
-                    <h2 class="col-span-3 font-semibold">@lang('lang.Login_Details')</h2>
-
+                </div>
+                <div class="grid  md:grid-cols-3 gap-6 mx-6 my-6">
                     <div>
-                        <label class="text-[14px] font-normal" for="email">@lang('lang.Email')</label>
+                        <label class="text-[14px] font-normal" for="phone">@lang('lang.Phone_No')</label>
+                        <input type="number" min="0" required
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="phone" id="phone" value="{{ $user->name ?? '' }}"
+                            placeholder=" @lang('lang.Phone_No_Here')">
+                    </div>
+                    <div>
+                        <label class="text-[14px] font-normal" for="user_email">@lang('lang.Email_Address')</label>
                         <input type="email" required
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                            name="email" id="email" value="{{ $user->name ?? '' }}"
-                            placeholder=" @lang('lang.Email_Here')">
+                            name="email" id="user_email" placeholder=" @lang('lang.Email_Address_Here')"
+                            value="{{ $user->email ?? '' }}">
+                    </div>
+                    <div>
+                        <label class="text-[14px] font-normal" for="address">@lang('lang.Address')</label>
+                        <input type="text" required
+                            class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
+                            name="address" id="address" placeholder=" @lang('lang.Address_Here')"
+                            value="{{ $user->email ?? '' }}">
                     </div>
 
                     <div>
@@ -136,6 +173,13 @@
                         <input type="password" {{ isset($user->id) ? '' : 'required' }}
                             class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
                             name="confirm_password" id="confirm_password" placeholder=" @lang('lang.Confirm_Password_Here')">
+                    </div>
+                    <div>
+                        <label class="text-[14px] font-normal" for="role">@lang('lang.Role')</label>
+                        <select name="role" id="role">
+                            <option value="admin" selected>
+                                @lang('lang.Admin')</option>
+                        </select>
                     </div>
 
                 </div>
@@ -171,32 +215,28 @@
 
         </div>
     </div>
+
+
+    @if (isset($user))
+        <script>
+            $(document).ready(function() {
+                $('#addcustomermodal').removeClass("hidden");
+
+            });
+        </script>
+    @endif
 @endsection
+
+
 @section('js')
     <script>
-        let specialization = document.querySelectorAll(".doctor");
-        let role = document.getElementById("role");
-
-        specialization.forEach(function(elem) {
-            elem.style.display = "none";
-        });
-
-        function show() {
-            specialization.forEach(function(elem) {
-                if (role.value === 'doctor') {
-                    elem.style.display = "block";
-                } else {
-                    elem.style.display = "none";
-                }
-            });
-        }
         $(document).ready(function() {
             $('.delButton').click(function() {
                 var id = $(this).attr('delId');
                 $('#delLink').attr('href', '../delCustomer/' + id);
             });
-            // Insert Staff Data
-            $("#departmentData").submit(function(event) {
+            // insert data
+            $("#customerData").submit(function(event) {
                 var url = "../registerdata";
                 event.preventDefault();
                 var formData = new FormData(this);
@@ -213,13 +253,13 @@
                         $('#addBtn').attr('disabled', true);
                     },
                     success: function(response) {
-                        window.location.href = '../departments';
+                        window.location.href = '../companies';
 
 
                     },
                     error: function(jqXHR) {
                         let response = JSON.parse(jqXHR.responseText);
-                        console.log("error" + response);
+                        console.log("error");
                         Swal.fire(
                             'Warning!',
                             response.message,

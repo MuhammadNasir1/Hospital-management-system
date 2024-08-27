@@ -23,6 +23,11 @@ class userController extends Controller
         $users =  User::where('role', 'admin')->where('verification', 'approved')->get();
         return view('users', ['users'  => $users]);
     }
+    public function requests()
+    {
+        $users =  User::where('role', 'admin')->where('verification', 'pending')->get();
+        return view('admin.requsets', ['users'  => $users]);
+    }
 
 
     public function  addCustomer(Request $request)
@@ -210,7 +215,8 @@ class userController extends Controller
     public function staff()
     {
         $staff = User::where('company', session('user_det')['company_id'])->whereNot('role', 'admin')->whereNot('role', 'department')->get();
-        return view('admin.staff', compact('staff'));
+        $department = User::where('company', session('user_det')['company_id'])->where('role', 'department')->get();
+        return view('admin.staff', compact('staff', 'department'));
     }
     public function departments()
     {

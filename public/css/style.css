@@ -6,7 +6,6 @@
 body {
     background-color: whitesmoke;
 }
-
 ::selection {
     background-color: #027c56 !important;
     color: white;

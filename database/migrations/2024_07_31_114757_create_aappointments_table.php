@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('receptionist_id');
             $table->string('patient_id');
             $table->string('doctor_id');
+            $table->string('vip')->nullable();
             $table->string('price');
             $table->string('status');
             $table->string('date');

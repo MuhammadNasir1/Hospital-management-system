@@ -82,11 +82,15 @@
                                 placeholder="Email Address Here">
                         </div>
                         <div class="mt-3">
-                            <label class="text-[14px] font-normal" for="password">Password</label>
-                            <input type="password" required
-                                class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   h-[40px] text-[14px]"
-                                name="password" id="password" value="{{ $user->name ?? '' }}"
-                                placeholder="Password Here">
+                            <label class="text-[14px] font-normal" for="password">@lang('lang.Password')</label>
+                            <div class="relative">
+                                <input type="password"
+                                    class="w-full border-[#DEE2E6] passinput rounded-[4px] focus:border-primary h-[40px] text-[14px]"
+                                    name="password" id="password" placeholder="@lang('lang.Password_Here')"
+                                    {{ isset($user->id) ? '' : 'required' }}>
+                                <img src="{{ asset('images/icons/eye-invisible.png') }}" data-toggle="password"
+                                    class="absolute eyebtns cursor-pointer right-2 bottom-3" alt="">
+                            </div>
                         </div>
 
                         <div class="mt-3 flex items-center">
@@ -174,20 +178,15 @@
             });
         });
 
-        //  register page password show and hide
-
-        let passinputs = document.querySelectorAll('.passinput');
-        let eyebtns = document.querySelectorAll(".eyeicon");
-
-        eyebtns.forEach((btn, index) => {
-            btn.addEventListener("click", () => {
-                let passinput = passinputs[index];
-                if (passinput.type === "password") {
-                    passinput.type = "text";
-                    btn.src = "images/icons/eye-visible.png";
+        document.querySelectorAll('img[data-toggle="password"]').forEach(function(eyeIcon) {
+            eyeIcon.addEventListener('click', function() {
+                let inputField = this.previousElementSibling;
+                if (inputField.type === "password") {
+                    inputField.type = "text";
+                    this.src = "{{ asset('images/icons/eye-visible.png') }}";
                 } else {
-                    passinput.type = "password";
-                    btn.src = "images/icons/eye-invisible.png";
+                    inputField.type = "password";
+                    this.src = "{{ asset('images/icons/eye-invisible.png') }}";
                 }
             });
         });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Inventory;
 use App\Models\Patient;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -61,18 +62,82 @@ class PatientController extends Controller
     public function view()
     {
         $patients = Patient::all();
-        $doctors = User::where('role', 'doctor')->where('company', session('user_det')['company_id'])->get();
-        return view('reception.patient', compact('patients', 'doctors'));
+        $department = User::where('company', session('user_det')['company_id'])
+            ->where('role', 'department')
+            ->get();
+        $all = [
+            'patients' => $patients,
+            'department' => $department,
+        ];
+        // return $data;
+        return view('reception.patient', compact('all'));
     }
     public function print(string $id)
     {
         $printData = Patient::find($id);
-        return view('reception.patient_detail', compact('printData'));
+        $company = User::where('id', session('user_det')['company_id'])
+            ->first();
+
+        $all = [
+            'printData' => $printData,
+            'company' => $company,
+        ];
+        // return $all;
+        return view('reception.patient_detail', compact('all'));
+    }
+    public function token(string $id)
+    {
+        $printData = Patient::find($id);
+        $company = User::where('id', session('user_det')['company_id'])
+            ->first();
+
+        $all = [
+            'printData' => $printData,
+            'company' => $company,
+        ];
+        // return $all;
+        return view('reception.patient_detail', compact('all'));
     }
     public function delete(string $id)
     {
         $delPateint = Patient::find($id);
         $delPateint->delete();
         return redirect('../reception/patients');
+    }
+
+    public function fetch(string $id)
+    {
+        try {
+
+            $doctor = User::where('company', session('user_det')['company_id'])
+                ->where('role', 'doctor')
+                ->where('department', $id)
+                ->get();
+            return response()->json(["messsage" => "data get successfully", "doctors" => $doctor], 200);
+        } catch (\Exception $e) {
+            return response()->json(["messsage" => $e->getMessage()], 500);
+        }
+    }
+    public function fetchPatient(string $id)
+    {
+        try {
+
+            $patient = Patient::where('id', $id)
+                ->first();
+            return response()->json(["messsage" => "data get successfully", "patient" => $patient], 200);
+        } catch (\Exception $e) {
+            return response()->json(["messsage" => $e->getMessage()], 500);
+        }
+    }
+    public function fetchMedicine(string $id)
+    {
+        try {
+
+            $medicine = Inventory::where('id', $id)
+                ->first();
+            return response()->json(["messsage" => "data get successfully", "medicine" => $medicine], 200);
+        } catch (\Exception $e) {
+            return response()->json(["messsage" => $e->getMessage()], 500);
+        }
     }
 }
