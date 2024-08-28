@@ -263,31 +263,15 @@
 
                             <h1 class="text-xl font-bold p-5">Medicine Prescribed</h1>
 
-                            <div
-                                class=" bg-[#d9d9d963] px-5 w-[95%] shad rounded-sm mx-auto grid xl:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-3">
+                            <div class=" bg-[#d9d9d963] px-5 w-[95%] shad rounded-sm mx-auto grid xl:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-3"
+                                id="medicineContainer">
 
-                                <div class="bg-white rounded-md shd my-3 min-h-[70px] w-full text-center">
-                                    <h2 class="font-semibold  pt-3">Medicine Name</h2>
-                                    <h3 class="text-dark">#010203</h3>
-                                </div>
-                                <div class="bg-white rounded-md shd my-3 min-h-[70px] w-full text-center">
-                                    <h2 class="font-semibold  pt-3">Medicine Name</h2>
-                                    <h3 class="text-dark">#010203</h3>
-                                </div>
-                                <div class="bg-white rounded-md shd my-3 min-h-[70px] w-full text-center">
-                                    <h2 class="font-semibold  pt-3">Medicine Name</h2>
-                                    <h3 class="text-dark">#010203</h3>
-                                </div>
-                                <div class="bg-white rounded-md shd my-3 min-h-[70px] w-full text-center">
-                                    <h2 class="font-semibold  pt-3">Medicine Name</h2>
-                                    <h3 class="text-dark">#010203</h3>
-                                </div>
 
                             </div>
                             <h1 class="text-xl font-bold p-5">Test Prescribed</h1>
 
                             <div
-                                class=" bg-[#d9d9d963] px-5 w-[95%]                                                                                                                       rounded-sm mx-auto grid xl:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-3">
+                                class=" bg-[#d9d9d963] px-5 w-[95%] rounded-sm mx-auto grid xl:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-3">
 
                                 <div class="bg-white rounded-md shd my-3 min-h-[70px] w-full text-center">
                                     <h2 class="font-semibold  pt-3">Test Name</h2>
@@ -379,19 +363,18 @@
 
     {{--  --}}
 
-    <div id="addcustomermodal" data-modal-backdrop="static"
-        class="fixed inset-0 overflow-y-auto flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
-        <div class="relative p-4 w-full max-w-lg max-h-full">
+    <div id="addcustomermodal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
+        <div class="relative p-4 w-full max-w-lg">
             <form id="staffData" method="post" enctype="multipart/form-data">
                 @csrf
-                <div class="relative bg-white shadow-dark rounded-lg dark:bg-gray-700">
+                <div class="relative bg-white shadow-lg rounded-lg dark:bg-gray-700">
                     <div class="flex items-center justify-between p-5 rounded-t dark:border-gray-600 bg-primary">
                         <h3 id="modalMedicineName" class="text-xl font-semibold text-white">
                             <!-- Medicine Name will be inserted here -->
                         </h3>
                         <button type="button"
                             class="absolute right-2 text-white bg-transparent rounded-lg text-sm w-8 h-8 ms-auto"
-                            data-modal-hide="addcustomermodal">
+                            data-modal-hide="addcustomermodal" id="hideModal">
                             <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                 fill="none" viewBox="0 0 14 14">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -399,7 +382,6 @@
                             </svg>
                         </button>
                     </div>
-
 
                     <div class="px-10 pt-10 pb-5">
                         <input type="hidden" id="medicineId" name="medicine_id">
@@ -493,17 +475,13 @@
 
                                 <div class="flex-col items-start  mt-5">
                                     <label>Note:</label>
-                                    <textarea class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   min-h-[80px] text-[14px]"
-                                        placeholder="Write Here" name="note" placeholder="@lang('lang.Note')"></textarea>
+                                    <textarea id="noteData" class="w-full border-[#DEE2E6] rounded-[4px] focus:border-primary   min-h-[80px] text-[14px]"
+                                        name="note" placeholder="@lang('lang.Note')"></textarea>
                                 </div>
 
                             </div>
                         </div>
-
                     </div>
-
-
-
                     <div class="flex justify-end px-10">
                         <button class="bg-primary text-white py-2 px-6 mb-4 rounded-[4px] uaddBtn font-semibold"
                             id="addBtn">
@@ -523,10 +501,18 @@
                                 @lang('lang.Save')
                             </div>
                         </button>
+
                     </div>
                 </div>
             </form>
         </div>
+
+
+
+
+    </div>
+    </form>
+    </div>
     </div>
 
     </div>
@@ -536,6 +522,45 @@
 
 @section('js')
     <script>
+        $(document).ready(function() {
+            $('#staffData').on('submit', function(e) {
+                e.preventDefault();
+
+                // Get the medicine name and ID
+                var medicineName = $('#modalMedicineName').text();
+                var medicineId = $('#medicineId').val();
+
+                // Get values from the form
+                var odValue = $('input[name="od"]').is(':checked') ? 'onetime' : '';
+                var bdValue = $('input[name="bd"]').is(':checked') ? 'twotimes' : '';
+                var tdsValue = $('input[name="tds"]').is(':checked') ? 'threetimes' : '';
+                var daysValue = $('#days').val();
+                var mor_med = $('input[name="mor_med"]').val();
+                var aft_med = $('input[name="aft_med"]').val();
+                var night = $('input[name="night_med"]').val();
+                var note = $('#noteData').val(); // Use .val() instead of .text()
+
+                var newDiv = `
+            <div class="bg-white rounded-md shadow my-3 min-h-[70px] w-full text-center">
+                <h2 class="font-semibold pt-3">${medicineName}</h2>
+                <h3 class="text-dark"># ${medicineId}</h3>
+                <input type="hidden" name="od" value="${odValue}">
+                <input type="hidden" name="bd" value="${bdValue}">
+                <input type="hidden" name="tds" value="${tdsValue}">
+                <input type="hidden" name="days" value="${daysValue}">
+                <input type="hidden" name="morning" value="${mor_med}">
+                <input type="hidden" name="afternoon" value="${aft_med}">
+                <input type="hidden" name="night" value="${night}">
+                <input type="hidden" name="noteData" value="${note}">
+            </div>`;
+
+                // Append the new div to a container
+                $('#medicineContainer').append(newDiv);
+                $('#staffData')[0].reset();
+                $('#hideModal').click(); // Ensure this triggers the modal close
+            });
+        });
+
         $(document).ready(function() {
             // Increment quantity
             $('.increment').on('click', function() {
